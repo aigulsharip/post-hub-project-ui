@@ -317,5 +317,28 @@
     });
 
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const username = localStorage.getItem('username');
+        const token = localStorage.getItem('token');
+
+        if (username && token) {
+            document.getElementById('auth-links').style.display = 'none';
+            const welcomeMessage = document.getElementById('welcome-message');
+            welcomeMessage.style.display = 'block';
+            document.getElementById('greeting').textContent = username;
+        } else {
+            document.getElementById('auth-links').style.display = 'block';
+            document.getElementById('welcome-message').style.display = 'none';
+        }
+
+        document.getElementById('logout-link').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            window.location.reload();
+        });
+    });
+
+</script>
 </body>
 </html>

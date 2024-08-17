@@ -35,9 +35,18 @@
               <li><a href="#">contacts</a></li>
            </ul>
          </div>
-         <div class="login">
-             You have not yet registered to our club? &nbsp;&nbsp; &nbsp; <a href="#">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp; <a href="#">Log in</a>
-         </div>
+           <div class="login" id="auth-container">
+               <div id="auth-links">
+                   You have not yet registered to our club? &nbsp;&nbsp;
+                   <a href="register-page.html" id="register-link">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp;
+                   <a href="login-page.html" id="login-link">Log in</a>
+               </div>
+               <div id="welcome-message" style="display: none;">
+                   Welcome on board, <span id="greeting"></span>!
+                   &nbsp;&nbsp;<a href="#" id="logout-link">Logout</a>
+               </div>
+           </div>
+
          <div class="clear"></div>
        </div>
        <div class="middle">
@@ -110,6 +119,45 @@ pulvinar ac, lorem. Vestibulum sed ante. Donec sagittis euismod purus.</p>
       </div>
     </footer>
 </div>
-<!-- Coded by Grizli -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('auth-links').style.display = 'none';
+            const welcomeMessage = document.getElementById('welcome-message');
+            welcomeMessage.style.display = 'block';
+            document.getElementById('greeting').textContent = username;
+        }
+
+        document.getElementById('logout-link').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            window.location.reload();
+        });
+    });
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const username = localStorage.getItem('username');
+        const token = localStorage.getItem('token');
+
+        if (username && token) {
+            document.getElementById('auth-links').style.display = 'none';
+            const welcomeMessage = document.getElementById('welcome-message');
+            welcomeMessage.style.display = 'block';
+            document.getElementById('greeting').textContent = username;
+        } else {
+            document.getElementById('auth-links').style.display = 'block';
+            document.getElementById('welcome-message').style.display = 'none';
+        }
+
+        document.getElementById('logout-link').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            window.location.reload();
+        });
+    });
+
+</script>
 </body>
 </html>

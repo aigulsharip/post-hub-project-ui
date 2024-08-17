@@ -179,7 +179,12 @@
                             showError("Email already exists. Please use a different one.");
                         }
                     } else if (body.success) {
-                        localStorage.setItem('username', username);
+                        // Save the token, username, and other necessary details to localStorage
+                        localStorage.setItem('username', body.payload.username);
+                        localStorage.setItem('token', body.payload.token);
+                        localStorage.setItem('refreshToken', body.payload.refreshToken);
+
+                        // Redirect to the homepage
                         window.location.href = 'index.html';
                     } else {
                         showError("Registration error: " + body.message);
@@ -239,6 +244,7 @@
             return errors;
         }
     });
+
 </script>
 </body>
 </html>
