@@ -304,62 +304,37 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("register-form");
-
-        if (!form) {
-            console.error("Форма регистрации не найдена!");
-            return;
-        }
-
         form.addEventListener("submit", function(event) {
             event.preventDefault();
 
-            // Получаем значения полей формы
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const confirmPassword = document.getElementById('password_confirmation').value.trim();
+            const formData = {
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                confirmPassword: document.getElementById("password_confirmation").value
+            };
 
-            // Проверяем, есть ли значения в полях
-            if (!username || !email || !password || !confirmPassword) {
-                alert("Все поля обязательны для заполнения.");
-                return;
-            }
-
-            // Проверяем, совпадают ли пароли
-            if (password !== confirmPassword) {
-                alert("Пароли не совпадают.");
-                return;
-            }
-
-            // Логируем данные перед отправкой
-            console.log("Отправляемые данные:", { username, email, password, confirmPassword });
-
-            // Отправляем данные на сервер
-            fetch('https://post-wave-swagger.fun/auth/register', {
-                method: 'POST',
+            fetch("https://post-wave-swagger.fun/auth/register", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ username, email, password, confirmPassword })
+                body: JSON.stringify(formData)
             })
                 .then(response => {
-                    console.log("Ответ от сервера:", response);
                     if (response.ok) {
-                        localStorage.setItem('username', username);
-                        window.location.href = 'index.html';
+                        localStorage.setItem("username", formData.username);
+                        window.location.href = "index.html";
                     } else {
-                        return response.json().then(data => {
-                            alert("Ошибка регистрации: " + (data.error || "Неизвестная ошибка"));
-                        });
+                        alert("Registration failed. Please try again.");
                     }
                 })
                 .catch(error => {
-                    console.error("Ошибка:", error);
-                    alert("Произошла ошибка. Пожалуйста, попробуйте позже.");
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again later.");
                 });
         });
     });
 </script>
-
 </body>
 </html>
