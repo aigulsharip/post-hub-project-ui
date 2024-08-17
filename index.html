@@ -311,7 +311,7 @@
                 username: document.getElementById("username").value,
                 email: document.getElementById("email").value,
                 password: document.getElementById("password").value,
-                password_confirmation: document.getElementById("password_confirmation").value
+                confirmPassword: document.getElementById("password_confirmation").value  // Измените здесь
             };
 
             fetch("https://post-wave-swagger.fun/auth/register", {
@@ -326,7 +326,9 @@
                         localStorage.setItem("username", formData.username);
                         window.location.href = "index.html";
                     } else {
-                        alert("Registration failed. Please try again.");
+                        response.json().then(data => {
+                            alert("Registration failed: " + (data.error || "Unknown error"));
+                        });
                     }
                 })
                 .catch(error => {
