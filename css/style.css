@@ -3,6 +3,155 @@ article,aside,audio,canvas,command,datalist,details,embed,figcaption,figure,foot
 /* Global properties ======================================================== */
 html {width:100%;}
 
+/* Основные стили для страницы */
+.middle {
+    padding: 0; /* Убираем padding для центральной части */
+}
+
+.middle h1.logo {
+    margin-left: 0; /* Убираем сдвиг логотипа вправо */
+}
+
+nav {
+    padding: 0; /* Убираем отступы для навигации */
+}
+
+#slider {
+    margin: 0; /* Убираем отступы для слайдера */
+}
+
+/* Корректировка ширины формы поиска */
+form#search {
+    display: flex;
+    justify-content: flex-end; /* Выравниваем поиск вправо */
+}
+
+form#search input[type="text"] {
+    width: 200px; /* Устанавливаем фиксированную ширину */
+    padding: 5px 10px; /* Добавляем padding для лучшего вида */
+    border: none;
+    border-radius: 5px;
+}
+
+form#search .button1 {
+    padding: 6px 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+form#search .button1:hover {
+    background-color: #555;
+}
+
+/* Стили для формы регистрации */
+.register-box {
+    max-width: 960px; /* Максимальная ширина формы регистрации */
+    margin: 0 auto; /* Центрируем форму */
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.register-form {
+    max-width: 600px; /* Ширина формы регистрации */
+    margin: 0 auto; /* Центрируем форму */
+}
+
+.register-form .form-group {
+    margin-bottom: 20px;
+}
+
+.register-form label {
+    display: block;
+    font-size: 16px;
+    color: #ddd;
+    margin-bottom: 5px;
+}
+
+.register-form input.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: #ddd;
+    font-size: 14px;
+}
+
+.register-form input.form-control:focus {
+    border-color: #00BBFF;
+    outline: none;
+    background-color: #222;
+}
+
+.register-form .btn-register {
+    width: 104%;
+    padding: 10px;
+    background-color: #00BBFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register-form .btn-register:hover {
+    background-color: #009FCC;
+}
+
+.register-form .login-link {
+    text-align: center;
+    font-size: 14px;
+    color: #ddd;
+    margin-top: 20px;
+}
+
+.register-form .login-link a {
+    color: #00BBFF;
+    text-decoration: none;
+}
+
+.register-form .login-link a:hover {
+    text-decoration: underline;
+}
+
+.required {
+    color: #ff0000;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.required-info {
+    font-size: 12px;
+    color: #ddd;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Общие стили */
+body {
+    background: #1c1c1c;
+    font-family: 'Arial', sans-serif;
+    color: #ddd;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+h2.first {
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid #00BBFF;
+    padding-bottom: 10px;
+}
 body {font-family:Arial, Arial, Helvetica, sans-serif; font-size:12px; line-height:19px; color:#6a6a73; min-width:960px; background:url(../images/body_bg.jpg) 50% 0 no-repeat #1b1b1c;padding:59px 0 0;}
 .main {width:960px;padding:0;margin:0 auto;}
 

@@ -60,9 +60,16 @@
               <li><a href="#">contacts</a></li>
            </ul>
          </div>
-         <div class="login">
-             You have not yet registered to our club? &nbsp;&nbsp; &nbsp; <a href="#">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp; <a href="#">Log in</a>
-         </div>
+           <div class="login" id="auth-links">
+               You have not yet registered to our club? &nbsp;&nbsp;
+               <a href="register-page.html" id="register-link">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp;
+               <a href="login.html" id="login-link">Log in</a>
+               <span id="welcome-message" style="display: none;">
+        <span id="greeting"></span>
+        &nbsp;&nbsp;<a href="logout.html" id="logout-link">Logout</a>
+    </span>
+           </div>
+
          <div class="clear"></div>
        </div>
        <div class="middle">
@@ -199,7 +206,7 @@
                                  <h3 class="ind2">XBOX 360</h3>
                                  <h4>Lorem ipsum dolor sit amet conse</h4>
                               </div>
-                           </div> 
+                           </div>
                            <div class="text"><a href="#">Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt <br>ut labore et dolore magna aliqua.</a></div>
                         </li>
                         <li class="m_bottom_zero">
@@ -209,7 +216,7 @@
                                  <h3 class="ind2">PS 3</h3>
                                  <h4>dolor sit amet conse </h4>
                               </div>
-                           </div> 
+                           </div>
                            <div class="text"><a href="#">Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt <br>ut labore et dolore magna aliqua.</a></div>
                         </li>
                      </ul>
@@ -227,7 +234,7 @@
                                  <h3 class="ind2">XBOX 360</h3>
                                  <h4 class="ind">ipsum dolor sit amet conse </h4>
                               </div>
-                           </div> 
+                           </div>
                            <div class="text"><a href="#">Lorem ipsum dolor sit amet conse ctetur.</a></div>
                         </li>
                      </ul>
@@ -292,5 +299,38 @@
       </div>
     </footer>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const username = localStorage.getItem("username");
+
+        if (username) {
+            // Скрываем блок с регистрацией и логином
+            document.getElementById("auth-links").style.display = "none";
+
+            // Показываем приветствие и ссылку "Logout"
+            document.getElementById("welcome-message").style.display = "inline";
+            document.getElementById("greeting").textContent = `Добро пожаловать, ${username}`;
+        } else {
+            // Если пользователь не зарегистрирован, показываем стандартные ссылки
+            document.getElementById("auth-links").style.display = "block";
+            document.getElementById("welcome-message").style.display = "none";
+        }
+
+        const form = document.querySelector("form.register-form");
+        if (form) {
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const usernameInput = document.getElementById("username").value;
+                if (usernameInput.trim() !== "") {
+                    localStorage.setItem("username", usernameInput);
+                    window.location.href = "index.html"; // Перенаправляем на главную страницу после регистрации
+                } else {
+                    alert("Пожалуйста, заполните все обязательные поля.");
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
