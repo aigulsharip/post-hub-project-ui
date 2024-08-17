@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register</title>
+    <title>Login</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -39,8 +39,7 @@
                 </ul>
             </div>
             <div class="login">
-                You have not yet registered to our club? &nbsp;&nbsp; &nbsp; <a href="register-page.html">Register</a> &nbsp;&nbsp;
-                or &nbsp;&nbsp; <a href="login-page.html">Log in</a>
+                Don't have an account? &nbsp;&nbsp; &nbsp; <a href="register-page.html">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp; <a href="#">Log in</a>
             </div>
             <div class="clear"></div>
         </div>
@@ -73,37 +72,36 @@
             <div class="clear"></div>
         </nav>
     </header>
-    <!--==============================content================================-->
+    <!--==============================content=================================-->
     <section id="content" class="cont_pad">
         <div class="container_12">
             <div class="wrapper">
                 <article class="grid_12">
-                    <div class="box register-box">
-                        <h2 class="first">Registration</h2>
+                    <div class="box login-box">
+                        <h2 class="first">Login</h2>
                         <div class="sub_box4">
-                            <form id="register-form" method="post" accept-charset="UTF-8" class="register-form">
+                            <form id="login-form" method="post" accept-charset="UTF-8" class="login-form">
                                 <div class="form-group">
                                     <label for="username">Username: <span class="required">*</span></label>
                                     <input id="username" class="form-control" type="text" placeholder="Enter your username" name="username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email: <span class="required">*</span></label>
-                                    <input id="email" class="form-control" type="email" placeholder="Enter your email" name="email" required>
-                                </div>
-                                <div class="form-group">
                                     <label for="password">Password: <span class="required">*</span></label>
                                     <input id="password" class="form-control" type="password" placeholder="Enter your password" name="password" required>
                                 </div>
+
+                                <!-- Error message container -->
+                                <!-- Error message container -->
+                                <div id="error-message" class="error-message">
+                                    <h3>Login failed</h3>
+                                    <p>Incorrect username or password.</p>
+                                </div>
+
                                 <div class="form-group">
-                                    <label for="password_confirmation">Repeat Password: <span class="required">*</span></label>
-                                    <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat your password" name="password_confirmation" required>
+                                    <input class="btn btn-primary btn-login" type="submit" value="Log in" name="commit">
                                 </div>
                                 <div class="form-group">
-                                    <input class="btn btn-primary btn-register" type="submit" value="Create account" name="commit">
-                                </div>
-                                <div id="error-message" class="error-message" style="display: none;"></div>
-                                <div class="form-group">
-                                    <p class="login-link">Already have an account? <a href="login-page.html">Login</a></p>
+                                    <p class="register-link">Don't have an account? <a href="register-page.html">Register</a></p>
                                 </div>
                                 <div class="form-group">
                                     <p class="required-info">Fields marked with <span class="required">*</span> are mandatory.</p>
@@ -132,64 +130,55 @@
         </div>
     </footer>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const form = document.getElementById("register-form");
+        const form = document.getElementById("login-form");
 
         form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Предотвращаем стандартное поведение формы
+            event.preventDefault(); // Prevent the default form submission behavior
 
-            // Получаем значения полей формы
+            // Get form field values
             const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
-            const confirmPassword = document.getElementById('password_confirmation').value.trim();
             const errorMessage = document.getElementById('error-message');
 
-            // Очищаем предыдущее сообщение об ошибке
+            // Clear previous error message
             errorMessage.style.display = 'none';
-            errorMessage.textContent = '';
 
-            // Проверка совпадения паролей
-            if (password !== confirmPassword) {
-                showError("Passwords do not match.");
-                return;
-            }
+            // Log data before sending
+            console.log("Sending data:", { username, password });
 
-            // Отправляем данные на сервер
-            fetch('https://post-wave-swagger.fun/auth/register', {
+            // Send data to the server
+            fetch('https://post-wave-swagger.fun/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, email, password, confirmPassword })
+                body: JSON.stringify({ username, password })
             })
-                .then(response => response.json().then(data => ({ status: response.status, body: data })))
-                .then(({ status, body }) => {
-                    if (status === 409) { // Conflict
-                        if (body.includes('already exists')) {
-                            showError(body);
-                        } else {
-                            showError("An error occurred. Please try again later.");
-                        }
-                    } else if (status === 200 && body.success) {
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Response received:", data);
+                    if (data.success) {
+                        // Save the username in localStorage
                         localStorage.setItem('username', username);
+                        // Redirect to the homepage
                         window.location.href = 'index.html';
                     } else {
-                        showError("Registration error: " + (body.message || "Unknown error."));
+                        // Show the error message
+                        errorMessage.querySelector('h3').textContent = 'Login Failed';
+                        errorMessage.querySelector('p').textContent = 'Incorrect username or password.';
+                        errorMessage.style.display = 'block';
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    showError("An unexpected error occurred. Please try again later.");
+                    errorMessage.querySelector('h3').textContent = 'Login Failed';
+                    errorMessage.querySelector('p').textContent = 'Incorrect username or password.';
+                    errorMessage.style.display = 'block';
                 });
         });
-
-        function showError(message) {
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.innerHTML = message;
-            errorMessage.style.display = 'block';
-        }
     });
 
 </script>
