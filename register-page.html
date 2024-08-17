@@ -80,7 +80,7 @@
                     <div class="box register-box">
                         <h2 class="first">Registration</h2>
                         <div class="sub_box4">
-                            <form method="post" action="https://post-wave-swagger.fun/auth/register" accept-charset="UTF-8" class="register-form">
+                            <form id="register-form" accept-charset="UTF-8" class="register-form">
                                 <div class="form-group">
                                     <label for="username">Username: <span class="required">*</span></label>
                                     <input id="username" class="form-control" type="text" placeholder="Enter your username" name="username" required>
@@ -130,5 +130,40 @@
         </div>
     </footer>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("register-form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = {
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                password_confirmation: document.getElementById("password_confirmation").value
+            };
+
+            fetch("https://post-wave-swagger.fun/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        localStorage.setItem("username", formData.username);
+                        window.location.href = "index.html";
+                    } else {
+                        alert("Registration failed. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again later.");
+                });
+        });
+    });
+</script>
 </body>
 </html>

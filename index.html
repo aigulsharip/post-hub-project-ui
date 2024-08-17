@@ -303,24 +303,38 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const form = document.querySelector("form.register-form");
-        if (form) {
-            form.addEventListener("submit", function(e) {
-                e.preventDefault(); // Предотвращаем стандартное поведение формы
-                const usernameInput = document.getElementById("username").value.trim();
-                if (usernameInput !== "") {
-                    localStorage.setItem("username", usernameInput); // Сохраняем имя пользователя
-                    window.location.href = "index.html"; // Перенаправляем на главную страницу
-                } else {
-                    alert("Пожалуйста, заполните все обязательные поля.");
-                }
-            });
-        }
+        const form = document.getElementById("register-form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = {
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                password_confirmation: document.getElementById("password_confirmation").value
+            };
+
+            fetch("https://post-wave-swagger.fun/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        localStorage.setItem("username", formData.username);
+                        window.location.href = "index.html";
+                    } else {
+                        alert("Registration failed. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again later.");
+                });
+        });
     });
-
-
 </script>
-
-
 </body>
 </html>
