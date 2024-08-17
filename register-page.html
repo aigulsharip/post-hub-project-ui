@@ -135,24 +135,24 @@
         const form = document.getElementById("register-form");
 
         form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Остановить стандартное поведение формы
+            event.preventDefault(); // Prevent the default form submission behavior
 
-            // Получаем значения полей формы
+            // Get form field values
             const username = document.getElementById('username').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             const confirmPassword = document.getElementById('password_confirmation').value.trim();
 
-            // Логируем данные перед отправкой
+            // Log data before sending
             console.log("Sending data:", { username, email, password, confirmPassword });
 
-            // Проверка на совпадение паролей
+            // Check if passwords match
             if (password !== confirmPassword) {
-                alert("Пароли не совпадают.");
+                alert("Passwords do not match.");
                 return;
             }
 
-            // Отправляем данные на сервер
+            // Send data to the server
             fetch('https://post-wave-swagger.fun/auth/register', {
                 method: 'POST',
                 headers: {
@@ -164,22 +164,20 @@
                 .then(data => {
                     console.log("Response received:", data);
                     if (data.success) {
-                        // Сохраняем имя пользователя в localStorage
+                        // Save the username in localStorage
                         localStorage.setItem('username', username);
-                        // Перенаправляем на главную страницу
+                        // Redirect to the homepage
                         window.location.href = 'index.html';
                     } else {
-                        alert("Ошибка регистрации: " + data.message);
+                        alert("Registration error: " + data.message);
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("Произошла ошибка. Пожалуйста, попробуйте позже.");
+                    alert("An error occurred. Please try again later.");
                 });
         });
     });
-
 </script>
-
 </body>
 </html>
