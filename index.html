@@ -303,51 +303,22 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Получаем значение имени пользователя из localStorage
-        const username = localStorage.getItem("username");
-
-        if (username) {
-            // Если пользователь зарегистрирован, скрываем блок с регистрацией и логином
-            document.getElementById("auth-links").style.display = "none";
-
-            // Показываем приветствие и ссылку "Logout"
-            document.getElementById("welcome-message").style.display = "block";
-            document.getElementById("greeting").textContent = `${username}`;
-        } else {
-            // Если пользователь не зарегистрирован, показываем стандартные ссылки
-            document.getElementById("auth-links").style.display = "block";
-            document.getElementById("welcome-message").style.display = "none";
-        }
-
-        // Обработка формы регистрации
         const form = document.querySelector("form.register-form");
         if (form) {
             form.addEventListener("submit", function(e) {
-                e.preventDefault();
+                e.preventDefault(); // Предотвращаем стандартное поведение формы
                 const usernameInput = document.getElementById("username").value.trim();
                 if (usernameInput !== "") {
-                    // Сохраняем имя пользователя в localStorage
-                    localStorage.setItem("username", usernameInput);
-                    // Перенаправляем на главную страницу после регистрации
-                    window.location.href = "index.html";
+                    localStorage.setItem("username", usernameInput); // Сохраняем имя пользователя
+                    window.location.href = "index.html"; // Перенаправляем на главную страницу
                 } else {
                     alert("Пожалуйста, заполните все обязательные поля.");
                 }
             });
         }
-
-        // Обработка выхода
-        const logoutLink = document.getElementById("logout-link");
-        if (logoutLink) {
-            logoutLink.addEventListener("click", function(e) {
-                e.preventDefault();
-                // Удаляем имя пользователя из localStorage
-                localStorage.removeItem("username");
-                // Перезагружаем страницу для обновления интерфейса
-                window.location.href = "index.html";
-            });
-        }
     });
+
+
 </script>
 
 
