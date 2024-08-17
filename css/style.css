@@ -331,7 +331,7 @@ header {margin: 0 10px 19px;}
       .login a{font-size: 12px; color: #fff; font-weight:bold;}
       .login a:hover{color:#8cc503;}
    .middle{overflow: hidden;background: url('../images/header_middle.png') repeat-x #2b2b2d;padding: 22px 20px 26px 33px;}
-   .middle .h_banner{background: url('../images/heabanner.jpg') no-repeat;display:block;width:466px;float:right;padding-top:20px;height:38px;border:1px solid #38383c;text-align:center;font-size: 17px; color: #555557;}
+   .middle .h_banner{background: url('../images/heabanner-466х58.jpg') no-repeat;display:block;width:466px;float:right;padding-top:20px;height:38px;border:1px solid #38383c;text-align:center;font-size: 17px; color: #555557;}
 header h1{width:123px;padding-top:10px; float:left;}
 header h1 a {display:block;width:123px;height:41px;background:url(../images/logo.png) 0 0 no-repeat; text-decoration:none; text-indent:-9999px;}
 

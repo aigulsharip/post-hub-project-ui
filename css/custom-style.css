@@ -1,0 +1,32 @@
+/* custom-style.css */
+.middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.logo {
+    font-size: 36px; /* Размер шрифта */
+    font-weight: bold; /* Жирность шрифта */
+    color: #4CAF50; /* Цвет текста */
+    text-transform: uppercase; /* Преобразование текста в верхний регистр */
+    text-decoration: none; /* Убрать подчеркивание */
+    display: inline-block;
+}
+
+.logo span {
+    color: #333; /* Цвет для первой части текста, например "Post" */
+}
+
+
+.h_banner {
+    background: url('../images/heabanner-466х58.jpg') no-repeat;
+    display: block;
+    width: 466px;
+    height: 38px;
+    border: 1px solid #38383c;
+    text-align: center;
+    font-size: 17px;
+    color: #555557;
+}
