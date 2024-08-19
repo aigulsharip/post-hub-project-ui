@@ -43,6 +43,21 @@
     <![endif]-->
 </head>
 <body>
+<!-- Прелоадер -->
+<div id="preloader">
+    <div class="cube-grid">
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+    </div>
+</div>
+
 <div class="main">
     <!--==============================header=================================-->
     <header>
@@ -65,7 +80,7 @@
                 </div>
                 <div id="welcome-message" style="display: none;">
                     Welcome on board, <span id="greeting"></span>!
-                    &nbsp;&nbsp;<a href="#" id="logout-link">Logout</a>
+                    &nbsp;&nbsp;<a href="index.html" id="logout-link">Logout</a>
                 </div>
             </div>
 
@@ -99,50 +114,34 @@
         </nav>
     </header>
     <!--==============================content================================-->
-    <section id="content">
-        <div class="container_12">
-            <div class="wrapper">
-                <article class="grid_12">
-                    <div class="box">
-                        <h2 class="first">my posts</h2>
-                        <div class="sub_box">
-                            <ul class="ext_list picks">
-                                <li>
-                                    <figure><img src="images/picks1.jpg" alt="" /></figure>
-                                    <div>
-                                        <h4>Red Faction: Armageddon Interview</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et<br>
-                                        <a href="#" class="button3">movie</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <figure><img src="images/picks2.jpg" alt="" /></figure>
-                                    <div>
-                                        <h4>Brink: A Choir of Guns Trailer</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et<br>
-                                        <a href="#" class="button3">movie</a>
-                                    </div>
-                                </li>
-                                <li class="bd_none m_bottom_zero">
-                                    <figure><img src="images/picks3.jpg" alt="" /></figure>
-                                    <div>
-                                        <h4>Top Spin 4 First Impressions</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et<br>
-                                        <a href="#" class="button3">preview</a>
-                                    </div>
-                                </li>
-                            </ul>
+    <div class="main">
+        <section id="content">
+            <div class="container_12">
+                <div class="wrapper">
+                    <article class="grid_12">
+                        <div class="box">
+                            <h2 class="first">My Posts</h2>
+                            <div class="button-container">
+                                <div id="create-post-container">
+                                    <a href="create-post.html" class="create-post-button">
+                                        <div class="plus-icon">+</div>
+                                        <div class="add-post-text">Add New Post</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr class="divider">
+                            <div class="sub_box" id="post-container">
+                                <ul class="ext_list picks" id="post-list">
+                                    <!-- Динамически загружаемые посты -->
+                                </ul>
+                            </div>
                         </div>
-                        <hr class="divider">
-                        <div class="link-wrapper">
-                            <a href="#" class="link2">see all users</a>
-                        </div>
-                    </div>
-                </article>
-
+                    </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -159,20 +158,95 @@
         </div>
     </footer>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
-        if (username) {
+        const token = localStorage.getItem('token');
+        const postContainer = document.getElementById('post-container');
+        const postList = document.getElementById('post-list');
+        const linkWrapper = document.createElement('div');
+        linkWrapper.className = 'link-wrapper';
+        linkWrapper.innerHTML = `<a href="#" class="link2">View All My Posts</a>`;
+        const createPostContainer = document.getElementById('create-post-container');
+
+        if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
+
+            // Показываем кнопку создания поста только для залогиненного пользователя
+            createPostContainer.style.display = 'block';
+
+            // Load posts
+            fetch('https://post-wave-swagger.fun/posts', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Скрываем прелоадер после загрузки данных
+                    preloader.style.display = 'none';
+
+                    if (data.success && data.payload.length > 0) {
+                        postList.innerHTML = ''; // Clear existing content
+
+                        data.payload.forEach(post => {
+                            const postItem = `
+                    <li>
+                        <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.svg';" /></figure>
+                        <div class="content-wrapper">
+                            <div>
+                                <h4><a href="#">${post.title}</a></h4>
+                                <p class="post-content">${post.content.substring(0, 150)}...</p>
+                                <p class="likes">Likes: ${post.likes}</p>
+                                <p class="comments">The number of comments: ${post.commentsCount}</p>
+                            </div>
+                            <a href="#" class="button3">View Post</a>
+                        </div>
+                    </li>`;
+                            postList.innerHTML += postItem;
+                        });
+
+                        // Add the "View All My Posts" link
+                        postContainer.appendChild(linkWrapper);
+                    } else {
+                        postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> or <a href="login-page.html">log in</a> to get started!</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading posts:', error);
+                    preloader.style.display = 'none'; // Скрываем прелоадер в случае ошибки
+                });
+        } else {
+            document.getElementById('auth-links').style.display = 'block';
+            document.getElementById('welcome-message').style.display = 'none';
+            postContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
+            preloader.style.display = 'none'; // Скрываем прелоадер если пользователь не авторизован
         }
 
         document.getElementById('logout-link').addEventListener('click', function() {
             localStorage.removeItem('username');
-            window.location.reload();
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
+            window.location.href = 'login-page.html'; // Redirect to login page after logout
         });
+
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
+            menuItem.classList.remove('current');
+        });
+
+        if (currentPath.includes("index.html")) {
+            document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
+        } else if (currentPath.includes("my-posts.html")) {
+            document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
+        }
     });
 
 </script>
@@ -197,27 +271,25 @@
             localStorage.removeItem('refreshToken');
             window.location.href = 'login-page.html'; // Redirect to login page after logout
         });
-    });
 
-    document.addEventListener("DOMContentLoaded", function() {
-        // Получаем текущий URL страницы
-        const currentPath = window.location.pathname;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Получаем текущий URL страницы
+            const currentPath = window.location.pathname;
 
-        // Убираем класс 'current' у всех элементов меню
-        document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
-            menuItem.classList.remove('current');
+            // Убираем класс 'current' у всех элементов меню
+            document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
+                menuItem.classList.remove('current');
+            });
+
+            // Проверяем, какая страница открыта, и добавляем класс 'current' соответствующему пункту меню
+            if (currentPath.includes("index.html")) {
+                document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
+            } else if (currentPath.includes("my-posts.html")) {
+                document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
+            }
+            // Добавьте здесь аналогичные условия для других страниц
         });
-
-        // Проверяем, какая страница открыта, и добавляем класс 'current' соответствующему пункту меню
-        if (currentPath.includes("index.html")) {
-            document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
-        } else if (currentPath.includes("my-posts.html")) {
-            document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
-        }
-        // Добавьте здесь аналогичные условия для других страниц
     });
-
-
 </script>
 </body>
 </html>

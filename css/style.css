@@ -33,6 +33,87 @@ html {width:100%;}
     vertical-align: middle; /* Вертикальное выравнивание иконки с текстом */
 }
 
+/* Посты */
+.picks li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.picks figure {
+    flex: 0 0 150px;
+    margin-right: 20px;
+}
+
+.picks figure img {
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer; /* Курсор указатель */
+}
+
+.picks div.content-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.picks h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    cursor: pointer; /* Курсор указатель */
+    color: #fff; /* Белый цвет заголовка */
+    text-decoration: none; /* Убрано подчеркивание */
+}
+
+.picks .post-content {
+    font-size: 14px; /* Больший размер для контента */
+    color: #ccc; /* Светлый цвет для контента */
+}
+
+.picks .likes,
+.picks .comments {
+    font-size: 12px; /* Меньший размер для лайков и комментариев */
+    color: #fff; /* Белый цвет для лайков */
+    margin-top: auto; /* Чтобы лайки и комментарии были на уровне нижнего края фотографии */
+}
+
+.picks .button3 {
+    background-color: #ffffff; /* Полностью белый фон кнопки */
+    color: #ffffff;
+    padding: 5px 15px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #000; /* Черная рамка */
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.picks .button3:hover {
+    background-color: #e0e0e0; /* Светло-серый фон при наведении */
+}
+/* Posts */
+.no-posts-message {
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.no-posts-message a {
+    color: #00ff00; /* Зеленый цвет для ссылок */
+    text-decoration: underline;
+}
+
+.no-posts-message a:hover {
+    color: #00cc00; /* Темно-зеленый цвет при наведении */
+}
+
 .divider {
     border: none;
     border-top: 0.5px solid #3e3e3e; /* Синий цвет линии */
@@ -51,7 +132,7 @@ html {width:100%;}
     color: #8cc503; /* Зеленый цвет */
     text-transform: uppercase; /* Заглавные буквы */
     font-family: 'Oswald', sans-serif; /* Шрифт */
-    font-size: 14px; /* Размер текста */
+    font-size: 18px !important; /* Увеличенный размер текста с !important */
     display: inline-block;
 }
 
@@ -59,6 +140,134 @@ html {width:100%;}
     color: #66a300; /* Цвет ссылки при наведении */
     /*text-decoration: underline; !* Подчеркнуть ссылку при наведении *!*/
 }
+
+/* Прелоадер */
+#preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cube-grid {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cube {
+    width: 33%;
+    height: 33%;
+    background-color: #8cc503; /* Зеленый цвет */
+    animation: cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.cube1 { animation-delay: 0.2s; }
+.cube2 { animation-delay: 0.3s; }
+.cube3 { animation-delay: 0.4s; }
+.cube4 { animation-delay: 0.1s; }
+.cube5 { animation-delay: 0.2s; }
+.cube6 { animation-delay: 0.3s; }
+.cube7 { animation-delay: 0.0s; }
+.cube8 { animation-delay: 0.1s; }
+.cube9 { animation-delay: 0.2s; }
+
+@keyframes cubeGridScaleDelay {
+    0%, 70%, 100% {
+        transform: scale(1);
+    }
+    35% {
+        transform: scale(0);
+    }
+}
+
+/* Add post button */
+.button-container {
+    text-align: right;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end; /* Выровнять по правому краю */
+}
+
+#create-post-container {
+    display: inline-block;
+}
+
+.create-post-button {
+    display: inline-block;
+    background-color: #6AC820; /* Яркий зеленый цвет */
+    color: #FFFFFF;
+    padding: 12px 25px;
+    border-radius: 12px; /* Более округлые углы */
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 20px; /* Правый отступ */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Глубокая тень для эффекта "парения" */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Плавные переходы всех свойств */
+    font-size: 16px; /* Оптимальный размер текста */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрирование текста и иконки */
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(120deg, #6AC820, #57b514, #46a510); /* Градиент для более стильного вида */
+}
+
+.create-post-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+}
+
+.create-post-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.create-post-button:hover {
+    background-image: linear-gradient(120deg, #57b514, #46a510, #3b8e0a); /* Темнее при наведении */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px); /* Легкий подъем кнопки при наведении */
+}
+
+.plus-icon {
+    font-size: 22px; /* Размер иконки плюс */
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.add-post-text {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.create-post-button:hover .plus-icon {
+    transform: rotate(90deg); /* Поворот иконки при наведении */
+}
+
+.create-post-button:active {
+    background-image: linear-gradient(120deg, #46a510, #3b8e0a, #328009); /* Более темный оттенок при нажатии */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(0); /* Возвращение кнопки в исходное положение при нажатии */
+}
+
 
  .line {
      border-bottom: 0.5px solid #00BBFF; /* Синий цвет линии */
