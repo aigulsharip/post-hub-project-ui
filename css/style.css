@@ -26,6 +26,37 @@ html {width:100%;}
         color: #8cc503;
     }
 }
+.divider {
+    border: none;
+    border-top: 0.5px solid #3e3e3e; /* Синий цвет линии */
+    width: 90%; /* Ширина линии уменьшена, чтобы справа она заканчивалась раньше */
+    margin: 0 0 10px 24px; /* Центрирование линии с отступом слева */
+}
+
+.link-wrapper {
+    text-align: left;
+    padding-left: 22px; /* Отступ слева для выравнивания */
+    margin-top: -10px; /* Поднятие текста */
+    padding-bottom: 20px; /* Отступ снизу внутри блока My users */
+}
+
+.link2 {
+    color: #8cc503; /* Зеленый цвет */
+    text-transform: uppercase; /* Заглавные буквы */
+    font-family: 'Oswald', sans-serif; /* Шрифт */
+    font-size: 14px; /* Размер текста */
+    display: inline-block;
+}
+
+.link2:hover {
+    color: #66a300; /* Цвет ссылки при наведении */
+    /*text-decoration: underline; !* Подчеркнуть ссылку при наведении *!*/
+}
+
+ .line {
+     border-bottom: 0.5px solid #00BBFF; /* Синий цвет линии */
+     margin: 10px 0; /* Отступы сверху и снизу */
+ }
 
 /* Основные стили для страницы */
 .middle {
@@ -357,7 +388,7 @@ header {margin: 0 10px 19px;}
    .middle{overflow: hidden;background: url('../images/header_middle.png') repeat-x #2b2b2d;padding: 22px 20px 26px 33px;}
    .middle .h_banner{background: url('../images/heabanner-466х58.gif') no-repeat;display:block;width:466px;float:right;padding-top:20px;height:38px;border:1px solid #38383c;text-align:center;font-size: 17px; color: #555557;}
 header h1{width:123px;padding-top:0px; float:left;}
-header h1 a {display:block;width:130px;height:65px;background:url(../images/logo7.svg) 0 0 no-repeat; text-decoration:none; text-indent:-9999px;}
+header h1 a {display:block;width:130px;height:65px;background:url(../images/logo/logo7.svg) 0 0 no-repeat; text-decoration:none; text-indent:-9999px;}
 
 #search{float:right;padding:14px 15px 0 0;}
 #search input{background:#e1e1e1;border-bottom:1px solid #f5f5f5;font-family:Arial, Arial, Helvetica, sans-serif;border-left:1px solid #dcdcdc;border-top:1px solid #b3b3b3;border-right:1px solid #dcdcdc;border-radius:3px;width:198px;font-size: 12px; color: #2f2f2f;padding: 5px 10px 4px;height:15px;}
