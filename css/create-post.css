@@ -41,7 +41,7 @@
     color: #ffffff;
 }
 
-.form-group input[type="text"],
+.form-group input[type="text"] ,
 .form-group textarea,
 .form-group input[type="file"] {
     width: 100%;
@@ -50,7 +50,8 @@
     border: 1px solid #cccccc;
     background-color: #1e1e1e;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 16px; /* Устанавливаем одинаковый размер шрифта */
+    font-family: 'Roboto', sans-serif; /* Устанавливаем одинаковый шрифт */
     box-sizing: border-box;
     transition: border-color 0.3s ease; /* Плавный переход цвета границы */
 }
@@ -61,6 +62,7 @@
     border-color: #00BBFF; /* Синий цвет границы при фокусе */
     outline: none; /* Убираем стандартное выделение */
 }
+
 
 .form-group input[type="text"]::placeholder {
     color: #888888;
