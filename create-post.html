@@ -1,48 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Post-Wave demo</title>
+    <title>Create Post - Post-Wave</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/create-post.css">
     <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
-    <script>
-        $(function(){
-            $('.slider')._TMS({
-                prevBu:false,
-                nextBu:false,
-                playBu:false,
-                duration:800,
-                easing:'easeOutQuad',
-                preset:'diagonalFade',
-                pagination:true,//'.pagination',true,'<ul></ul>'
-                pagNums:false,
-                slideshow:7000,
-                numStatus:false,
-                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
-                waitBannerAnimation:false,
-                progressBar:false
-            })
-        })
-    </script>
-    <!--[if lt IE 8]>
-    <div style=' clear: both; text-align:center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-        </a>
-    </div>
-    <![endif]-->
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="js/html5.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
-    <![endif]-->
 </head>
 <body>
+<!-- Прелоадер -->
+<div id="preloader">
+    <div class="cube-grid">
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+    </div>
+</div>
+
 <div class="main">
     <!--==============================header=================================-->
     <header>
@@ -98,7 +84,41 @@
         </nav>
     </header>
     <!--==============================content================================-->
-
+    <section id="content">
+        <div class="container_12">
+            <div class="wrapper">
+                <article class="grid_12">
+                    <div class="box create-post-box">
+                        <h2 class="first">Create Your Post</h2>
+                        <form id="create-post-form">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" id="title" name="title" placeholder="Enter your title here..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content</label>
+                                <textarea id="content" name="content" rows="5" placeholder="Write your content here..." required maxlength="500" oninput="updateCharCount(this.value)"></textarea>
+                                <div class="char-counter">
+                                    <span id="char-count">500</span> characters remaining
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image-url">Image URL</label>
+                                <input type="text" id="image-url" name="image-url" placeholder="Paste the image URL here...">
+                                <div class="preview" id="url-preview"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image-file">Or Upload an Image</label>
+                                <input type="file" id="image-file" name="image-file" accept="image/*">
+                                <div class="preview" id="file-preview"></div>
+                            </div>
+                            <button type="submit" class="submit-button">Create Post</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -117,23 +137,7 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
-            document.getElementById('greeting').textContent = username;
-        }
-
-        document.getElementById('logout-link').addEventListener('click', function() {
-            localStorage.removeItem('username');
-            window.location.reload();
-        });
-    });
-
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+        const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
 
@@ -150,30 +154,94 @@
         document.getElementById('logout-link').addEventListener('click', function() {
             localStorage.removeItem('username');
             localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            window.location.href = 'login-page.html'; // Redirect to login page after logout
+            window.location.href = 'login-page.html';
+        });
+
+        document.getElementById('image-url').addEventListener('input', function() {
+            const url = this.value;
+            const preview = document.getElementById('url-preview');
+            if (url) {
+                preview.innerHTML = `<img src="${url}" alt="Image Preview">`;
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+
+        document.getElementById('image-file').addEventListener('change', function() {
+            const file = this.files[0];
+            const preview = document.getElementById('file-preview');
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                preview.innerHTML = `<img src="${reader.result}" alt="Image Preview">`;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+
+        const form = document.getElementById("create-post-form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value.trim();
+            const content = document.getElementById('content').value;
+            const image = document.getElementById('image-url').value.trim() || document.getElementById('file-preview').querySelector('img')?.src;
+            const likes = 10;
+
+            if (!token) {
+                alert("You are not logged in. Please log in to create a post.");
+                return;
+            }
+
+            // Показываем прелоадер
+            preloader.style.display = 'flex';
+
+            fetch('https://post-wave-swagger.fun/posts/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ title, content, image, likes })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Прячем прелоадер после успешного запроса
+                    preloader.style.display = 'none';
+
+                    if (data.success) {
+                        window.location.href = 'my-posts.html';
+                    } else {
+                        alert('Error creating post: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert('Error creating post. Please try again.');
+                    // Прячем прелоадер в случае ошибки
+                    preloader.style.display = 'none';
+                });
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function() {
-        // Получаем текущий URL страницы
-        const currentPath = window.location.pathname;
-
-        // Убираем класс 'current' у всех элементов меню
-        document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
-            menuItem.classList.remove('current');
-        });
-
-        // Проверяем, какая страница открыта, и добавляем класс 'current' соответствующему пункту меню
-        if (currentPath.includes("index.html")) {
-            document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
-        } else if (currentPath.includes("my-users.html")) {
-            document.querySelector('.sf-menu li a[href="my-users.html"]').parentElement.classList.add('current');
-        }
-        // Добавьте здесь аналогичные условия для других страниц
+    // Скрипт для скрытия прелоадера после полной загрузки страницы
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'none';
+        document.querySelector('.main').style.display = 'block';
     });
 
-
+    function updateCharCount(value) {
+        const maxLength = 500;
+        const charCount = document.getElementById('char-count');
+        const remainingChars = maxLength - value.length;
+        charCount.textContent = remainingChars;
+    }
 </script>
+
 </body>
 </html>

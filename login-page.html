@@ -24,6 +24,21 @@
     <![endif]-->
 </head>
 <body>
+<!-- Прелоадер -->
+<div id="preloader">
+    <div class="cube-grid">
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+    </div>
+</div>
+
 <div class="main">
     <!--==============================header=================================-->
     <header>
@@ -140,6 +155,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const preloader = document.getElementById('preloader');
         const form = document.getElementById("login-form");
 
         form.addEventListener("submit", function(event) {
@@ -152,6 +168,8 @@
 
             // Clear previous error message
             errorMessage.style.display = 'none';
+            // Показываем прелоадер
+            preloader.style.display = 'flex';
 
             // Send data to the server
             fetch('https://post-wave-swagger.fun/auth/login', {
@@ -168,6 +186,9 @@
                         localStorage.setItem('username', data.payload.username); // предполагаем, что username в payload
                         localStorage.setItem('token', data.payload.token);
 
+                        // Прячем прелоадер после успешного запроса
+                        preloader.style.display = 'none';
+
                         // Redirect to the homepage
                         window.location.href = 'index.html';
                     } else {
@@ -175,6 +196,9 @@
                         errorMessage.querySelector('h3').textContent = 'Login Failed';
                         errorMessage.querySelector('p').textContent = 'Incorrect username or password.';
                         errorMessage.style.display = 'block';
+
+                        // Прячем прелоадер после успешного запроса
+                        preloader.style.display = 'none';
                     }
                 })
                 .catch(error => {
@@ -182,8 +206,22 @@
                     errorMessage.querySelector('h3').textContent = 'Login Failed';
                     errorMessage.querySelector('p').textContent = 'Incorrect username or password.';
                     errorMessage.style.display = 'block';
+
+                    // Прячем прелоадер после успешного запроса
+                    preloader.style.display = 'none';
                 });
         });
+    });
+    // Скрипт для скрытия прелоадера после полной загрузки страницы
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'none';
+    });
+    // Скрипт для скрытия прелоадера после полной загрузки страницы
+    window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'none';
+        document.querySelector('.main').style.display = 'block';
     });
 
 

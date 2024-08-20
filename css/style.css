@@ -202,53 +202,58 @@ html {width:100%;}
 
 .create-post-button {
     display: inline-block;
-    background-color: #6AC820; /* Яркий зеленый цвет */
-    color: #FFFFFF;
+    background-color: #1e1e1e; /* Темный фон кнопки */
+    color: #00BBFF; /* Синий текст */
+    border: 2px solid #00BBFF; /* Синяя рамка */
     padding: 12px 25px;
     border-radius: 12px; /* Более округлые углы */
     font-weight: bold;
     text-decoration: none;
     margin-right: 20px; /* Правый отступ */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Глубокая тень для эффекта "парения" */
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Плавные переходы всех свойств */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Плавные переходы всех свойств */
     font-size: 16px; /* Оптимальный размер текста */
     display: flex;
     align-items: center;
     justify-content: center; /* Центрирование текста и иконки */
     position: relative;
     overflow: hidden;
-    background-image: linear-gradient(120deg, #6AC820, #57b514, #46a510); /* Градиент для более стильного вида */
-}
-
-.create-post-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transition: transform 0.5s ease, opacity 0.3s ease;
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0;
-}
-
-.create-post-button:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
+    width: auto; /* Оставляем ширину кнопки такой, как была */
 }
 
 .create-post-button:hover {
-    background-image: linear-gradient(120deg, #57b514, #46a510, #3b8e0a); /* Темнее при наведении */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    transform: translateY(-3px); /* Легкий подъем кнопки при наведении */
+    background-color: #00BBFF; /* Синий фон при наведении */
+    color: #ffffff; /* Белый текст */
+    box-shadow: 0px 0px 20px rgba(0, 187, 255, 0.75), 0 0 30px rgba(0, 187, 255, 0.5); /* Умеренный неоновый эффект */
+    transform: translateY(-2px) scale(1.02); /* Подъем и легкое увеличение */
+}
+
+.create-post-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 187, 255, 0.5), transparent);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.create-post-button:hover::after {
+    transform: scale(1); /* Радиальный градиент расширяется при наведении */
+}
+
+.create-post-button:active {
+    background-color: #0088cc; /* Темный синий при нажатии */
+    box-shadow: 0px 0px 10px rgba(0, 136, 204, 0.75);
+    transform: translateY(0) scale(1); /* Возвращение кнопки в исходное положение при нажатии */
 }
 
 .plus-icon {
     font-size: 22px; /* Размер иконки плюс */
     margin-right: 8px;
-    transition: transform 0.3s ease;
+    transition: none; /* Убираем эффект поворота */
 }
 
 .add-post-text {
@@ -257,17 +262,6 @@ html {width:100%;}
     font-size: 14px;
     letter-spacing: 1px;
 }
-
-.create-post-button:hover .plus-icon {
-    transform: rotate(90deg); /* Поворот иконки при наведении */
-}
-
-.create-post-button:active {
-    background-image: linear-gradient(120deg, #46a510, #3b8e0a, #328009); /* Более темный оттенок при нажатии */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    transform: translateY(0); /* Возвращение кнопки в исходное положение при нажатии */
-}
-
 
  .line {
      border-bottom: 0.5px solid #00BBFF; /* Синий цвет линии */
