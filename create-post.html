@@ -202,6 +202,7 @@
 
             fetch('https://post-wave-swagger.fun/posts/create', {
                 method: 'POST',
+                mode: 'cors', // Обеспечивает поддержку CORS
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
