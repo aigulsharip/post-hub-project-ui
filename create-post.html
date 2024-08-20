@@ -141,120 +141,98 @@
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
+        const postContainer = document.getElementById('post-container');
+        const postList = document.getElementById('post-list');
+        const postInfoContainer = document.getElementById('post-info-container');
+        const linkWrapper = document.createElement('div');
+        linkWrapper.className = 'link-wrapper';
+        linkWrapper.innerHTML = `<a href="all-posts.html" class="link2">View All My Posts</a>`;
+        const createPostContainer = document.getElementById('create-post-container');
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
+
+            createPostContainer.style.display = 'block';
+
+            fetch('https://post-wave-swagger.fun/posts', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    preloader.style.display = 'none';
+
+                    if (data.success && data.payload.length > 0) {
+                        postList.innerHTML = '';
+
+                        const sortedPosts = data.payload.sort((a, b) => new Date(b.created) - new Date(a.created));
+                        const postsToShow = sortedPosts.slice(0, 5);
+
+                        postsToShow.forEach((post, index) => {
+                            const postDate = new Date(post.created);
+                            const formattedDate = `${postDate.getDate()}-${postDate.getMonth() + 1}-${postDate.getFullYear()}`;
+                            const postItem = `
+                    <li>
+                        <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.svg';" /></figure>
+                        <div class="content-wrapper">
+                            <div>
+                                <h4>${index + 1}. <a href="#">${post.title}</a></h4>
+                                <p class="post-content">${post.content.substring(0, 150)}...</p>
+                                <p class="date">Created on: ${formattedDate}</p>
+                                <p class="likes">Likes: ${post.likes}</p>
+                                <p class="comments">The number of comments: ${post.commentsCount}</p>
+                            </div>
+                            <a href="#" class="button3">View Post</a>
+                        </div>
+                    </li>`;
+                            postList.innerHTML = postItem + postList.innerHTML;
+                        });
+
+                        postContainer.appendChild(linkWrapper);
+                        postInfoContainer.innerHTML = `Total posts: ${data.payload.length}. Displaying latest 5.`;
+                    } else {
+                        postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> or <a href="login-page.html">log in</a> to get started!</p>`;
+                        postInfoContainer.innerHTML = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading posts:', error);
+                    preloader.style.display = 'none';
+                    postInfoContainer.innerHTML = '';
+                });
         } else {
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
+            postContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
+            preloader.style.display = 'none';
+            postInfoContainer.innerHTML = '';
         }
 
         document.getElementById('logout-link').addEventListener('click', function() {
             localStorage.removeItem('username');
             localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
             window.location.href = 'login-page.html';
         });
 
-        document.getElementById('post-image-url').addEventListener('input', function() {
-            const url = this.value;
-            const preview = document.getElementById('url-preview');
-            if (url) {
-                preview.innerHTML = `<img src="${url}" alt="Image Preview">`;
-            } else {
-                preview.innerHTML = '';
-            }
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
+            menuItem.classList.remove('current');
         });
 
-        document.getElementById('post-image-file').addEventListener('change', function() {
-            const file = this.files[0];
-            const preview = document.getElementById('file-preview');
-            const reader = new FileReader();
-
-            reader.onloadend = function() {
-                preview.innerHTML = `<img src="${reader.result}" alt="Image Preview">`;
-            };
-
-            if (file) {
-                reader.readAsDataURL(file);
-            } else {
-                preview.innerHTML = '';
-            }
-        });
-
-        const form = document.getElementById("create-post-form");
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            const title = document.getElementById('post-title').value.trim();
-            const content = document.getElementById('post-content').value.trim();
-            const image = document.getElementById('post-image-url').value.trim() ||
-                document.getElementById('file-preview').querySelector('img')?.src;
-            const likes = 5212;
-
-            if (!token) {
-                alert("You are not logged in. Please log in to create a post.");
-                return;
-            }
-
-            if (!content) {
-                alert("Content cannot be empty.");
-                return;
-            }
-
-            if (!image) {
-                alert("Add image URL.");
-                return;
-            }
-
-            preloader.style.display = 'flex';
-
-            fetch('https://post-wave-swagger.fun/posts/create', {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ title, content, image, likes })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    preloader.style.display = 'none';
-
-                    if (data.success) {
-                        window.location.href = 'my-posts.html';
-                    } else {
-                        alert('Error creating post: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert('Error creating post. Please try again.');
-                    preloader.style.display = 'none';
-                });
-        });
+        if (currentPath.includes("index.html")) {
+            document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
+        } else if (currentPath.includes("my-posts.html")) {
+            document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
+        }
     });
 
-    window.addEventListener('load', function() {
-        const preloader = document.getElementById('preloader');
-        preloader.style.display = 'none';
-        document.querySelector('.main').style.display = 'block';
-    });
-
-    function updateCharCount(value) {
-        const maxLength = 500;
-        const charCount = document.getElementById('char-count');
-        const remainingChars = maxLength - value.length;
-        charCount.textContent = remainingChars;
-    }
 
 </script>
 

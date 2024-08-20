@@ -133,6 +133,14 @@
                                 <ul class="ext_list picks" id="post-list">
                                     <!-- Динамически загружаемые посты -->
                                 </ul>
+                                <div class="post-footer">
+                                    <div id="view-all-container" class="view-all-container">
+                                        <a href="all-posts.html" class="link2">View All My Posts</a>
+                                    </div>
+                                    <div id="post-info-container" class="post-info-container">
+                                        <!-- Здесь будет отображаться информация о количестве постов -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -165,10 +173,7 @@
         const token = localStorage.getItem('token');
         const postContainer = document.getElementById('post-container');
         const postList = document.getElementById('post-list');
-        const linkWrapper = document.createElement('div');
-        linkWrapper.className = 'link-wrapper';
-        linkWrapper.innerHTML = `<a href="#" class="link2">View All My Posts</a>`;
-        const createPostContainer = document.getElementById('create-post-container');
+        const postInfoContainer = document.getElementById('post-info-container');
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
@@ -176,10 +181,7 @@
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
 
-            // Показываем кнопку создания поста только для залогиненного пользователя
-            createPostContainer.style.display = 'block';
-
-            // Load posts
+            // Загружаем посты
             fetch('https://post-wave-swagger.fun/posts', {
                 method: 'GET',
                 headers: {
@@ -189,51 +191,59 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    // Скрываем прелоадер после загрузки данных
                     preloader.style.display = 'none';
 
                     if (data.success && data.payload.length > 0) {
-                        postList.innerHTML = ''; // Clear existing content
+                        postList.innerHTML = '';
 
-                        data.payload.forEach(post => {
+                        // Сортируем посты по дате создания (от новых к старым)
+                        const sortedPosts = data.payload.sort((a, b) => new Date(b.created) - new Date(a.created));
+                        const postsToShow = sortedPosts.slice(0, 5);
+
+                        postsToShow.forEach(post => {
+                            const postDateArray = post.created;
+                            const postDate = `${postDateArray[2]}-${postDateArray[1]}-${postDateArray[0]}`;
                             const postItem = `
-                    <li>
-                        <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.svg';" /></figure>
-                        <div class="content-wrapper">
-                            <div>
-                                <h4><a href="#">${post.title}</a></h4>
-                                <p class="post-content">${post.content.substring(0, 150)}...</p>
-                                <p class="likes">Likes: ${post.likes}</p>
-                                <p class="comments">The number of comments: ${post.commentsCount}</p>
+                        <li>
+                            <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.svg';" /></figure>
+                            <div class="content-wrapper">
+                                <div>
+                                    <h4><a href="#">${post.title}</a></h4>
+                                    <p class="post-content">${post.content.substring(0, 150)}...</p>
+                                    <p class="likes">Likes: ${post.likes}</p>
+                                    <p class="comments">The number of comments: ${post.commentsCount}</p>
+                                </div>
+                                <p class="date" style="text-align: right;">Created on: ${postDate}</p>
+                                <a href="#" class="button3">View Post</a>
                             </div>
-                            <a href="#" class="button3">View Post</a>
-                        </div>
-                    </li>`;
+                        </li>`;
                             postList.innerHTML += postItem;
                         });
 
-                        // Add the "View All My Posts" link
-                        postContainer.appendChild(linkWrapper);
+                        postInfoContainer.innerHTML = `Total posts: ${data.payload.length}. Displaying latest 5.`;
                     } else {
                         postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> or <a href="login-page.html">log in</a> to get started!</p>`;
+                        postInfoContainer.innerHTML = '';
                     }
                 })
                 .catch(error => {
                     console.error('Error loading posts:', error);
-                    preloader.style.display = 'none'; // Скрываем прелоадер в случае ошибки
+                    preloader.style.display = 'none';
+                    postInfoContainer.innerHTML = '';
                 });
         } else {
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
             postContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
-            preloader.style.display = 'none'; // Скрываем прелоадер если пользователь не авторизован
+            preloader.style.display = 'none';
+            postInfoContainer.innerHTML = '';
         }
 
         document.getElementById('logout-link').addEventListener('click', function() {
             localStorage.removeItem('username');
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
-            window.location.href = 'login-page.html'; // Redirect to login page after logout
+            window.location.href = 'login-page.html';
         });
 
         const currentPath = window.location.pathname;
@@ -248,47 +258,6 @@
         }
     });
 
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const username = localStorage.getItem('username');
-        const token = localStorage.getItem('token');
-
-        if (username && token) {
-            document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
-            document.getElementById('greeting').textContent = username;
-        } else {
-            document.getElementById('auth-links').style.display = 'block';
-            document.getElementById('welcome-message').style.display = 'none';
-        }
-
-        document.getElementById('logout-link').addEventListener('click', function() {
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            window.location.href = 'login-page.html'; // Redirect to login page after logout
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Получаем текущий URL страницы
-            const currentPath = window.location.pathname;
-
-            // Убираем класс 'current' у всех элементов меню
-            document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
-                menuItem.classList.remove('current');
-            });
-
-            // Проверяем, какая страница открыта, и добавляем класс 'current' соответствующему пункту меню
-            if (currentPath.includes("index.html")) {
-                document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
-            } else if (currentPath.includes("my-posts.html")) {
-                document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
-            }
-            // Добавьте здесь аналогичные условия для других страниц
-        });
-    });
 </script>
 </body>
 </html>

@@ -187,7 +187,64 @@ html {width:100%;}
         transform: scale(0);
     }
 }
+.date {
+    font-size: 14px;
+    color: #999;
+    text-align: right;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 
+.button3 {
+    margin-right: 10px;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.post-footer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+}
+
+.post-info-container {
+    background-color: #333;
+    color: #f2f2f2;
+    padding: 5px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    margin-left: auto;
+    margin-top: 10px;
+    width: fit-content;
+    border: 1px solid #444;
+    background: linear-gradient(145deg, #444, #222);
+    transition: background-color 0.3s ease;
+}
+
+.post-info-container:hover {
+    background-color: #444;
+}
+
+.content-wrapper {
+    position: relative;
+    padding-bottom: 50px; /* Это нужно для обеспечения пространства для кнопки */
+}
+
+figure {
+    margin: 0;
+}
+
+.content-wrapper h4 {
+    margin-top: 0;
+}
 /* Add post button */
 .button-container {
     text-align: right;
