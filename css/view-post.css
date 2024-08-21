@@ -1,0 +1,175 @@
+/* Основной контейнер контента поста */
+#post-content-wrapper {
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 960px; /* Растягиваем контейнер до границы зеленого меню */
+    margin: 0 auto;
+}
+
+/* Контейнер для изображения и информации о посте */
+.post-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 40px; /* Увеличенный отступ снизу */
+}
+
+/* Стили для картинки поста */
+.post-image {
+    flex: 0 0 300px;
+    margin-right: 20px;
+}
+
+.post-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для информации о посте */
+.post-info {
+    flex: 1;
+    color: #fff;
+}
+
+#post-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #00BBFF;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.post-content {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    word-wrap: break-word; /* Добавляем перенос слов, чтобы текст не выходил за пределы контейнера */
+}
+
+.post-likes, .post-comments, .post-date {
+    font-size: 14px;
+    color: #bbb;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin-right: 20px; /* Увеличенный отступ между строками */
+}
+
+.post-date {
+    font-style: italic;
+}
+
+/* Контейнер для кнопок редактирования и удаления */
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+/* Стили для кнопок редактирования и удаления */
+.button3 {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #00BBFF;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Уменьшили яркость */
+}
+
+.button3:hover {
+    background-color: #00BBFF;
+    color: #1e1e1e;
+    box-shadow: 0 0 10px #00BBFF, 0 0 15px #00BBFF, 0 0 20px #00BBFF; /* Уменьшили яркость */
+}
+
+/* Стили для комментариев */
+.comments-section {
+    margin-top: 40px;
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.comments-section h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #00BBFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#comments-list {
+    margin-bottom: 20px;
+}
+
+.comment-item {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.comment-item p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.comment-item .comment-date {
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Форма добавления комментариев */
+#comment-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Кнопка внутри блока с комментарием */
+}
+
+#comment-form textarea {
+    flex: 1;
+    padding: 15px; /* Увеличиваем высоту поля */
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: #fff;
+    resize: none;
+    margin-right: 10px;
+    min-height: 50px; /* Минимальная высота текстового поля */
+}
+
+#comment-form button {
+    flex-shrink: 0; /* Кнопка занимает только необходимое пространство */
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #00BBFF;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Уменьшили яркость */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#comment-form button:hover {
+    background-color: #00BBFF;
+    color: #1e1e1e;
+    box-shadow: 0 0 10px #00BBFF, 0 0 15px #00BBFF, 0 0 20px #00BBFF; /* Уменьшили яркость */
+}

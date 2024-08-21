@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Post Details - Post-Wave</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/view-post.css">
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="js/superfish.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/tms-0.4.1.js"></script>
+    <script>
+        $(function(){
+            $('.slider')._TMS({
+                prevBu:false,
+                nextBu:false,
+                playBu:false,
+                duration:800,
+                easing:'easeOutQuad',
+                preset:'diagonalFade',
+                pagination:true,//'.pagination',true,'<ul></ul>'
+                pagNums:false,
+                slideshow:7000,
+                numStatus:false,
+                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
+                waitBannerAnimation:false,
+                progressBar:false
+            })
+        })
+    </script>
+    <!--[if lt IE 8]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+    </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+    <![endif]-->
+</head>
+<body>
+<!-- Прелоадер -->
+<div id="preloader">
+    <div class="cube-grid">
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+    </div>
+</div>
+
+<div class="main">
+    <!--==============================header=================================-->
+    <header>
+        <div class="top">
+            <div class="nav">
+                <ul class="sf-menu">
+                    <li><a href="index.html">home</a></li>
+                    <li><a href="list-of-posts.html">news</a></li>
+                    <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
+                    <li><a target="_blank " href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
+                    <li><a href="#">community</a></li>
+                    <li><a href="contatcs.html">contacts</a></li>
+                </ul>
+            </div>
+            <div class="login" id="auth-container">
+                <div id="auth-links">
+                    You have not yet registered to our club? &nbsp;&nbsp;
+                    <a href="register-page.html" id="register-link">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp;
+                    <a href="login-page.html" id="login-link">Log in</a>
+                </div>
+                <div id="welcome-message" style="display: none;">
+                    Welcome on board, <span id="greeting"></span>!
+                    &nbsp;&nbsp;<a href="#" id="logout-link">Logout</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="middle">
+            <h1><a class="logo" href="index.html"><span>Post</span>Wave</a></h1>
+            <a href="index.html" class="h_banner"></a>
+        </div>
+        <nav>
+            <ul class="sf-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="my-users.html">MY USERS</a></li>
+                <li class="current f_item"><a href="my-posts.html">MY POSTS</a></li>
+                <li><a href="actions.html">ACTIONS</a>
+                    <ul>
+                        <li><a href="create-user.html">Create user </a></li>
+                        <li><a href="create-post.html">Create post</a></li>
+                        <li><a href="create-comment.html">Create comment </a></li>
+                        <li><a href="get-list-of-users.html">Get list of users </a></li>
+                    </ul>
+                </li>
+                <li><a href="#">LOGS</a></li>
+                <li><a href="#">MY ACCOUNT</a></li>
+            </ul>
+            <form id="search" action="search.php" method="GET" accept-charset="utf-8">
+                <input type="text" name="s" />
+                <a onclick="document.getElementById('search').submit()" class="button1">Search</a>
+            </form>
+            <div class="clear"></div>
+        </nav>
+    </header>
+    <!--==============================content================================-->
+    <div class="main">
+        <section id="content">
+            <div class="container_12">
+                <div class="wrapper">
+                    <article class="grid_12">
+                        <div class="box" id="post-content-wrapper">
+                            <div class="post-wrapper">
+                                <div class="post-image">
+                                    <img id="post-image" src="" alt="Post Image" />
+                                </div>
+                                <div class="post-info">
+                                    <h2 id="post-title">Loading...</h2>
+                                    <p id="post-text" class="post-content"></p>
+                                    <p id="post-likes" class="post-likes"></p>
+                                    <p id="post-comments" class="post-comments"></p>
+                                    <p id="post-date" class="post-date"></p>
+                                </div>
+                            </div>
+                            <hr class="divider">
+                            <div class="comments-section">
+                                <h3>Comments</h3>
+                                <div id="comments-list">
+                                    <!-- Комментарии будут загружены сюда -->
+                                </div>
+                                <form id="comment-form">
+                                    <textarea placeholder="Add a comment..."></textarea>
+                                    <button type="submit">POST COMMENT</button>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!--==============================footer=================================-->
+    <footer>
+        <div class="menu">
+            <a href="#">home</a>
+            <a href="#">reviews</a>
+            <a href="#">news</a>
+            <a href="#">videos</a>
+            <a href="#">blog</a>
+            <a href="#">contacts</a>
+        </div>
+        <div class="privacy">
+            <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
+        </div>
+    </footer>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+
+        if (!postId || postId === "null") {
+            console.error('Post ID is missing or null');
+            return;
+        }
+
+        // Проверка наличия токена и пользователя
+        const token = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
+
+        if (!token || !username) {
+            alert('You are not logged in. Please log in to view this post.');
+            window.location.href = 'login-page.html';
+            return;
+        } else {
+            document.getElementById('auth-links').style.display = 'none';
+            document.getElementById('welcome-message').style.display = 'block';
+            document.getElementById('greeting').textContent = username;
+        }
+
+        // Загрузка информации о посте
+        fetch(`https://post-wave-swagger.fun/posts/${postId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('post-title').textContent = data.payload.title;
+                    document.getElementById('post-text').textContent = data.payload.content;
+                    document.getElementById('post-likes').textContent = `Likes: ${data.payload.likes}`;
+                    document.getElementById('post-comments').textContent = `Comments: ${data.payload.commentsCount}`;
+                    document.getElementById('post-image').src = data.payload.image || 'images/here-your-photo.png';
+                    const postDate = new Date(data.payload.created).toLocaleDateString();
+                    document.getElementById('post-date').textContent = `Created on: ${postDate}`;
+
+                    document.getElementById('edit-post-button').href = `edit-post.html?id=${postId}`;
+                    document.getElementById('post-content-wrapper').style.display = 'block';
+                    document.getElementById('preloader').style.display = 'none';
+
+                    // Загрузка комментариев
+                    loadComments(postId, token);
+                } else {
+                    alert('Error loading post details');
+                    document.getElementById('preloader').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading post details:', error);
+                document.getElementById('preloader').style.display = 'none';
+            });
+
+        // Функция для загрузки комментариев
+        function loadComments(postId, token) {
+            fetch('https://post-wave-swagger.fun/comments', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const commentsList = document.getElementById('comments-list');
+                        commentsList.innerHTML = '';
+
+                        const filteredComments = data.payload.filter(comment => comment.postId == postId);
+
+                        filteredComments.forEach(comment => {
+                            const commentItem = document.createElement('div');
+                            commentItem.classList.add('comment-item');
+
+                            const commentText = document.createElement('p');
+                            commentText.textContent = comment.message;
+
+                            const commentOwner = document.createElement('p');
+                            commentOwner.textContent = `By: ${comment.owner.username}`;
+
+                            const commentDate = document.createElement('p');
+                            commentDate.classList.add('comment-date');
+                            commentDate.textContent = `Created on: ${new Date(comment.created).toLocaleString()}`;
+
+                            commentItem.appendChild(commentText);
+                            commentItem.appendChild(commentOwner);
+                            commentItem.appendChild(commentDate);
+
+                            commentsList.appendChild(commentItem);
+                        });
+                    } else {
+                        alert('Error loading comments');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading comments:', error);
+                });
+        }
+
+        document.getElementById('logout-link').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
+            window.location.href = 'login-page.html';
+        });
+
+        // Обработчик отправки комментария
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const commentMessage = document.getElementById('comment-message').value;
+
+            fetch('https://post-wave-swagger.fun/comments/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    postId: postId,
+                    message: commentMessage
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('comment-message').value = ''; // Очищаем поле ввода
+                        loadComments(postId, token); // Перезагружаем комментарии
+                    } else {
+                        alert('Error posting comment');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error posting comment:', error);
+                });
+        });
+    });
+
+</script>
+</body>
+</html>
