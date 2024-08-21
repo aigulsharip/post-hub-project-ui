@@ -55,13 +55,12 @@ html {width:100%;}
     cursor: pointer; /* Курсор указатель */
 }
 
-.picks div.content-wrapper {
-    flex: 1;
+.picks .content-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
-    padding-bottom: 15px; /* Добавляем небольшой padding снизу */
-    margin-bottom: 0; /* Убираем margin-bottom, чтобы управлять расстоянием через li */
+    height: 100%;
+    position: relative;
 }
 
 /* Стили для заголовка поста */
@@ -84,13 +83,44 @@ html {width:100%;}
     font-size: 14px; /* Больший размер для контента */
     color: #ccc; /* Светлый цвет для контента */
 }
-
 .picks .likes,
 .picks .comments {
-    font-size: 12px; /* Меньший размер для лайков и комментариев */
-    color: #fff; /* Белый цвет для лайков */
-    margin-top: auto; /* Чтобы лайки и комментарии были на уровне нижнего края фотографии */
+    align-self: flex-start; /* Выровнять по левому краю */
+    font-size: 12px; /* Меньший размер текста */
+    color: #fff; /* Цвет текста */
+    margin-bottom: 5px; /* Добавляем отступ снизу */
 }
+
+.picks .likes {
+    margin-top: auto; /* Перемещаем блок в самый низ */
+}
+
+.picks .comments {
+    margin-top: 0;
+}
+
+.picks figure {
+    margin-right: 20px;
+    margin-bottom: 0;
+    flex: 0 0 150px;
+}
+
+.picks div.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Все элементы наверху */
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.picks .content-wrapper p.likes,
+.picks .content-wrapper p.comments {
+    align-self: flex-end; /* Выровнять по правому краю */
+    margin-right: 0;
+    margin-top: auto; /* Перемещаем блок в самый низ */
+}
+
 
 .picks .button3 {
     background-color: #ffffff; /* Полностью белый фон кнопки */
@@ -198,6 +228,71 @@ html {width:100%;}
         transform: scale(0);
     }
 }
+
+.back-button {
+    display: inline-block;
+    background-color: #1e1e1e;
+    color: #00BBFF;
+    border: 2px solid #00BBFF;
+    padding: 5px 10px; /* Уменьшены отступы справа и слева */
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 5px 0 0 0; /* Уменьшенный отступ сверху */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    width: auto;
+    max-width: 130px; /* Еще более уменьшена максимальная ширина */
+}
+
+.back-button:hover {
+    background-color: #00BBFF;
+    color: #ffffff;
+    box-shadow: 0px 0px 15px rgba(0, 187, 255, 0.5), 0 0 20px rgba(0, 187, 255, 0.3);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.back-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 187, 255, 0.4), transparent);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.back-button:hover::after {
+    transform: scale(1);
+}
+
+.back-button:active {
+    background-color: #0088cc;
+    box-shadow: 0px 0px 10px rgba(0, 136, 204, 0.5);
+    transform: translateY(0) scale(1);
+}
+
+.arrow-icon {
+    font-size: 20px;
+    margin-right: 6px;
+    transition: none;
+}
+
+.back-text {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
 .date {
     font-size: 14px;
     color: #999;
@@ -214,7 +309,7 @@ html {width:100%;}
     justify-content: flex-end;
     position: absolute;
     right: 10px;
-    bottom: 40px; /* Увеличьте значение, чтобы поднять кнопку выше */
+    bottom: 10px; /* Увеличьте значение, чтобы поднять кнопку выше */
 }
 
 
@@ -598,12 +693,16 @@ body {
 
 h2.first {
     color: #fff;
-    font-size: 28px;
-    margin-bottom: 30px;
+    font-size: 48px;
+    margin-bottom: 40px;
     text-align: center;
     text-transform: uppercase;
     border-bottom: 2px solid #00BBFF;
     padding-bottom: 10px;
+}
+.title-label {
+    font-size: 18px; /* Увеличенный размер текста метки Title */
+    font-weight: bold;
 }
 
 /* Общие стили */

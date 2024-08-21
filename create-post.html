@@ -62,9 +62,9 @@
         </div>
         <nav>
             <ul class="sf-menu">
-                <li class="current f_item"><a href="index.html">HOME</a></li>
+                <li><a href="index.html">HOME</a></li>
                 <li><a href="my-users.html">MY USERS</a></li>
-                <li><a href="my-posts.html">MY POSTS</a></li>
+                <li class="current f_item"><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="actions.html">ACTIONS</a>
                     <ul>
                         <li><a href="create-user.html">Create user </a></li>
@@ -89,26 +89,31 @@
             <div class="wrapper">
                 <article class="grid_12">
                     <div class="box create-post-box">
+                        <!-- Кнопка Назад -->
+                        <a href="my-posts.html" class="back-button">
+                            <span class="arrow-icon">←</span>
+                            <span class="back-text">Back to My Posts</span>
+                        </a>
                         <h2 class="first">Create Your Post</h2>
                         <form id="create-post-form">
                             <div class="form-group">
-                                <label for="post-title">Title <span style="color: red;">*</span></label>
+                                <label for="post-title" class="title-label">Title <span style="color: red;">*</span></label>
                                 <input type="text" id="post-title" name="post-title" placeholder="Enter your title here..." required>
                             </div>
                             <div class="form-group">
-                                <label for="post-content">Content <span style="color: red;">*</span></label>
+                                <label for="post-content" class="title-label">Content <span style="color: red;">*</span></label>
                                 <textarea id="post-content" name="post-content" rows="5" placeholder="Write your content here..." required maxlength="500" oninput="updateCharCount(this.value)"></textarea>
                                 <div class="char-counter">
                                     <span id="char-count">500</span> characters remaining
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="post-image-url">Image URL</label>
+                                <label for="post-image-url" class="title-label">Image URL</label>
                                 <input type="text" id="post-image-url" name="post-image-url" placeholder="Paste the image URL here...">
                                 <div class="preview" id="url-preview"></div>
                             </div>
                             <div class="form-group">
-                                <label for="post-image-file">Or Upload an Image</label>
+                                <label for="post-image-file" class="title-label">Or Upload an Image</label>
                                 <input type="file" id="post-image-file" name="post-image-file" accept="image/*">
                                 <div class="preview" id="file-preview"></div>
                             </div>
