@@ -174,12 +174,17 @@
         const postContainer = document.getElementById('post-container');
         const postList = document.getElementById('post-list');
         const postInfoContainer = document.getElementById('post-info-container');
+        const createPostContainer = document.getElementById('create-post-container');
 
+        // Скрыть кнопку "Add New Post" для незарегистрированных пользователей
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
+
+            // Показываем кнопку "Add New Post" только для залогиненных пользователей
+            createPostContainer.style.display = 'block';
 
             // Загружаем посты
             fetch('https://post-wave-swagger.fun/posts', {
@@ -204,25 +209,25 @@
                             const postDateArray = post.created;
                             const postDate = `${postDateArray[2]}-${postDateArray[1]}-${postDateArray[0]}`;
                             const postItem = `
-                        <li>
-                            <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.svg';" /></figure>
-                            <div class="content-wrapper">
-                                <div>
-                                    <h4><a href="#">${post.title}</a></h4>
-                                    <p class="post-content">${post.content.substring(0, 150)}...</p>
-                                    <p class="likes">Likes: ${post.likes}</p>
-                                    <p class="comments">The number of comments: ${post.commentsCount}</p>
-                                </div>
-                                <p class="date" style="text-align: right;">Created on: ${postDate}</p>
-                                <a href="#" class="button3">View Post</a>
+                    <li>
+                        <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.svg';" /></figure>
+                        <div class="content-wrapper">
+                            <div>
+                                <h4><a href="#">${post.title}</a></h4>
+                                <p class="post-content">${post.content.substring(0, 150)}...</p>
+                                <p class="likes">Likes: ${post.likes}</p>
+                                <p class="comments">The number of comments: ${post.commentsCount}</p>
                             </div>
-                        </li>`;
-                            postList.innerHTML += postItem;
+                            <p class="date" style="text-align: right;">Created on: ${postDate}</p>
+                            <a href="#" class="button3">View Post</a>
+                        </div>
+                    </li>`;
+                            postList.innerHTML = postItem + postList.innerHTML;
                         });
 
                         postInfoContainer.innerHTML = `Total posts: ${data.payload.length}. Displaying latest 5.`;
                     } else {
-                        postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> or <a href="login-page.html">log in</a> to get started!</p>`;
+                        postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> to get started!</p>`;
                         postInfoContainer.innerHTML = '';
                     }
                 })
@@ -232,8 +237,13 @@
                     postInfoContainer.innerHTML = '';
                 });
         } else {
+            // Показываем сообщение для незарегистрированных пользователей
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
+
+            // Скрываем кнопку "Add New Post" для незарегистрированных пользователей
+            createPostContainer.style.display = 'none';
+
             postContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
             preloader.style.display = 'none';
             postInfoContainer.innerHTML = '';
