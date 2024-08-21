@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Posts - Post-Wave</title>
+    <title>Post-Wave demo</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
@@ -176,17 +176,13 @@
         const postInfoContainer = document.getElementById('post-info-container');
         const createPostContainer = document.getElementById('create-post-container');
 
-        // Скрыть кнопку "Add New Post" для незарегистрированных пользователей
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
-
-            // Показываем кнопку "Add New Post" только для залогиненных пользователей
             createPostContainer.style.display = 'block';
 
-            // Загружаем посты
             fetch('https://post-wave-swagger.fun/posts', {
                 method: 'GET',
                 headers: {
@@ -199,39 +195,41 @@
                     preloader.style.display = 'none';
 
                     if (data.success && data.payload.length > 0) {
-                        postList.innerHTML = ''; // Очищаем список перед добавлением новых постов
+                        postList.innerHTML = '';
 
-                        // Сортируем посты по дате создания (от новых к старым)
-                        const sortedPosts = data.payload.sort((a, b) => new Date(b.created) - new Date(a.created));
+                        // Сортируем посты по дате (от новых к старым)
+                        const sortedPosts = data.payload.sort((a, b) => {
+                            const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
+                            const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
+                            return dateB - dateA;
+                        });
 
-                        // Добавляем посты сверху вниз
-                        sortedPosts.forEach(post => {
+                        // Выводим первые 5 постов
+                        sortedPosts.slice(0, 5).forEach(post => {
                             const postDateArray = post.created;
-                            const postDate = `${postDateArray[2]}-${postDateArray[1]}-${postDateArray[0]}`;
-                            const postItem = `
-                <li>
-                    <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.svg';" /></figure>
-                    <div class="content-wrapper">
-                        <div>
-                            <h4><a href="#">${post.title}</a></h4>
-                            <p class="post-content">${post.content.substring(0, 150)}...</p>
-                            <p class="likes">Likes: ${post.likes}</p>
-                            <p class="comments">The number of comments: ${post.commentsCount}</p>
-                        </div>
-                        <p class="date" style="text-align: right;">Created on: ${postDate}</p>
-                        <a href="#" class="button3">View Post</a>
-                    </div>
-                </li>`;
+                            const utcDate = new Date(Date.UTC(postDateArray[0], postDateArray[1] - 1, postDateArray[2], postDateArray[3], postDateArray[4], postDateArray[5]));
+                            const localDate = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
 
-                            postList.insertAdjacentHTML('afterbegin', postItem); // Вставляем каждый пост в начало списка
+                            const postDate = `${localDate.getFullYear()}-${(localDate.getMonth() + 1).toString().padStart(2, '0')}-${localDate.getDate().toString().padStart(2, '0')} ${localDate.getHours().toString().padStart(2, '0')}:${localDate.getMinutes().toString().padStart(2, '0')}`;
+
+                            const postItem = `
+                        <li>
+                            <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.png';" /></figure>
+                            <div class="content-wrapper">
+                                <div>
+                                    <h4><a href="post.html?id=${post.id}">${post.title}</a></h4>
+                                    <p class="post-content">${post.content.substring(0, 150)}...</p>
+                                    <p class="likes">Likes: ${post.likes}</p>
+                                    <p class="comments">The number of comments: ${post.commentsCount}</p>
+                                </div>
+                                <p class="date" style="text-align: right;">Created on: ${postDate}</p>
+                                <a href="post.html?id=${post.id}" class="button3">View Post</a>
+                            </div>
+                        </li>`;
+                            postList.insertAdjacentHTML('beforeend', postItem);
                         });
 
                         postInfoContainer.innerHTML = `Total posts: ${data.payload.length}. Displaying latest 5.`;
-
-                        // Если количество постов больше 5, удаляем старые
-                        while (postList.children.length > 5) {
-                            postList.removeChild(postList.lastElementChild); // Удаляем последние элементы списка
-                        }
                     } else {
                         postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> to get started!</p>`;
                         postInfoContainer.innerHTML = '';
@@ -242,13 +240,9 @@
                     preloader.style.display = 'none';
                     postInfoContainer.innerHTML = '';
                 });
-
         } else {
-            // Показываем сообщение для незарегистрированных пользователей
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
-
-            // Скрываем кнопку "Add New Post" для незарегистрированных пользователей
             createPostContainer.style.display = 'none';
 
             postContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
