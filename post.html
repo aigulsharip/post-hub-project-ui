@@ -138,10 +138,14 @@
                                 <div id="comments-list">
                                     <!-- Комментарии будут загружены сюда -->
                                 </div>
+                                <div id="no-comments-message" style="display: none;">No comments yet. Be the first to leave a comment!</div>
                                 <form id="comment-form">
-                                    <textarea placeholder="Add a comment..."></textarea>
+                                    <textarea id="comment-message" placeholder="Add a comment..."></textarea>
                                     <button type="submit">POST COMMENT</button>
                                 </form>
+                                <div class="comments-info-container" style="text-align: right;">
+                                    <p class="comments-info">Total comments: 2. Displaying latest 3.</p>
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -177,7 +181,6 @@
             return;
         }
 
-        // Проверка наличия токена и пользователя
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');
 
@@ -191,7 +194,6 @@
             document.getElementById('greeting').textContent = username;
         }
 
-        // Загрузка информации о посте
         fetch(`https://post-wave-swagger.fun/posts/${postId}`, {
             method: 'GET',
             headers: {
@@ -207,14 +209,20 @@
                     document.getElementById('post-likes').textContent = `Likes: ${data.payload.likes}`;
                     document.getElementById('post-comments').textContent = `Comments: ${data.payload.commentsCount}`;
                     document.getElementById('post-image').src = data.payload.image || 'images/here-your-photo.png';
-                    const postDate = new Date(data.payload.created).toLocaleDateString();
-                    document.getElementById('post-date').textContent = `Created on: ${postDate}`;
 
-                    document.getElementById('edit-post-button').href = `edit-post.html?id=${postId}`;
+                    const createdDate = new Date(
+                        data.payload.created[0],
+                        data.payload.created[1] - 1,
+                        data.payload.created[2],
+                        data.payload.created[3],
+                        data.payload.created[4],
+                        data.payload.created[5]
+                    );
+                    document.getElementById('post-date').textContent = `Created on: ${createdDate.toLocaleString()}`;
+
                     document.getElementById('post-content-wrapper').style.display = 'block';
                     document.getElementById('preloader').style.display = 'none';
 
-                    // Загрузка комментариев
                     loadComments(postId, token);
                 } else {
                     alert('Error loading post details');
@@ -226,7 +234,6 @@
                 document.getElementById('preloader').style.display = 'none';
             });
 
-        // Функция для загрузки комментариев
         function loadComments(postId, token) {
             fetch('https://post-wave-swagger.fun/comments', {
                 method: 'GET',
@@ -239,30 +246,66 @@
                 .then(data => {
                     if (data.success) {
                         const commentsList = document.getElementById('comments-list');
+                        const noCommentsMessage = document.getElementById('no-comments-message');
+                        const commentsInfo = document.querySelector('.comments-info');
                         commentsList.innerHTML = '';
 
                         const filteredComments = data.payload.filter(comment => comment.postId == postId);
 
-                        filteredComments.forEach(comment => {
-                            const commentItem = document.createElement('div');
-                            commentItem.classList.add('comment-item');
+                        if (filteredComments.length > 0) {
+                            noCommentsMessage.style.display = 'none';
 
-                            const commentText = document.createElement('p');
-                            commentText.textContent = comment.message;
+                            // Sort comments by creation date in descending order (latest first)
+                            const sortedComments = filteredComments.sort((a, b) => {
+                                const dateA = new Date(
+                                    a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]
+                                );
+                                const dateB = new Date(
+                                    b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]
+                                );
+                                return dateB - dateA;
+                            });
 
-                            const commentOwner = document.createElement('p');
-                            commentOwner.textContent = `By: ${comment.owner.username}`;
+                            // Show only the latest 3 comments
+                            const commentsToShow = sortedComments.slice(0, 3);
 
-                            const commentDate = document.createElement('p');
-                            commentDate.classList.add('comment-date');
-                            commentDate.textContent = `Created on: ${new Date(comment.created).toLocaleString()}`;
+                            commentsToShow.forEach(comment => {
+                                const commentItem = document.createElement('div');
+                                commentItem.classList.add('comment-item');
 
-                            commentItem.appendChild(commentText);
-                            commentItem.appendChild(commentOwner);
-                            commentItem.appendChild(commentDate);
+                                const commentText = document.createElement('p');
+                                commentText.textContent = comment.message;
 
-                            commentsList.appendChild(commentItem);
-                        });
+                                const commentOwner = document.createElement('p');
+                                commentOwner.classList.add('comment-owner');
+                                commentOwner.textContent = `By: ${comment.owner.username}`;
+
+                                const commentDate = document.createElement('p');
+                                commentDate.classList.add('comment-date');
+                                const createdDate = new Date(
+                                    comment.created[0],
+                                    comment.created[1] - 1,
+                                    comment.created[2],
+                                    comment.created[3],
+                                    comment.created[4],
+                                    comment.created[5]
+                                );
+                                commentDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
+
+                                commentItem.appendChild(commentText);
+                                commentItem.appendChild(commentOwner);
+                                commentItem.appendChild(commentDate);
+
+                                commentsList.appendChild(commentItem);
+                            });
+
+                            // Update comments info
+                            commentsInfo.textContent = `Total comments: ${filteredComments.length}. Displaying latest 3.`;
+
+                        } else {
+                            noCommentsMessage.style.display = 'block';
+                            commentsInfo.textContent = '';  // Clear the comments info text if there are no comments
+                        }
                     } else {
                         alert('Error loading comments');
                     }
@@ -279,7 +322,6 @@
             window.location.href = 'login-page.html';
         });
 
-        // Обработчик отправки комментария
         document.getElementById('comment-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -299,8 +341,8 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        document.getElementById('comment-message').value = ''; // Очищаем поле ввода
-                        loadComments(postId, token); // Перезагружаем комментарии
+                        document.getElementById('comment-message').value = '';
+                        loadComments(postId, token);
                     } else {
                         alert('Error posting comment');
                     }
