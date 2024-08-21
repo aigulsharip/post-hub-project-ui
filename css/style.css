@@ -37,14 +37,15 @@ html {width:100%;}
 .picks li {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Увеличиваем расстояние, но не слишком сильно */
     border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+    padding-bottom: 15px; /* Добавляем небольшой padding снизу */
 }
 
 .picks figure {
     flex: 0 0 150px;
     margin-right: 20px;
+    margin-bottom: 0; /* Убираем нижний отступ */
 }
 
 .picks figure img {
@@ -59,15 +60,25 @@ html {width:100%;}
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    padding-bottom: 15px; /* Добавляем небольшой padding снизу */
+    margin-bottom: 0; /* Убираем margin-bottom, чтобы управлять расстоянием через li */
 }
 
-.picks h4 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    cursor: pointer; /* Курсор указатель */
-    color: #fff; /* Белый цвет заголовка */
-    text-decoration: none; /* Убрано подчеркивание */
+/* Стили для заголовка поста */
+.picks h4 a {
+    color: #ffffff; /* Белый цвет заголовка */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: color 0.3s ease; /* Плавный переход цвета */
+    font-size: 18px; /* Увеличенный размер шрифта */
+    font-family: 'Oswald', sans-serif; /* Применяем шрифт Oswald для приятного вида */
+    letter-spacing: 1px; /* Расширяем межбуквенный интервал */
+    font-weight: bold; /* Делаем шрифт полужирным */
 }
+
+.picks h4 a:hover {
+    color: #8cc503; /* Зеленый цвет при наведении */
+}
+
 
 .picks .post-content {
     font-size: 14px; /* Больший размер для контента */
@@ -201,17 +212,17 @@ html {width:100%;}
     margin-top: auto;
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px;
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    bottom: 40px; /* Увеличьте значение, чтобы поднять кнопку выше */
 }
+
 
 .post-footer {
     display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .post-info-container {
@@ -221,9 +232,6 @@ html {width:100%;}
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     font-size: 14px;
-    margin-left: auto;
-    margin-top: 10px;
-    width: fit-content;
     border: 1px solid #444;
     background: linear-gradient(145deg, #444, #222);
     transition: background-color 0.3s ease;
@@ -232,6 +240,23 @@ html {width:100%;}
 .post-info-container:hover {
     background-color: #444;
 }
+
+.view-all-container {
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.view-all-container a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+}
+
+.view-all-container a:hover {
+    text-decoration: underline;
+}
+
 
 .content-wrapper {
     position: relative;
