@@ -9,13 +9,14 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/view-post.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/edit-delete-post.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/delete-post-modal.css">
     <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
     <style>
         /* Preloader styles (existing) */
-        #comment-preloader {
+        #comment-preloader, #delete-preloader {
             display: none; /* Hidden by default */
             position: fixed;
             left: 0;
@@ -145,7 +146,7 @@
                                     <button class="dropdown-btn"></button>
                                     <div class="dropdown-content">
                                         <a href="edit-post.html" id="edit-post">Edit</a>
-                                        <a href="#" id="delete-post">Delete</a>
+                                        <a id="delete-post">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -232,6 +233,11 @@
         const postImage = document.getElementById('post-image');
         const postDate = document.getElementById('post-date');
         const postLikes = document.getElementById('post-likes');
+        const deleteModal = document.getElementById('delete-modal');
+        const confirmDeleteButton = document.getElementById('confirm-delete');
+        const cancelDeleteButton = document.getElementById('cancel-delete');
+        const deletePostButton = document.getElementById('delete-post');
+        const deletePreloader = document.getElementById('delete-preloader');
 
         if (!postId || postId === "null") {
             console.error('Post ID is missing or null');
@@ -294,6 +300,58 @@
             .finally(() => {
                 preloader.style.display = 'none'; // Скрываем прелоудер после загрузки данных
             });
+
+        // Функция для удаления поста
+        function deletePost() {
+            deletePreloader.style.display = 'flex'; // Показываем прелоудер
+
+            fetch(`https://post-wave-swagger.fun/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = 'my-posts.html';
+                    } else {
+                        deletePreloader.style.display = 'none'; // Скрываем прелоудер при ошибке
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting post:', error);
+                    deletePreloader.style.display = 'none'; // Скрываем прелоудер при ошибке
+                });
+        }
+
+        // Обработчик нажатия на кнопку удаления
+        deletePostButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            deleteModal.style.display = 'flex'; // Показываем модальное окно
+        });
+
+        // Обработчик подтверждения удаления
+        confirmDeleteButton.addEventListener('click', function() {
+            deleteModal.style.display = 'none'; // Закрываем модальное окно
+            deletePost(); // Удаляем пост
+        });
+
+        // Обработчик отмены удаления
+        cancelDeleteButton.addEventListener('click', function() {
+            deleteModal.style.display = 'none'; // Закрываем модальное окно
+        });
+
+        document.getElementById('edit-post').addEventListener('click', function(event) {
+            event.preventDefault(); // предотвращает переход по ссылке по умолчанию
+            const postId = new URLSearchParams(window.location.search).get('id'); // Получаем ID поста из текущего URL
+            if (postId) {
+                window.location.href = `edit-post.html?id=${postId}`; // Перенаправляем на страницу редактирования с ID в URL
+            } else {
+                console.error('Post ID is missing or null');
+                alert('Post ID is missing. Unable to proceed to edit page.');
+            }
+        });
     });
 
     // Функция для загрузки комментариев
@@ -432,6 +490,30 @@
         }
     });
 </script>
+
+<div class="modal-overlay" id="delete-modal">
+    <div class="modal-window">
+        <div class="modal-title">Are you sure you want to delete this post?</div>
+        <div class="modal-buttons">
+            <button class="modal-button confirm" id="confirm-delete">Yes</button>
+            <button class="modal-button cancel" id="cancel-delete">No</button>
+        </div>
+    </div>
+</div>
+<!-- Прелоудер для удаления -->
+<div id="delete-preloader" style="display: none;">
+    <div class="cube-grid">
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+    </div>
+</div>
 
 </body>
 </html>
