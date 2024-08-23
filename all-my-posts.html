@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Post-Wave demo</title>
+    <title>All My Posts - Post-Wave</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
@@ -11,25 +11,6 @@
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
-    <script>
-        $(function(){
-            $('.slider')._TMS({
-                prevBu:false,
-                nextBu:false,
-                playBu:false,
-                duration:800,
-                easing:'easeOutQuad',
-                preset:'diagonalFade',
-                pagination:true,//'.pagination',true,'<ul></ul>'
-                pagNums:false,
-                slideshow:7000,
-                numStatus:false,
-                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
-                waitBannerAnimation:false,
-                progressBar:false
-            })
-        })
-    </script>
     <!--[if lt IE 8]>
     <div style=' clear: both; text-align:center; position: relative;'>
         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -41,9 +22,77 @@
     <script type="text/javascript" src="js/html5.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
     <![endif]-->
+    <style>
+        /* Additional styling for pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 10px 0;
+            margin: 20px 0 0 0;
+        }
+
+        .pagination li {
+            margin: 0 4px; /* Slightly reduce the margin to make them closer */
+        }
+
+        .pagination a {
+            text-decoration: none;
+            padding: 6px 12px; /* Reduce padding for a smaller button */
+            background-color: #1e1e1e; /* Dark background color */
+            color: #00BBFF; /* Blue text color */
+            border: 1px solid #00BBFF; /* Blue border */
+            border-radius: 3px; /* Slightly rounded corners */
+            font-size: 14px; /* Smaller font size */
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0px 0px 5px rgba(0, 187, 255, 0.4); /* Subtle neon glow */
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .pagination a:hover {
+            background-color: #00BBFF; /* Blue background on hover */
+            color: #ffffff; /* White text on hover */
+            box-shadow: 0px 0px 7px rgba(0, 187, 255, 0.4), 0 0 10px rgba(0, 187, 255, 0.2); /* Less intense neon glow */
+            transform: translateY(-1px) scale(1.01); /* Slight scaling on hover */
+        }
+
+        .pagination a::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 187, 255, 0.2), transparent);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .pagination a:hover::after {
+            transform: scale(1); /* Expands the radial gradient on hover */
+        }
+
+        .pagination .active a {
+            background-color: #00BBFF; /* Active page */
+            color: #ffffff;
+            transform: translateY(-1px) scale(1.01); /* Slight scaling */
+        }
+
+        .pagination a:active {
+            background-color: #0088cc; /* Darker blue on active */
+            box-shadow: 0px 0px 5px rgba(0, 136, 204, 0.5);
+            transform: translateY(0) scale(1); /* Return to normal on click */
+        }
+
+    </style>
 </head>
 <body>
-<!-- Прелоадер -->
+<!-- Preloader -->
 <div id="preloader">
     <div class="cube-grid">
         <div class="cube cube1"></div>
@@ -91,9 +140,9 @@
         </div>
         <nav>
             <ul class="sf-menu">
-                <li class="current f_item"><a href="index.html">HOME</a></li>
+                <li><a href="index.html">HOME</a></li>
                 <li><a href="my-users.html">MY USERS</a></li>
-                <li><a href="my-posts.html">MY POSTS</a></li>
+                <li class="current f_item"><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="actions.html">ACTIONS</a>
                     <ul>
                         <li><a href="create-user.html">Create user </a></li>
@@ -112,35 +161,28 @@
             <div class="clear"></div>
         </nav>
     </header>
-    <!--==============================content================================-->
+    <!--==============================content=================================-->
     <div class="main">
         <section id="content">
             <div class="container_12">
                 <div class="wrapper">
                     <article class="grid_12">
                         <div class="box">
-                            <h2 class="first">My Posts</h2>
-                            <div class="button-container">
-                                <div id="create-post-container">
-                                    <a href="create-post.html" class="create-post-button">
-                                        <div class="plus-icon">+</div>
-                                        <div class="add-post-text">Add New Post</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <hr class="divider">
+                            <h2 class="first">All My Posts</h2>
                             <div class="sub_box" id="post-container">
                                 <ul class="ext_list picks" id="post-list">
-                                    <!-- Динамически загружаемые посты -->
+                                    <!-- Dynamically loaded posts -->
                                 </ul>
                                 <div class="post-footer">
                                     <div id="view-all-container" class="view-all-container">
-                                        <a href="all-my-posts.html" class="link2">View All My Posts</a>
+                                        <a href="my-posts.html" class="link2">Back To My Posts</a>
                                     </div>
                                     <div id="post-info-container" class="post-info-container">
                                         <!-- Здесь будет отображаться информация о количестве постов -->
                                     </div>
-                                </div>
+                            </div>
+                            <div id="pagination-container">
+                                <!-- Pagination buttons will be dynamically generated here -->
                             </div>
                         </div>
                     </article>
@@ -171,17 +213,17 @@
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
-        const postContainer = document.getElementById('post-container');
         const postList = document.getElementById('post-list');
         const postInfoContainer = document.getElementById('post-info-container');
-        const createPostContainer = document.getElementById('create-post-container');
+        const paginationContainer = document.getElementById('pagination-container');
+        const postsPerPage = 10;
+        let currentPage = 1;
+        let allPosts = [];
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
+            document.getElementById('welcome-message').style.display = 'block';
             document.getElementById('greeting').textContent = username;
-            createPostContainer.style.display = 'block';
 
             fetch('https://post-wave-swagger.fun/posts', {
                 method: 'GET',
@@ -195,59 +237,97 @@
                     preloader.style.display = 'none';
 
                     if (data.success && data.payload.length > 0) {
-                        postList.innerHTML = '';
-
-                        // Сортируем посты по дате (от новых к старым)
-                        const sortedPosts = data.payload.sort((a, b) => {
+                        allPosts = data.payload.sort((a, b) => {
                             const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
                             const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
-                            return dateB - dateA;
+                            return dateB - dateA; // Sort posts from newest to oldest
                         });
 
-                        // Выводим первые 5 постов
-                        sortedPosts.slice(0, 5).forEach(post => {
-                            const postDateArray = post.created;
-                            const utcDate = new Date(Date.UTC(postDateArray[0], postDateArray[1] - 1, postDateArray[2], postDateArray[3], postDateArray[4], postDateArray[5]));
-                            const localDate = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
-
-                            const postDate = `${localDate.getFullYear()}-${(localDate.getMonth() + 1).toString().padStart(2, '0')}-${localDate.getDate().toString().padStart(2, '0')} ${localDate.getHours().toString().padStart(2, '0')}:${localDate.getMinutes().toString().padStart(2, '0')}`;
-
-                            const postItem = `
-                        <li>
-                            <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.png';" /></figure>
-                            <div class="content-wrapper">
-                                <div>
-                                    <h4><a href="post.html?id=${post.id}">${post.title}</a></h4>
-                                    <p class="post-content">${post.content.substring(0, 150)}...</p>
-                                    <p class="likes">Likes: ${post.likes} <span class="not-implemented">(not fully implemented)</span></p>
-                                    <p class="comments">The number of comments: ${post.commentsCount}</p>
-                                </div>
-                                <p class="date" style="text-align: right;">Created on: ${postDate}</p>
-                                <a href="post.html?id=${post.id}" class="button3">View Post</a>
-                            </div>
-                        </li>`;
-                            postList.insertAdjacentHTML('beforeend', postItem);
-                        });
-
-                        postInfoContainer.innerHTML = `Total posts: ${data.payload.length}. Displaying latest 5.`;
+                        renderPosts(allPosts, currentPage);
+                        renderPagination(allPosts.length, postsPerPage);
                     } else {
-                        postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> to get started!</p>`;
+                        postList.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> to get started!</p>`;
                         postInfoContainer.innerHTML = '';
+                        paginationContainer.innerHTML = '';
                     }
                 })
                 .catch(error => {
                     console.error('Error loading posts:', error);
                     preloader.style.display = 'none';
                     postInfoContainer.innerHTML = '';
+                    paginationContainer.innerHTML = '';
                 });
         } else {
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
-            createPostContainer.style.display = 'none';
-
-            postContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
+            postList.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
             preloader.style.display = 'none';
             postInfoContainer.innerHTML = '';
+            paginationContainer.innerHTML = '';
+        }
+
+        function renderPosts(posts, page) {
+            postList.innerHTML = '';
+            const startIndex = (page - 1) * postsPerPage;
+            const endIndex = Math.min(startIndex + postsPerPage, posts.length);
+            const postsToDisplay = posts.slice(startIndex, endIndex);
+
+            postsToDisplay.forEach(post => {
+                const postDateArray = post.created;
+                const utcDate = new Date(Date.UTC(postDateArray[0], postDateArray[1] - 1, postDateArray[2], postDateArray[3], postDateArray[4], postDateArray[5]));
+                const localDate = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
+
+                const postDate = `${localDate.getFullYear()}-${(localDate.getMonth() + 1).toString().padStart(2, '0')}-${localDate.getDate().toString().padStart(2, '0')} ${localDate.getHours().toString().padStart(2, '0')}:${localDate.getMinutes().toString().padStart(2, '0')}`;
+
+                const postItem = `
+                <li>
+                    <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.png';" /></figure>
+                    <div class="content-wrapper">
+                        <div>
+                            <h4><a href="post.html?id=${post.id}">${post.title}</a></h4>
+                            <p class="post-content">${post.content.substring(0, 150)}...</p>
+                            <p class="likes">Likes: ${post.likes} <span class="not-implemented">(not fully implemented)</span></p>
+                            <p class="comments">The number of comments: ${post.commentsCount}</p>
+                        </div>
+                        <p class="date" style="text-align: right;">Created on: ${postDate}</p>
+                        <a href="post.html?id=${post.id}" class="button3">View Post</a>
+                    </div>
+                </li>`;
+                postList.insertAdjacentHTML('beforeend', postItem);
+            });
+
+            postInfoContainer.innerHTML = `Total posts: ${posts.length}. Displaying posts ${startIndex + 1} - ${endIndex}.`;
+        }
+
+        function renderPagination(totalPosts, postsPerPage) {
+            paginationContainer.innerHTML = '';
+            const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+            const paginationList = document.createElement('ul');
+            paginationList.className = 'pagination';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageItem = document.createElement('li');
+                const pageLink = document.createElement('a');
+                pageLink.href = '#';
+                pageLink.textContent = i;
+
+                if (i === currentPage) {
+                    pageItem.className = 'active';
+                }
+
+                pageLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    currentPage = i;
+                    renderPosts(allPosts, currentPage);
+                    renderPagination(totalPosts, postsPerPage);
+                });
+
+                pageItem.appendChild(pageLink);
+                paginationList.appendChild(pageItem);
+            }
+
+            paginationContainer.appendChild(paginationList);
         }
 
         document.getElementById('logout-link').addEventListener('click', function() {

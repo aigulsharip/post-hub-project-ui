@@ -1,0 +1,94 @@
+.latest-post-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: #1c1c1c; /* Темный фон для постов */
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.latest-post-item:hover {
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Легкий эффект неона вокруг поста */
+}
+
+.latest-post-image {
+    width: 135px; /* Размер изображения */
+    height: 135px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.latest-post-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.latest-post-title {
+    font-size: 20px; /* Увеличенный размер заголовка */
+    font-weight: bold;
+    color: #ffffff; /* Белый цвет заголовка */
+    margin: 0 0 5px 0;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.latest-post-content {
+    font-size: 14px; /* Размер текста */
+    color: #e0e0e0; /* Светлый цвет текста */
+    margin: 5px 0 10px 0;
+}
+
+.latest-post-author {
+    font-size: 12px;
+    color: #8f8f8f; /* Серый цвет для автора */
+}
+
+.latest-post-item:hover .latest-post-title {
+    color: #00ccff; /* Насыщенный голубой цвет при наведении */
+}
+
+/* latest-posts-preloader */
+.latest-posts-preloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.loader {
+    display: flex;
+    gap: 8px;
+}
+
+.loader-bar {
+    width: 8px;
+    height: 40px;
+    background-color: #00ccff;
+    animation: loading 0.8s infinite;
+}
+
+.loader-bar:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.loader-bar:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.loader-bar:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes loading {
+    0% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(2);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}

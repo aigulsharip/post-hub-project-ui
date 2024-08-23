@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/prettyPhoto.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
+    <link rel="stylesheet" type="text/css" href="css/latest-posts.css">
     <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
@@ -25,11 +26,11 @@
                 duration:800,
                 easing:'easeOutQuad',
                 preset:'diagonalFade',
-                pagination:true,//'.pagination',true,'<ul></ul>'
+                pagination:true,
                 pagNums:false,
                 slideshow:7000,
                 numStatus:false,
-                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
+                banners:'fade',
                 waitBannerAnimation:false,
                 progressBar:false
             });
@@ -72,7 +73,7 @@
                     <li><a href="index.html">home</a></li>
                     <li><a href="list-of-posts.html">news</a></li>
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
-                    <li><a target="_blank " href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
+                    <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
                     <li><a href="contatcs.html">contacts</a></li>
                 </ul>
@@ -101,10 +102,10 @@
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="actions.html">ACTIONS</a>
                     <ul>
-                        <li><a href="create-user.html">Create user </a></li>
+                        <li><a href="create-user.html">Create user</a></li>
                         <li><a href="create-post.html">Create post</a></li>
-                        <li><a href="create-comment.html">Create comment </a></li>
-                        <li><a href="get-list-of-users.html">Get list of users </a></li>
+                        <li><a href="create-comment.html">Create comment</a></li>
+                        <li><a href="get-list-of-users.html">Get list of users</a></li>
                     </ul>
                 </li>
                 <li><a href="#">LOGS</a></li>
@@ -201,38 +202,28 @@
             <div class="wrapper">
                 <article class="grid_8">
                     <div class="box">
-                        <h2 class="first">news feed</h2>
+                        <h2 class="first">latest posts</h2>
                         <div class="sub_box">
-                            <ul class="ext_list topics">
-                                <li>
-                                    <figure><img src="images/topic1.jpg" alt="" /></figure>
-                                    <div>
-                                        <h3 class="ind1">PS2</h3>
-                                        <h4>Excepteur sint occaecat</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt <br>ut labore et dolore magna aliqua.<br>
-                                        <a href="#" class="button3">Read More</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <figure><img src="images/topic2.jpg" alt="" /></figure>
-                                    <div>
-                                        <h3 class="ind1">XBOX 360</h3>
-                                        <h4>cupidatat non proident</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt <br>ut labore et dolore magna aliqua.<br>
-                                        <a href="#" class="button3">Read More</a>
-                                    </div>
-                                </li>
-                                <li class="m_bottom_zero">
-                                    <figure><img src="images/topic3.jpg" alt="" /></figure>
-                                    <div>
-                                        <h3 class="ind1">Mobile</h3>
-                                        <h4>Lorem ipsum dolor sit amet conse </h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt <br>ut labore et dolore magna aliqua.<br>
-                                        <a href="#" class="button3">Read More</a>
-                                    </div>
-                                </li>
+                            <!-- Preloader for Latest Posts -->
+                            <div id="latest-posts-preloader" class="latest-posts-preloader">
+                                <div class="loader">
+                                    <div class="loader-bar"></div>
+                                    <div class="loader-bar"></div>
+                                    <div class="loader-bar"></div>
+                                    <div class="loader-bar"></div>
+                                </div>
+                            </div>
+                            <ul class="ext_list topics" id="latest-posts">
+                                <!-- Posts will be dynamically loaded here -->
                             </ul>
-                            <a href="#" class="link1">see all</a>
+                            <div class="post-footer">
+                                <div id="view-all-container" class="view-all-container">
+                                    <a href="list-of-all-posts.html" class="link2">View All List of Posts</a>
+                                </div>
+                                <div id="post-info-container" class="post-info-container">
+                                    <!-- Здесь будет отображаться информация о количестве постов -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -287,43 +278,6 @@
             </div>
         </div>
     </section>
-    <aside>
-        <div class="container_12">
-            <div class="wrapper">
-                <article class="grid_4">
-                    <h5>about us</h5>
-                    <p class="green p2">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br>
-                    <a href="#" class="link2">read more</a>
-                </article>
-                <article class="grid_4">
-                    <h5>featured</h5>
-                    <p class="green p3">Dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                    <p class="p3">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                    Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.<br>
-                    <a href="#" class="link2 b_ind">read more</a>
-                </article>
-                <article class="grid_4">
-                    <h5>top games:</h5>
-                    <ul class="games_list">
-                        <li>
-                            <span class="green">XBOX 360</span><br>
-                            <a href="#">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
-                        </li>
-                        <li>
-                            <span class="green">Mobile</span><br>
-                            <a href="#">Dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
-                        </li>
-                        <li class="last bd_none">
-                            <span class="green">XBOX 360</span><br>
-                            <a href="#">Sit amet conse ctetur adipisicing elit</a>
-                        </li>
-                    </ul>
-                    <a href="#" class="link2">read more</a>
-                </article>
-            </div>
-        </div>
-    </aside>
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -341,6 +295,7 @@
         </div>
     </footer>
 </div>
+
 <script>
     // Скрипт для скрытия прелоадера после полной загрузки страницы
     window.addEventListener('load', function() {
@@ -348,30 +303,81 @@
         preloader.style.display = 'none';
     });
 
-    // Остальные ваши скрипты
+    // Fetch and display latest posts
     document.addEventListener("DOMContentLoaded", function() {
-        const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
-            document.getElementById('greeting').textContent = username;
-        }
+        const latestPostsContainer = document.getElementById('latest-posts');
+        const preloader = document.getElementById('latest-posts-preloader');
+        const postInfoContainer = document.getElementById('post-info-container');
+        const token = localStorage.getItem('token');
 
-        document.getElementById('logout-link').addEventListener('click', function() {
-            localStorage.removeItem('username');
-            window.location.reload();
-        });
+        // Показ прелоадера и скрытие контейнера с постами
+        latestPostsContainer.style.display = 'none';
+        preloader.style.display = 'flex';
+
+        fetch('https://post-wave-swagger.fun/posts/all', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                preloader.style.display = 'none'; // Скрываем прелоадер после загрузки данных
+                if (data.success && data.payload.length > 0) {
+                    const sortedPosts = data.payload.sort((a, b) => {
+                        const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
+                        const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
+                        return dateB - dateA;
+                    });
+
+                    // Отображаем только три последних поста
+                    sortedPosts.slice(0, 3).forEach(post => {
+                        const createdDate = new Date(Date.UTC(post.created[0], post.created[1] - 1, post.created[2], post.created[3], post.created[4], post.created[5])).toLocaleString('en-GB', {
+                            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                        });
+
+                        const postItem = `
+                        <li class="latest-post-item">
+                            <figure>
+                                <img src="${post.image}" alt="${post.title}" class="latest-post-image" onerror="this.onerror=null;this.src='images/here-your-photo.png';" />
+                            </figure>
+                            <div class="latest-post-details">
+                                <h3 class="latest-post-title">${post.title}</h3>
+                                <p class="latest-post-content">${post.content.substring(0, 50)}...</p>
+                                <p class="latest-post-author">Created by: ${post.owner.username}</p>
+                                <p class="latest-post-date">Created on: ${createdDate}</p>
+                            </div>
+                        </li>`;
+                        latestPostsContainer.insertAdjacentHTML('beforeend', postItem);
+                    });
+
+                    // Отображаем контейнер с постами после загрузки данных
+                    latestPostsContainer.style.display = 'block';
+
+                    // Отображаем количество постов и информацию об отображении последних 3 постов
+                    postInfoContainer.textContent = `Total posts: ${data.payload.length}. Displaying latest 3.`;
+                } else {
+                    latestPostsContainer.innerHTML = '<li>No recent posts available.</li>';
+                    latestPostsContainer.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching posts:', error);
+                preloader.style.display = 'none';
+                latestPostsContainer.innerHTML = '<li>Error loading posts. Please try again later.</li>';
+                latestPostsContainer.style.display = 'block';
+            });
     });
 
+    // Auth and logout handling
     document.addEventListener("DOMContentLoaded", function() {
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
+            document.getElementById('welcome-message').style.display = 'block';
             document.getElementById('greeting').textContent = username;
         } else {
             document.getElementById('auth-links').style.display = 'block';
@@ -384,7 +390,7 @@
             window.location.reload();
         });
     });
-
 </script>
+
 </body>
 </html>
