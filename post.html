@@ -8,29 +8,60 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/view-post.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/edit-delete-post.css">
     <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
-    <script>
-        $(function(){
-            $('.slider')._TMS({
-                prevBu:false,
-                nextBu:false,
-                playBu:false,
-                duration:800,
-                easing:'easeOutQuad',
-                preset:'diagonalFade',
-                pagination:true,//'.pagination',true,'<ul></ul>'
-                pagNums:false,
-                slideshow:7000,
-                numStatus:false,
-                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
-                waitBannerAnimation:false,
-                progressBar:false
-            })
-        })
-    </script>
+    <style>
+        /* Preloader styles (existing) */
+        #comment-preloader {
+            display: none; /* Hidden by default */
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cube-grid {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .cube {
+            width: 33%;
+            height: 33%;
+            background-color: #8cc503; /* Зеленый цвет */
+            animation: cubeGridScaleDelay 1.3s infinite ease-in-out;
+        }
+
+        .cube1 { animation-delay: 0.2s; }
+        .cube2 { animation-delay: 0.3s; }
+        .cube3 { animation-delay: 0.4s; }
+        .cube4 { animation-delay: 0.1s; }
+        .cube5 { animation-delay: 0.2s; }
+        .cube6 { animation-delay: 0.3s; }
+        .cube7 { animation-delay: 0.0s; }
+        .cube8 { animation-delay: 0.1s; }
+        .cube9 { animation-delay: 0.2s; }
+
+        @keyframes cubeGridScaleDelay {
+            0%, 70%, 100% {
+                transform: scale(1);
+            }
+            35% {
+                transform: scale(0);
+            }
+        }
+    </style>
     <!--[if lt IE 8]>
     <div style=' clear: both; text-align:center; position: relative;'>
         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -44,22 +75,7 @@
     <![endif]-->
 </head>
 <body>
-<!-- Прелоадер -->
-<div id="preloader">
-    <div class="cube-grid">
-        <div class="cube cube1"></div>
-        <div class="cube cube2"></div>
-        <div class="cube cube3"></div>
-        <div class="cube cube4"></div>
-        <div class="cube cube5"></div>
-        <div class="cube cube6"></div>
-        <div class="cube cube7"></div>
-        <div class="cube cube8"></div>
-        <div class="cube cube9"></div>
-    </div>
-</div>
-
-<div class="main">
+<div class="main main-content"> <!-- Класс main-content для скрытия контента -->
     <!--==============================header=================================-->
     <header>
         <div class="top">
@@ -120,6 +136,19 @@
                 <div class="wrapper">
                     <article class="grid_12">
                         <div class="box" id="post-content-wrapper">
+                            <div class="post-header">
+                                <a href="my-posts.html?id=${postId}" class="back-button">
+                                    <span class="arrow-icon">←</span>
+                                    <span class="back-text">Back to My Posts</span>
+                                </a>
+                                <div class="dropdown">
+                                    <button class="dropdown-btn"></button>
+                                    <div class="dropdown-content">
+                                        <a href="edit-post.html" id="edit-post">Edit</a>
+                                        <a href="#" id="delete-post">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="post-wrapper">
                                 <div class="post-image">
                                     <img id="post-image" src="" alt="Post Image" />
@@ -127,7 +156,10 @@
                                 <div class="post-info">
                                     <h2 id="post-title">Loading...</h2>
                                     <p id="post-text" class="post-content"></p>
-                                    <p id="post-likes" class="post-likes"></p>
+                                    <p id="post-likes" class="post-likes">
+                                        Likes: <span id="like-count"></span>
+                                        <span class="not-implemented">(not fully implemented)</span>
+                                    </p>
                                     <p id="post-comments" class="post-comments"></p>
                                     <p id="post-date" class="post-date"></p>
                                 </div>
@@ -139,12 +171,30 @@
                                     <!-- Комментарии будут загружены сюда -->
                                 </div>
                                 <div id="no-comments-message" style="display: none;">No comments yet. Be the first to leave a comment!</div>
+
+                                <!-- Comment form -->
                                 <form id="comment-form">
-                                    <textarea id="comment-message" placeholder="Add a comment..."></textarea>
+                                    <textarea id="comment-message" placeholder="Add a comment..." required></textarea>
                                     <button type="submit">POST COMMENT</button>
                                 </form>
-                                <div class="comments-info-container" style="text-align: right;">
-                                    <p class="comments-info">Total comments: 2. Displaying latest 3.</p>
+
+                                <!-- Preloader for comments -->
+                                <div id="comment-preloader" style="display: none;">
+                                    <div class="cube-grid">
+                                        <div class="cube cube1"></div>
+                                        <div class="cube cube2"></div>
+                                        <div class="cube cube3"></div>
+                                        <div class="cube cube4"></div>
+                                        <div class="cube cube5"></div>
+                                        <div class="cube cube6"></div>
+                                        <div class="cube cube7"></div>
+                                        <div class="cube cube8"></div>
+                                        <div class="cube cube9"></div>
+                                    </div>
+                                </div>
+
+                                <div class="comments-info-container">
+                                    <p class="comments-info">Total comments: 0. Displaying latest 3.</p>
                                 </div>
                             </div>
                         </div>
@@ -175,6 +225,13 @@
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         const postId = urlParams.get('id');
+        const preloader = document.getElementById('comment-preloader');
+        const postContentWrapper = document.getElementById('post-content-wrapper');
+        const postTitle = document.getElementById('post-title');
+        const postText = document.getElementById('post-text');
+        const postImage = document.getElementById('post-image');
+        const postDate = document.getElementById('post-date');
+        const postLikes = document.getElementById('post-likes');
 
         if (!postId || postId === "null") {
             console.error('Post ID is missing or null');
@@ -194,6 +251,9 @@
             document.getElementById('greeting').textContent = username;
         }
 
+        // Показываем прелоудер
+        preloader.style.display = 'flex';
+
         fetch(`https://post-wave-swagger.fun/posts/${postId}`, {
             method: 'GET',
             headers: {
@@ -204,11 +264,11 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    document.getElementById('post-title').textContent = data.payload.title;
-                    document.getElementById('post-text').textContent = data.payload.content;
-                    document.getElementById('post-likes').textContent = `Likes: ${data.payload.likes}`;
-                    document.getElementById('post-comments').textContent = `Comments: ${data.payload.commentsCount}`;
-                    document.getElementById('post-image').src = data.payload.image || 'images/here-your-photo.png';
+                    // Заполняем контент данными
+                    postTitle.textContent = data.payload.title;
+                    postText.textContent = data.payload.content;
+                    postLikes.innerHTML = `Likes: ${data.payload.likes} <span class="not-implemented">(not fully implemented)</span>`;
+                    postImage.src = data.payload.image || 'images/here-your-photo.png';
 
                     const createdDate = new Date(
                         data.payload.created[0],
@@ -218,141 +278,160 @@
                         data.payload.created[4],
                         data.payload.created[5]
                     );
-                    document.getElementById('post-date').textContent = `Created on: ${createdDate.toLocaleString()}`;
+                    postDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
 
-                    document.getElementById('post-content-wrapper').style.display = 'block';
-                    document.getElementById('preloader').style.display = 'none';
-
-                    loadComments(postId, token);
+                    // Показываем контент
+                    postContentWrapper.style.display = 'block';
+                    loadComments(postId, token); // Загружаем комментарии
                 } else {
                     alert('Error loading post details');
-                    document.getElementById('preloader').style.display = 'none';
                 }
             })
             .catch(error => {
                 console.error('Error loading post details:', error);
-                document.getElementById('preloader').style.display = 'none';
+                alert('An error occurred while loading the post.');
+            })
+            .finally(() => {
+                preloader.style.display = 'none'; // Скрываем прелоудер после загрузки данных
             });
-
-        function loadComments(postId, token) {
-            fetch('https://post-wave-swagger.fun/comments', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const commentsList = document.getElementById('comments-list');
-                        const noCommentsMessage = document.getElementById('no-comments-message');
-                        const commentsInfo = document.querySelector('.comments-info');
-                        commentsList.innerHTML = '';
-
-                        const filteredComments = data.payload.filter(comment => comment.postId == postId);
-
-                        if (filteredComments.length > 0) {
-                            noCommentsMessage.style.display = 'none';
-
-                            // Sort comments by creation date in descending order (latest first)
-                            const sortedComments = filteredComments.sort((a, b) => {
-                                const dateA = new Date(
-                                    a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]
-                                );
-                                const dateB = new Date(
-                                    b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]
-                                );
-                                return dateB - dateA;
-                            });
-
-                            // Show only the latest 3 comments
-                            const commentsToShow = sortedComments.slice(0, 3);
-
-                            commentsToShow.forEach(comment => {
-                                const commentItem = document.createElement('div');
-                                commentItem.classList.add('comment-item');
-
-                                const commentText = document.createElement('p');
-                                commentText.textContent = comment.message;
-
-                                const commentOwner = document.createElement('p');
-                                commentOwner.classList.add('comment-owner');
-                                commentOwner.textContent = `By: ${comment.owner.username}`;
-
-                                const commentDate = document.createElement('p');
-                                commentDate.classList.add('comment-date');
-                                const createdDate = new Date(
-                                    comment.created[0],
-                                    comment.created[1] - 1,
-                                    comment.created[2],
-                                    comment.created[3],
-                                    comment.created[4],
-                                    comment.created[5]
-                                );
-                                commentDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
-
-                                commentItem.appendChild(commentText);
-                                commentItem.appendChild(commentOwner);
-                                commentItem.appendChild(commentDate);
-
-                                commentsList.appendChild(commentItem);
-                            });
-
-                            // Update comments info
-                            commentsInfo.textContent = `Total comments: ${filteredComments.length}. Displaying latest 3.`;
-
-                        } else {
-                            noCommentsMessage.style.display = 'block';
-                            commentsInfo.textContent = '';  // Clear the comments info text if there are no comments
-                        }
-                    } else {
-                        alert('Error loading comments');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading comments:', error);
-                });
-        }
-
-        document.getElementById('logout-link').addEventListener('click', function() {
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            window.location.href = 'login-page.html';
-        });
-
-        document.getElementById('comment-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const commentMessage = document.getElementById('comment-message').value;
-
-            fetch('https://post-wave-swagger.fun/comments/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    postId: postId,
-                    message: commentMessage
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('comment-message').value = '';
-                        loadComments(postId, token);
-                    } else {
-                        alert('Error posting comment');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error posting comment:', error);
-                });
-        });
     });
 
+    // Функция для загрузки комментариев
+    function loadComments(postId, token) {
+        const preloader = document.getElementById('comment-preloader');
+        preloader.style.display = 'flex';
+
+        fetch(`https://post-wave-swagger.fun/comments?postId=${postId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const commentsList = document.getElementById('comments-list');
+                const noCommentsMessage = document.getElementById('no-comments-message');
+                const commentsInfo = document.querySelector('.comments-info');
+                commentsList.innerHTML = '';
+
+                // Убедимся, что данные соответствуют конкретному посту
+                const filteredComments = data.payload.filter(comment => comment.postId === parseInt(postId));
+
+                if (filteredComments.length > 0) {
+                    noCommentsMessage.style.display = 'none';
+
+                    // Сортируем комментарии по дате создания
+                    const sortedComments = filteredComments.sort((a, b) => {
+                        const dateA = new Date(
+                            a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]
+                        );
+                        const dateB = new Date(
+                            b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]
+                        );
+                        return dateB - dateA;
+                    });
+
+                    // Отображаем последние 3 комментария
+                    const commentsToShow = sortedComments.slice(0, 3);
+
+                    commentsToShow.forEach(comment => {
+                        const commentItem = document.createElement('div');
+                        commentItem.classList.add('comment-item');
+
+                        const commentText = document.createElement('p');
+                        commentText.textContent = comment.message;
+
+                        const commentOwner = document.createElement('p');
+                        commentOwner.classList.add('comment-owner');
+                        commentOwner.textContent = `By: ${comment.owner.username}`;
+
+                        const commentDate = document.createElement('p');
+                        commentDate.classList.add('comment-date');
+                        const createdDate = new Date(
+                            comment.created[0],
+                            comment.created[1] - 1,
+                            comment.created[2],
+                            comment.created[3],
+                            comment.created[4],
+                            comment.created[5]
+                        );
+                        commentDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
+
+                        commentItem.appendChild(commentText);
+                        commentItem.appendChild(commentOwner);
+                        commentItem.appendChild(commentDate);
+
+                        commentsList.appendChild(commentItem);
+                    });
+
+                    // Обновляем информацию о комментариях
+                    commentsInfo.textContent = `Total comments: ${filteredComments.length}. Displaying latest 3.`;
+
+                } else {
+                    noCommentsMessage.style.display = 'block';
+                    commentsInfo.textContent = 'Total comments: 0. Displaying latest 3.';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading comments:', error);
+                alert('An error occurred while loading comments.');
+            })
+            .finally(() => {
+                preloader.style.display = 'none'; // Hide preloader when done
+            });
+    }
+
+    document.getElementById('comment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const commentMessage = document.getElementById('comment-message').value;
+        const token = localStorage.getItem('token');
+        const postId = new URLSearchParams(window.location.search).get('id');
+
+        // Show the comment preloader
+        const preloader = document.getElementById('comment-preloader');
+        preloader.style.display = 'flex';
+
+        fetch('https://post-wave-swagger.fun/comments/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                postId: postId,
+                message: commentMessage
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('comment-message').value = '';
+                    loadComments(postId, token);
+                } else {
+                    alert('Error posting comment');
+                }
+            })
+            .catch(error => {
+                console.error('Error posting comment:', error);
+                alert('An error occurred while posting the comment.');
+            })
+            .finally(() => {
+                preloader.style.display = 'none'; // Hide preloader when done
+            });
+    });
+    document.getElementById('edit-post').addEventListener('click', function(event) {
+        event.preventDefault(); // предотвращает переход по ссылке по умолчанию
+        const postId = new URLSearchParams(window.location.search).get('id'); // Получаем ID поста из текущего URL
+        if (postId) {
+            window.location.href = `edit-post.html?id=${postId}`; // Перенаправляем на страницу редактирования с ID в URL
+        } else {
+            console.error('Post ID is missing or null');
+            alert('Post ID is missing. Unable to proceed to edit page.');
+        }
+    });
 </script>
+
 </body>
 </html>

@@ -1,0 +1,88 @@
+/* Style for the small dropdown container */
+.dropdown-small {
+    position: absolute;
+    top: 10px; /* Позиция сверху */
+    right: 10px; /* Позиция справа */
+    display: inline-block;
+}
+
+/* Style for the smaller three-dot button */
+.dropdown-small-btn {
+    background-color: transparent; /* Прозрачный фон */
+    color: #ffffff; /* Белый цвет для точек */
+    font-size: 24px; /* Увеличенный размер шрифта для точек */
+    border: none; /* Без рамки */
+    cursor: pointer;
+    padding: 0; /* Убираем padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Одна линия высоты */
+}
+
+/* Декорация трех точек */
+.dropdown-small-btn::before {
+    content: "⋮"; /* Вертикальные три точки */
+    font-size: 24px; /* Размер шрифта для трех точек */
+    color: #ffffff; /* Белый цвет для точек */
+}
+
+/* Hover effect для кнопки с тремя точками */
+.dropdown-small-btn:hover {
+    color: #1e90ff; /* Синий цвет на hover */
+}
+
+/* Dropdown content styling for the small dropdown */
+.dropdown-small-content {
+    display: none;
+    position: absolute;
+    background-color: #1f1f1f; /* Темный фон для выпадающего меню */
+    min-width: 120px; /* Минимальная ширина */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.6); /* Тень */
+    z-index: 1;
+    right: 0;
+    border-radius: 8px 2px 8px 2px; /* Закругленные углы */
+    overflow: hidden;
+    transform: translateY(5px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+/* Стиль ссылок внутри dropdown */
+.dropdown-small-content a {
+    color: #ffffff; /* Белый цвет текста */
+    padding: 8px 12px; /* Padding для ссылок */
+    text-decoration: none;
+    display: block;
+    font-size: 12px; /* Размер шрифта */
+    border-bottom: 1px solid #444; /* Линия разделения */
+    transition: background-color 0.3s ease;
+}
+
+/* Эффект наведения для ссылок */
+.dropdown-small-content a:hover {
+    background-color: #4682b4; /* Синий цвет на hover */
+}
+
+/* Показ dropdown на hover */
+.dropdown-small:hover .dropdown-small-content {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Hover effect для маленькой кнопки */
+.dropdown-small:hover .dropdown-small-btn {
+    color: #1e90ff; /* Синий цвет на hover */
+}
+
+/* Стиль для блока комментариев */
+.comment-item {
+    position: relative;
+    padding: 20px 15px 15px 15px; /* Добавляем padding */
+    border: 1px solid #333; /* Граница */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

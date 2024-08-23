@@ -80,7 +80,7 @@
                 </div>
                 <div id="welcome-message" style="display: none;">
                     Welcome on board, <span id="greeting"></span>!
-                    &nbsp;&nbsp;<a href="#" id="logout-link">Logout</a>
+                    &nbsp;&nbsp;<a href="index.html" id="logout-link">Logout</a>
                 </div>
             </div>
             <div class="clear"></div>
@@ -219,7 +219,7 @@
                                 <div>
                                     <h4><a href="post.html?id=${post.id}">${post.title}</a></h4>
                                     <p class="post-content">${post.content.substring(0, 150)}...</p>
-                                    <p class="likes">Likes: ${post.likes}</p>
+                                    <p class="likes">Likes: ${post.likes} <span class="not-implemented">(not fully implemented)</span></p>
                                     <p class="comments">The number of comments: ${post.commentsCount}</p>
                                 </div>
                                 <p class="date" style="text-align: right;">Created on: ${postDate}</p>

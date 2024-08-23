@@ -509,6 +509,23 @@ form#search .button1:hover {
     background-color: #555;
 }
 
+.not-implemented {
+    font-size: 10px; /* Уменьшенный размер текста */
+    color: rgba(255, 255, 255, 0.5); /* Белый более прозрачный текст */
+    background-color: rgba(70, 70, 70, 0.3); /* Темный более прозрачный фон */
+    padding: 2px 8px; /* Меньшие отступы внутри блока */
+    border-radius: 6px; /* Менее круглые углы */
+    margin-left: 5px; /* Меньший отступ слева от количества лайков */
+    display: inline-block; /* Отображение как встроенный блок */
+    box-shadow: none; /* Убираем тень */
+    transition: background-color 0.3s ease; /* Плавный переход для фона */
+}
+
+.not-implemented:hover {
+    background-color: rgba(90, 90, 90, 0.4); /* Легкое увеличение яркости фона при наведении */
+}
+
+
 /* !!!!! Стили для формы регистрации !!!!! */
 .register-box {
     max-width: 960px; /* Максимальная ширина формы регистрации */
