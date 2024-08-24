@@ -240,7 +240,7 @@
                         allPosts = data.payload.sort((a, b) => {
                             const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
                             const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
-                            return dateB - dateA; // Сортируем посты от новых к старым
+                            return dateB - dateA; // Sort posts from newest to oldest
                         });
 
                         renderPosts(allPosts, currentPage);
@@ -280,23 +280,28 @@
                 const postDate = `${localDate.getFullYear()}-${(localDate.getMonth() + 1).toString().padStart(2, '0')}-${localDate.getDate().toString().padStart(2, '0')} ${localDate.getHours().toString().padStart(2, '0')}:${localDate.getMinutes().toString().padStart(2, '0')}`;
 
                 const postItem = `
-                <li>
-                    <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.png';" /></figure>
-                    <div class="content-wrapper">
-                        <div>
-                            <h4>${post.title}</h4>
-                            <p class="post-content">${post.content.substring(0, 150)}...</p>
-                            <p class="likes">Likes: ${post.likes} <span class="not-implemented">(not fully implemented)</span></p>
-                            <p class="comments">The number of comments: ${post.commentsCount}</p>
-                        </div>
-                        <p class="date" style="text-align: right;">Created on: ${postDate}</p>
+            <li>
+                <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.png';" /></figure>
+                <div class="content-wrapper">
+                    <div>
+                        <h4><a href="post.html?id=${post.id}">${post.title}</a></h4>
+                        <p class="post-content">${post.content.substring(0, 150)}...</p>
+                        <p class="likes">Likes: ${post.likes} <span class="not-implemented">(not fully implemented)</span></p>
+                        <p class="comments">The number of comments: ${post.commentsCount}</p>
                     </div>
-                </li>`;
+                    <div class="post-meta">
+                        <p class="date">Created on: ${postDate}</p>
+                        <p class="author">Created by: ${post.owner.username}</p>
+                    </div>
+                    <a href="post.html?id=${post.id}" class="button3">View Post</a>
+                </div>
+            </li>`;
                 postList.insertAdjacentHTML('beforeend', postItem);
             });
 
             postInfoContainer.innerHTML = `Total posts: ${posts.length}. Displaying posts ${startIndex + 1} - ${endIndex}.`;
         }
+
 
         function renderPagination(totalPosts, postsPerPage) {
             paginationContainer.innerHTML = '';
@@ -347,7 +352,7 @@
             document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
         }
     });
-</script>
 
+</script>
 </body>
 </html>

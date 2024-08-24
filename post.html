@@ -238,6 +238,7 @@
         const cancelDeleteButton = document.getElementById('cancel-delete');
         const deletePostButton = document.getElementById('delete-post');
         const deletePreloader = document.getElementById('delete-preloader');
+        const dropdown = document.querySelector('.dropdown');
 
         if (!postId || postId === "null") {
             console.error('Post ID is missing or null');
@@ -285,6 +286,13 @@
                         data.payload.created[5]
                     );
                     postDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
+
+                    // Проверяем, является ли пользователь владельцем поста
+                    if (data.payload.owner.username === username) {
+                        dropdown.style.display = 'block'; // Показываем меню редактирования и удаления
+                    } else {
+                        dropdown.style.display = 'none'; // Скрываем меню редактирования и удаления
+                    }
 
                     // Показываем контент
                     postContentWrapper.style.display = 'block';
@@ -479,16 +487,7 @@
                 preloader.style.display = 'none'; // Hide preloader when done
             });
     });
-    document.getElementById('edit-post').addEventListener('click', function(event) {
-        event.preventDefault(); // предотвращает переход по ссылке по умолчанию
-        const postId = new URLSearchParams(window.location.search).get('id'); // Получаем ID поста из текущего URL
-        if (postId) {
-            window.location.href = `edit-post.html?id=${postId}`; // Перенаправляем на страницу редактирования с ID в URL
-        } else {
-            console.error('Post ID is missing or null');
-            alert('Post ID is missing. Unable to proceed to edit page.');
-        }
-    });
+
 </script>
 
 <div class="modal-overlay" id="delete-modal">

@@ -459,6 +459,42 @@ figure {
     font-size: 14px;
     letter-spacing: 1px;
 }
+.post-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравниваем дату и автора по левому краю */
+    margin-bottom: 10px;
+}
+
+.post-meta .date,
+.post-meta .author {
+    margin: 0;
+    padding: 0;
+}
+
+.post-meta .author {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #999;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-right: 10px; /* Отступ справа для выравнивания с контентом */
+}
+
+.content-wrapper > div {
+    flex-grow: 1;
+}
+
+.button3 {
+    align-self: flex-start; /* Выравниваем кнопку по левому краю */
+    margin-top: 10px; /* Добавляем отступ сверху для кнопки */
+}
+
 
  .line {
      border-bottom: 0.5px solid #00BBFF; /* Синий цвет линии */

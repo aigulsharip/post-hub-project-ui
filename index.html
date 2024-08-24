@@ -278,6 +278,43 @@
             </div>
         </div>
     </section>
+    <aside>
+        <div class="container_12">
+            <div class="wrapper">
+                <article class="grid_4">
+                    <h5>about us</h5>
+                    <p class="green p2">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br>
+                    <a href="#" class="link2">read more</a>
+                </article>
+                <article class="grid_4">
+                    <h5>featured</h5>
+                    <p class="green p3">Dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    <p class="p3">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.<br>
+                    <a href="#" class="link2 b_ind">read more</a>
+                </article>
+                <article class="grid_4">
+                    <h5>top games:</h5>
+                    <ul class="games_list">
+                        <li>
+                            <span class="green">XBOX 360</span><br>
+                            <a href="#">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
+                        </li>
+                        <li>
+                            <span class="green">Mobile</span><br>
+                            <a href="#">Dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
+                        </li>
+                        <li class="last bd_none">
+                            <span class="green">XBOX 360</span><br>
+                            <a href="#">Sit amet conse ctetur adipisicing elit</a>
+                        </li>
+                    </ul>
+                    <a href="#" class="link2">read more</a>
+                </article>
+            </div>
+        </div>
+    </aside>
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -317,8 +354,7 @@
         fetch('https://post-wave-swagger.fun/posts/all', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type': 'application/json'
             }
         })
             .then(response => response.json())
@@ -339,16 +375,19 @@
 
                         const postItem = `
                         <li class="latest-post-item">
-                            <figure>
-                                <img src="${post.image}" alt="${post.title}" class="latest-post-image" onerror="this.onerror=null;this.src='images/here-your-photo.png';" />
-                            </figure>
-                            <div class="latest-post-details">
-                                <h3 class="latest-post-title">${post.title}</h3>
-                                <p class="latest-post-content">${post.content.substring(0, 50)}...</p>
-                                <p class="latest-post-author">Created by: ${post.owner.username}</p>
-                                <p class="latest-post-date">Created on: ${createdDate}</p>
-                            </div>
-                        </li>`;
+    <figure>
+        <a href="post.html?id=${post.id}">
+            <img src="${post.image}" alt="${post.title}" class="latest-post-image" onerror="this.onerror=null;this.src='images/here-your-photo.png';" />
+        </a>
+    </figure>
+    <div class="latest-post-details">
+        <h3 class="latest-post-title"><a href="post.html?id=${post.id}" style="text-decoration: none; color: inherit;">${post.title}</a></h3>
+        <p class="latest-post-content">${post.content.substring(0, 50)}...</p>
+        <p class="latest-post-author">Created by: ${post.owner.username}</p>
+        <p class="latest-post-date">Created on: ${createdDate}</p>
+    </div>
+</li>
+`;
                         latestPostsContainer.insertAdjacentHTML('beforeend', postItem);
                     });
 
