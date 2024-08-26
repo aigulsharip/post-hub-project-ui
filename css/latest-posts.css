@@ -37,13 +37,21 @@
 .latest-post-content {
     font-size: 14px; /* Размер текста */
     color: #e0e0e0; /* Светлый цвет текста */
-    margin: 5px 0 10px 0;
+    margin: 5px 0 25px 0; /* Увеличенный отступ снизу */
 }
 
-.latest-post-author {
+.latest-post-comments {
     font-size: 12px;
-    color: #8f8f8f; /* Серый цвет для автора */
+    color: #f0f0f0; /* Более светлый цвет для количества комментариев, ближе к белому */
+    margin-bottom: 5px; /* Отступ снизу, чтобы уменьшить расстояние до следующего элемента */
 }
+
+.latest-post-author, .latest-post-date {
+    font-size: 12px;
+    color: #8f8f8f; /* Серый цвет для автора и даты */
+    margin-bottom: 3px; /* Уменьшенный отступ между автором и датой */
+}
+
 
 .latest-post-item:hover .latest-post-title {
     color: #00ccff; /* Насыщенный голубой цвет при наведении */
