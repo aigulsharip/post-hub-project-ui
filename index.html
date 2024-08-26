@@ -128,7 +128,7 @@
         <div class="slider">
             <ul class="items">
                 <li>
-                    <img src="images/slider/slide1-1.svg" width="640" height="385" alt="slide1" />
+                    <img src="images/slider/slide1-1.png" width="640" height="385" alt="slide1" />
                     <div class="banner">
                         <div class="title1">Project Documentation</div>
                         <div class="title2">Learn More About the Project</div>
@@ -205,9 +205,10 @@
     <section id="content">
         <div class="container_12">
             <div class="wrapper">
+                <!-- Latest Posts Section -->
                 <article class="grid_8">
                     <div class="box">
-                        <h2 class="first">latest posts</h2>
+                        <h2 class="first">Latest Posts</h2>
                         <div class="sub_box">
                             <!-- Preloader for Latest Posts -->
                             <div id="latest-posts-preloader" class="latest-posts-preloader">
@@ -226,43 +227,39 @@
                                     <a href="list-of-all-posts.html" class="link2">View All List of Posts</a>
                                 </div>
                                 <div id="post-info-container" class="post-info-container">
-                                    <!-- Здесь будет отображаться информация о количестве постов -->
+                                    <!-- Here information about the total posts will be displayed -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </article>
+
+                <!-- Latest Comments Section -->
                 <article class="grid_4">
-                    <div class="box m_bot1">
-                        <h2 class="first">Latest users</h2>
-                        <div class="sub_box1">
-                            <ul class="ext_list latest_r">
-                                <li>
-                                    <div class="ext_box review">
-                                        <figure><img src="images/latest1.jpg" alt="" /></figure>
-                                        <div>
-                                            <h3 class="ind2">XBOX 360</h3>
-                                            <h4>Lorem ipsum dolor sit amet conse</h4>
-                                        </div>
-                                    </div>
-                                    <div class="text"><a href="#">Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt <br>ut labore et dolore magna aliqua.</a></div>
-                                </li>
-                                <li class="m_bottom_zero">
-                                    <div class="ext_box review">
-                                        <figure><img src="images/latest2.jpg" alt="" /></figure>
-                                        <div>
-                                            <h3 class="ind2">PS 3</h3>
-                                            <h4>dolor sit amet conse </h4>
-                                        </div>
-                                    </div>
-                                    <div class="text"><a href="#">Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt <br>ut labore et dolore magna aliqua.</a></div>
-                                </li>
+                    <div class="box">
+                        <h2 class="first">Latest Comments</h2>
+                        <div class="sub_box">
+                            <!-- Preloader for Latest Comments -->
+                            <div id="latest-comments-preloader" class="latest-posts-preloader">
+                                <div class="loader">
+                                    <div class="loader-bar"></div>
+                                    <div class="loader-bar"></div>
+                                    <div class="loader-bar"></div>
+                                    <div class="loader-bar"></div>
+                                </div>
+                            </div>
+                            <ul class="ext_list comments" id="latest-comments">
+                                <!-- Comments will be dynamically loaded here -->
                             </ul>
-                            <a href="#" class="link1">see all</a>
+                            <div id="comments-info-container" class="post-info-container">
+                                <!-- Here information about the total comments will be displayed -->
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Latest Users Section -->
                     <div class="box">
-                        <h2 class="first">Latest comments</h2>
+                        <h2 class="first">Latest Users</h2>
                         <div class="sub_box">
                             <ul class="ext_list latest_r video">
                                 <li class="m_bottom_zero">
@@ -270,7 +267,7 @@
                                         <figure><a class="lightbox-video" href="flash/video_AS3.swf?width=512&amp;height=288&amp;fileVideo=intro06.flv" data-gal="prettyPhoto"><img src="images/latest3.jpg" alt="" /></a></figure>
                                         <div>
                                             <h3 class="ind2">XBOX 360</h3>
-                                            <h4 class="ind">ipsum dolor sit amet conse </h4>
+                                            <h4 class="ind">ipsum dolor sit amet conse</h4>
                                         </div>
                                     </div>
                                     <div class="text"><a href="#">Lorem ipsum dolor sit amet conse ctetur.</a></div>
@@ -283,17 +280,18 @@
             </div>
         </div>
     </section>
+
     <aside>
         <div class="container_12">
             <div class="wrapper">
                 <article class="grid_4">
-                    <h5>about us</h5>
-                    <p class="green p2">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <h5>About project</h5>
+                    <p class="green p2">Этот проект ипсользует Java 17, Spring Boot 2.7.12, Docker hub for deploy, PostgreSQL database, CORS configuration. It consists of 4 microservices</p>
                     Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br>
                     <a href="#" class="link2">read more</a>
                 </article>
                 <article class="grid_4">
-                    <h5>featured</h5>
+                    <h5>access and restrictions</h5>
                     <p class="green p3">Dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
                     <p class="p3">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                     Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.<br>
@@ -415,6 +413,67 @@
             });
     });
 
+    // Fetch and display latest comments
+    document.addEventListener("DOMContentLoaded", function() {
+        const latestCommentsContainer = document.getElementById('latest-comments');
+        const commentInfoContainer = document.getElementById('comments-info-container'); // Updated ID to match the HTML
+
+        fetch('https://post-wave-swagger.fun/comments/all', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success && data.payload.length > 0) {
+                    const sortedComments = data.payload.sort((a, b) => {
+                        const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
+                        const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
+                        return dateB - dateA;
+                    });
+
+                    // Display only the latest two comments
+                    sortedComments.slice(0, 2).forEach(comment => {
+                        const createdDate = new Date(Date.UTC(comment.created[0], comment.created[1] - 1, comment.created[2], comment.created[3], comment.created[4], comment.created[5])).toLocaleString('en-GB', {
+                            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                        });
+
+                        const commentItem = `
+                    <li class="latest-comment-item">
+                        <div class="latest-comment-avatar"></div>
+                        <div class="latest-comment-details">
+                            <p class="latest-comment-text">${comment.message.substring(0, 50)}...</p>
+                            <p class="latest-comment-author">Created by: ${comment.owner.username}</p>
+                            <p class="latest-comment-date">Created on: ${createdDate}</p>
+                        </div>
+                    </li>
+                `;
+                        latestCommentsContainer.insertAdjacentHTML('beforeend', commentItem);
+                    });
+
+                    // Display the number of comments and information
+                    commentInfoContainer.textContent = `Total comments: ${data.payload.length}. Displaying latest 2.`;
+                } else {
+                    latestCommentsContainer.innerHTML = '<li>No recent comments available.</li>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching comments:', error);
+                latestCommentsContainer.innerHTML = '<li>Error loading comments. Please try again later.</li>';
+            })
+            .finally(() => {
+                const preloader = document.getElementById('latest-comments-preloader');
+                if (preloader) {
+                    preloader.style.display = 'none'; // Ensure preloader is hidden after load
+                }
+            });
+    });
 
     function handleSearch(event) {
         event.preventDefault();
