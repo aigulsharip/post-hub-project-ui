@@ -1,0 +1,102 @@
+/* Контейнер для информации об аккаунте */
+.account-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 40px; /* Сдвиг влево */
+    padding-right: 40px; /* Сдвиг вправо */
+    background-color: #222; /* Добавляем легкий фон для выделения блока */
+    padding: 20px; /* Отступы внутри блока */
+    border-radius: 12px; /* Скругление углов */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Добавляем легкую тень */
+}
+
+/* Контейнер для аватарки */
+.avatar-container {
+    flex: 0 0 150px; /* Увеличиваем размер контейнера для аватарки */
+    margin-right: 30px; /* Увеличиваем отступ справа */
+    border: 2px solid #555; /* Чуть светлее рамка */
+    padding: 15px; /* Увеличиваем отступ внутри */
+    border-radius: 12px; /* Скругляем углы чуть больше */
+    background-color: #333;
+    position: relative;
+}
+
+/* Аватарка пользователя */
+.user-avatar {
+    width: 100%;
+    height: auto;
+    border-radius: 12px; /* Более мягкое скругление */
+    object-fit: cover;
+}
+
+/* Детали пользователя */
+.user-details p {
+    margin: 0 0 15px; /* Увеличиваем отступы между полями */
+    font-size: 20px; /* Чуть крупнее шрифт */
+    color: #ddd; /* Легкий оттенок серого для текста */
+}
+
+.user-details p strong {
+    color: #00BBFF; /* Цвет для меток полей */
+}
+
+/* Стили для статуса */
+.user-details p span#user-status {
+    color: #00ff00; /* Зеленый цвет для активного статуса */
+    font-weight: bold; /* Выделяем статус жирным шрифтом */
+}
+
+/* Ровный разделитель */
+.divider {
+    margin: 20px auto; /* Центрирование разделителя */
+    border-top: 1px solid #555;
+    width: 95%; /* Ширина на 90% для смещения от краев */
+    text-align: center;
+}
+
+/* Контейнер для кнопок редактирования и удаления */
+.button-container {
+    text-align: right;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px; /* Сдвиг кнопок от правого края */
+}
+
+#edit-delete-container {
+    display: flex;
+    gap: 15px; /* Увеличиваем расстояние между кнопками */
+}
+
+/* Кнопки редактирования и удаления */
+.edit-button, .delete-button {
+    display: inline-block;
+    background-color: #1e1e1e;
+    color: #00BBFF;
+    border: 2px solid #00BBFF;
+    padding: 12px 24px; /* Немного больше кнопки */
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-size: 16px; /* Чуть крупнее текст */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #00BBFF;
+    color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(0, 187, 255, 0.75), 0 0 30px rgba(0, 187, 255, 0.5);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.edit-button:active, .delete-button:active {
+    background-color: #0088cc;
+    box-shadow: 0px 0px 10px rgba(0, 136, 204, 0.75);
+    transform: translateY(0) scale(1);
+}

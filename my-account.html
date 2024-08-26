@@ -1,48 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Post-Wave demo</title>
+    <title>My Account - Post-Wave</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/my-account.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/edit-delete-post.css">
     <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
-    <script>
-        $(function(){
-            $('.slider')._TMS({
-                prevBu:false,
-                nextBu:false,
-                playBu:false,
-                duration:800,
-                easing:'easeOutQuad',
-                preset:'diagonalFade',
-                pagination:true,//'.pagination',true,'<ul></ul>'
-                pagNums:false,
-                slideshow:7000,
-                numStatus:false,
-                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
-                waitBannerAnimation:false,
-                progressBar:false
-            })
-        })
-    </script>
-    <!--[if lt IE 8]>
-    <div style=' clear: both; text-align:center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-        </a>
-    </div>
-    <![endif]-->
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="js/html5.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
-    <![endif]-->
+    <style>
+        .dropdown {
+            position: absolute;
+            top: 20px; /* Позиционирование кнопки по вертикали */
+            right: 20px; /* Позиционирование кнопки по горизонтали */
+            z-index: 1000;
+        }
+
+        .dropdown-btn {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 <body>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="cube-grid">
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+    </div>
+</div>
+
 <div class="main">
     <!--==============================header=================================-->
     <header>
@@ -75,7 +103,7 @@
         </div>
         <nav>
             <ul class="sf-menu">
-                <li class="current f_item"><a href="index.html">HOME</a></li>
+                <li><a href="index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
@@ -87,7 +115,7 @@
                     </ul>
                 </li>
                 <li><a href="actions.html">LOGS</a></li>
-                <li><a href="my-account.html">MY ACCOUNT</a></li>
+                <li class="current f_item"><a href="my-account.html">MY ACCOUNT</a></li>
             </ul>
             <form id="search" onsubmit="return handleSearch(event)" accept-charset="utf-8" style="position: relative;">
                 <label for="search-query"></label><input type="text" id="search-query" name="s" placeholder="Enter search term..." />
@@ -103,119 +131,41 @@
         </nav>
     </header>
     <!--==============================content================================-->
-    <section id="content">
-        <div class="container_12">
-            <div class="wrapper">
-                <article class="grid_8">
-                    <!--                <div class="box m_bot1">-->
-                    <!--                    <h2 class="first ind1">my users</h2>-->
-                    <!--                    <div class="wrapper">-->
-                    <!--                        <article class="grid_4 alpha">-->
-                    <!--                            <div class="sub_box">-->
-                    <!--                                <div class="mix">-->
-                    <!--                                    <a href="#"><img src="images/mix1.jpg" width="250" height="157" alt="mix1" /></a>-->
-                    <!--                                    <div class="title1">Beyond Good &amp; Evil</div>-->
-                    <!--                                    <div class="title2">XBOX 360 Movie</div>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </article>-->
-                    <!--                        <article class="grid_4 omega">-->
-                    <!--                            <div class="sub_box2">-->
-                    <!--                                <div class="mix">-->
-                    <!--                                    <a href="#"><img src="images/mix2.jpg" width="250" height="157" alt="mix2" /></a>-->
-                    <!--                                    <div class="title1">WWE All Stars</div>-->
-                    <!--                                    <div class="title2">XBOX 360 Movie</div>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </article>-->
-                    <!--                    </div>-->
-                    <!--                    <hr class="divider">-->
-                    <!--                    <div class="link-wrapper">-->
-                    <!--                        <a href="#" class="link2">see all users</a>-->
-                    <!--                    </div>-->
-                    <!--                </div>-->
-
-                    <div class="box">
-                        <h2 class="first">my users</h2>
-                        <div class="sub_box">
-                            <ul class="ext_list picks">
-                                <li>
-                                    <figure><img src="images/picks1.jpg" alt="" /></figure>
-                                    <div>
-                                        <h4>Red Faction: Armageddon Interview</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et<br>
-                                        <a href="#" class="button3">movie</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <figure><img src="images/picks2.jpg" alt="" /></figure>
-                                    <div>
-                                        <h4>Brink: A Choir of Guns Trailer</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et<br>
-                                        <a href="#" class="button3">movie</a>
-                                    </div>
-                                </li>
-                                <li class="bd_none m_bottom_zero">
-                                    <figure><img src="images/picks3.jpg" alt="" /></figure>
-                                    <div>
-                                        <h4>Top Spin 4 First Impressions</h4>
-                                        Lorem ipsum dolor sit amet conse ctetur adipi- sicing elit, sed do eiusmod tempor incididunt<br> ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et<br>
-                                        <a href="#" class="button3">preview</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <hr class="divider">
-                        <div class="link-wrapper">
-                            <a href="#" class="link2">see all users</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="grid_4">
-                    <div class="box m_bot2">
-                        <h2 class="first">Latest headlines</h2>
-                        <div class="sub_box3">
-                            <div class="ext_box headline">
-                                <figure><img src="images/latest1.jpg" alt="" /></figure>
-                                <div>
-                                    <h4>Mass Effect 2 Version Hands-On</h4>
-                                    Lorem ipsum dolor<br> sit amet conse
+    <div class="main">
+        <section id="content">
+            <div class="container_12">
+                <div class="wrapper">
+                    <article class="grid_12">
+                        <div class="box">
+                            <h2 class="first">My Account</h2>
+                            <div class="button-container">
+                                <div id="edit-delete-container">
+                                    <a href="edit-account.html" class="edit-button">EDIT</a>
+                                    <a href="delete-account.html" class="delete-button">DELETE</a>
                                 </div>
                             </div>
-                            <p class="p4">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor </p>
-                            <ul class="list1 list_ind">
-                                <li><a href="#">Red Faction film cast revealed</a></li>
-                                <li><a href="#">Double Fine starts Stacking next month</a></li>
-                                <li><a href="#">MX vs. ATV Alive revving up in May</a></li>
-                                <li><a href="#">Propaganda Games closed</a></li>
-                                <li class="m_bottom_zero"><a href="#">Molyneux getting lifetime achievement.</a></li>
-                            </ul>
-                            <div class="link1">Editor's picks</div>
+                            <hr class="divider">
+                            <div class="account-details">
+                                <div class="avatar-container">
+                                    <img src="images/avatars/avatar-6.png" alt="Avatar" class="user-avatar" id="user-avatar">
+                                </div>
+                                <div class="user-details">
+                                    <p><strong>Username:</strong> <span id="user-username">Loading...</span></p>
+                                    <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+                                    <p><strong>Phone Number:</strong> <span id="user-phone">Loading...</span></p>
+                                    <p><strong>Last Login:</strong> <span id="user-last-login">Loading...</span></p>
+                                    <p><strong>Status:</strong> <span id="user-status">Loading...</span></p>
+                                    <p><strong>Role:</strong> <span id="user-role">Loading...</span></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <h5>Gamespot recommends</h5>
-                    <ul class="gamespot">
-                        <li>
-                            <h4>Pac-Man CE DX (X360)</h4>
-                            <span class="green">Score:9.0</span><br>
-                            <a href="#">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
-                        </li>
-                        <li>
-                            <h4>Call of Duty: Black Ops (X360)</h4>
-                            <span class="green">Score:9.0</span><br>
-                            <a href="#">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
-                        </li>
-                        <li class="m_bottom_zero">
-                            <h4>Tomb Rider (X360)</h4>
-                            <span class="green">Score:9.0</span><br>
-                            <a href="#">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
-                        </li>
-                    </ul>
-                    <a href="#" class="link1">see all reviews</a>
-                </article>
+                    </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
+
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -232,71 +182,97 @@
         </div>
     </footer>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const username = localStorage.getItem('username');
-        if (username) {
-            document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
-            document.getElementById('greeting').textContent = username;
-        }
-
-        document.getElementById('logout-link').addEventListener('click', function() {
-            localStorage.removeItem('username');
-            window.location.reload();
-        });
-    });
-
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+        const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
+        const userAvatar = document.getElementById('user-avatar');
+        const userDetails = {
+            username: document.getElementById('user-username'),
+            email: document.getElementById('user-email'),
+            phone: document.getElementById('user-phone'),
+            lastLogin: document.getElementById('user-last-login'),
+            status: document.getElementById('user-status'),
+            role: document.getElementById('user-role')
+        };
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
+
+            fetch('https://post-wave-swagger.fun/users/info', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    preloader.style.display = 'none';
+
+                    if (data.success && data.payload) {
+                        const payload = data.payload;
+
+                        userDetails.username.textContent = payload.username;
+                        userDetails.email.textContent = payload.email;
+                        userDetails.phone.textContent = payload.phoneNumber;
+
+                        const lastLoginDate = new Date(Date.UTC(...payload.lastLogin)).toLocaleString('en-GB', {
+                            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                        });
+                        userDetails.lastLogin.textContent = lastLoginDate;
+
+                        userDetails.status.textContent = payload.registrationStatus;
+                        userDetails.role.textContent = payload.roles.map(role => role.name).join(', ');
+
+                        // Назначение фиксированной аватарки
+                        const fixedAvatar = `avatar-6.png`;
+                        userAvatar.src = `images/avatars/${fixedAvatar}`;
+
+                    } else {
+                        console.error('Failed to load user information');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading user information:', error);
+                    preloader.style.display = 'none';
+                });
         } else {
-            document.getElementById('auth-links').style.display = 'block';
-            document.getElementById('welcome-message').style.display = 'none';
+            window.location.href = 'login-page.html'; // Redirect to login if no user information
         }
 
         document.getElementById('logout-link').addEventListener('click', function() {
             localStorage.removeItem('username');
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
-            window.location.href = 'login-page.html'; // Redirect to login page after logout
+            window.location.href = 'login-page.html';
         });
-    });
 
-    document.addEventListener("DOMContentLoaded", function() {
-        // Получаем текущий URL страницы
         const currentPath = window.location.pathname;
-
-        // Убираем класс 'current' у всех элементов меню
         document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
             menuItem.classList.remove('current');
         });
 
-        // Проверяем, какая страница открыта, и добавляем класс 'current' соответствующему пункту меню
         if (currentPath.includes("index.html")) {
             document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
         } else if (currentPath.includes("my-account.html")) {
             document.querySelector('.sf-menu li a[href="my-account.html"]').parentElement.classList.add('current');
         }
-        // Добавьте здесь аналогичные условия для других страниц
     });
+
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
 
-        // Показываем попап
+        // Show the popup
         popup.style.display = 'block';
 
-        // Скрываем попап через 3 секунды
+        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
