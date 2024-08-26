@@ -61,7 +61,7 @@
         </div>
         <nav>
             <ul class="sf-menu">
-                <li class="current f_item"><a href="index.html">HOME</a></li>
+                <li><a href="index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
@@ -153,15 +153,16 @@
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
 
-        if (username && token) {
-            document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
-            document.getElementById('greeting').textContent = username;
-        } else {
-            document.getElementById('auth-links').style.display = 'block';
-            document.getElementById('welcome-message').style.display = 'none';
+        if (!username || !token) {
+            // Redirect to the login page if the user is not logged in
+            window.location.href = 'login-page.html';
+            return;
         }
+
+        document.getElementById('auth-links').style.display = 'none';
+        const welcomeMessage = document.getElementById('welcome-message');
+        welcomeMessage.style.display = 'block';
+        document.getElementById('greeting').textContent = username;
 
         document.getElementById('logout-link').addEventListener('click', function() {
             localStorage.removeItem('username');
@@ -278,6 +279,7 @@
             popup.style.display = 'none';
         }, 3000);
     }
+
 
 </script>
 
