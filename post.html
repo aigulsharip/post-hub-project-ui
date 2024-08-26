@@ -83,9 +83,8 @@
             <div class="nav">
                 <ul class="sf-menu">
                     <li><a href="index.html">home</a></li>
-                    <li><a href="list-of-posts.html">news</a></li>
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
-                    <li><a target="_blank " href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
+                    <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
                     <li><a href="contatcs.html">contacts</a></li>
                 </ul>
@@ -110,23 +109,29 @@
         <nav>
             <ul class="sf-menu">
                 <li><a href="index.html">HOME</a></li>
-                <li><a href="my-users.html">MY USERS</a></li>
-                <li class="current f_item"><a href="my-posts.html">MY POSTS</a></li>
-                <li><a href="actions.html">ACTIONS</a>
+                <li><a href="my-posts.html">MY POSTS</a></li>
+                <li><a href="my-comments.html">MY COMMENTS</a></li>
+                <li><a >ACTIONS</a>
                     <ul>
-                        <li><a href="create-user.html">Create user </a></li>
+                        <li><a href="create-user.html">Create user</a></li>
                         <li><a href="create-post.html">Create post</a></li>
-                        <li><a href="create-comment.html">Create comment </a></li>
-                        <li><a href="get-list-of-users.html">Get list of users </a></li>
+                        <li><a href="create-comment.html">Create comment</a></li>
+                        <li><a href="get-list-of-users.html">Get list of users</a></li>
                     </ul>
                 </li>
-                <li><a href="#">LOGS</a></li>
-                <li><a href="#">MY ACCOUNT</a></li>
+                <li><a href="actions.html">LOGS</a></li>
+                <li><a href="my-account.html">MY ACCOUNT</a></li>
             </ul>
-            <form id="search" action="search.php" method="GET" accept-charset="utf-8">
-                <input type="text" name="s" />
-                <a onclick="document.getElementById('search').submit()" class="button1">Search</a>
+            <form id="search" onsubmit="return handleSearch(event)" accept-charset="utf-8" style="position: relative;">
+                <label for="search-query"></label><input type="text" id="search-query" name="s" placeholder="Enter search term..." />
+                <button type="submit" class="button1">Search</button>
+                <!-- Pop-up -->
+                <div id="search-popup" style="display: none; position: absolute; top: 100%; left: 0; background-color: rgba(255, 255, 255, 0.95); color: #333; padding: 10px 15px; border-radius: 8px; margin-top: 5px; font-size: 12px; z-index: 1000; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); border: 1px solid #ddd; white-space: nowrap;">
+                    <i class="fas fa-info-circle" style="vertical-align: middle; line-height: 1;"></i>
+                    <span style="vertical-align: middle;">Search functionality not implemented yet</span>
+                </div>
             </form>
+            <div id="search-results"></div>
             <div class="clear"></div>
         </nav>
     </header>
@@ -487,7 +492,18 @@
                 preloader.style.display = 'none'; // Hide preloader when done
             });
     });
+    function handleSearch(event) {
+        event.preventDefault();
+        const popup = document.getElementById('search-popup');
 
+        // Показываем попап
+        popup.style.display = 'block';
+
+        // Скрываем попап через 3 секунды
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 3000);
+    }
 </script>
 
 <div class="modal-overlay" id="delete-modal">

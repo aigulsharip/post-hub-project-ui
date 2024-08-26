@@ -1,46 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Posts - Post-Wave</title>
+    <title>My Comments - Post-Wave</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/view-comment.css">
     <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
-    <script>
-        $(function(){
-            $('.slider')._TMS({
-                prevBu:false,
-                nextBu:false,
-                playBu:false,
-                duration:800,
-                easing:'easeOutQuad',
-                preset:'diagonalFade',
-                pagination:true,//'.pagination',true,'<ul></ul>'
-                pagNums:false,
-                slideshow:7000,
-                numStatus:false,
-                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
-                waitBannerAnimation:false,
-                progressBar:false
-            })
-        })
-    </script>
-    <!--[if lt IE 8]>
-    <div style=' clear: both; text-align:center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-        </a>
-    </div>
-    <![endif]-->
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="js/html5.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
-    <![endif]-->
+    <style>
+        /* Подсветка ссылки на комментарий при наведении */
+        .comment-link:hover {
+            color: #00ff00; /* Зеленый цвет */
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 <!-- Прелоадер -->
@@ -93,7 +71,7 @@
                 <li class="current f_item"><a href="index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
-                <li><a >ACTIONS</a>
+                <li><a href="#">ACTIONS</a>
                     <ul>
                         <li><a href="create-user.html">Create user</a></li>
                         <li><a href="create-post.html">Create post</a></li>
@@ -124,26 +102,27 @@
                 <div class="wrapper">
                     <article class="grid_12">
                         <div class="box">
-                            <h2 class="first">My Posts</h2>
+                            <h2 class="first">My Comments</h2>
                             <div class="button-container">
                                 <div id="create-post-container">
-                                    <a href="create-post.html" class="create-post-button">
+                                    <a href="create-comment.html" class="create-post-button">
                                         <div class="plus-icon">+</div>
-                                        <div class="add-post-text">Add New Post</div>
+                                        <div class="add-post-text">Add New Comment</div>
                                     </a>
                                 </div>
                             </div>
                             <hr class="divider">
                             <div class="sub_box" id="post-container">
-                                <ul class="ext_list picks" id="post-list">
-                                    <!-- Динамически загружаемые посты -->
+                                <ul id="comment-list" class="picks comments-list">
+                                    <!-- Комментарии будут динамически загружаться здесь -->
                                 </ul>
+
                                 <div class="post-footer">
                                     <div id="view-all-container" class="view-all-container">
-                                        <a href="all-my-posts.html" class="link2">View All My Posts</a>
+                                        <a href="all-my-comments.html" class="link2">View All My Comments</a>
                                     </div>
                                     <div id="post-info-container" class="post-info-container">
-                                        <!-- Здесь будет отображаться информация о количестве постов -->
+                                        <!-- Здесь будет отображаться информация о количестве комментариев -->
                                     </div>
                                 </div>
                             </div>
@@ -176,19 +155,19 @@
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
-        const postContainer = document.getElementById('post-container');
-        const postList = document.getElementById('post-list');
-        const postInfoContainer = document.getElementById('post-info-container');
-        const createPostContainer = document.getElementById('create-post-container');
+        const commentContainer = document.getElementById('post-container'); // Изменено с comment-container на post-container
+        const commentList = document.getElementById('comment-list');
+        const commentInfoContainer = document.getElementById('post-info-container'); // Изменено с comment-info-container на post-info-container
+        const createCommentContainer = document.getElementById('create-post-container'); // Изменено с create-comment-container на create-post-container
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
-            createPostContainer.style.display = 'block';
+            createCommentContainer.style.display = 'block';
 
-            fetch('https://post-wave-swagger.fun/posts', {
+            fetch('https://post-wave-swagger.fun/comments', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -200,59 +179,64 @@
                     preloader.style.display = 'none';
 
                     if (data.success && data.payload.length > 0) {
-                        postList.innerHTML = '';
+                        commentList.innerHTML = '';
 
-                        // Сортируем посты по дате (от новых к старым)
-                        const sortedPosts = data.payload.sort((a, b) => {
+                        // Сортируем комментарии по дате (от новых к старым)
+                        const sortedComments = data.payload.sort((a, b) => {
                             const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
                             const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
                             return dateB - dateA;
                         });
 
-                        // Выводим первые 5 постов
-                        sortedPosts.slice(0, 5).forEach(post => {
-                            const postDateArray = post.created;
-                            const utcDate = new Date(Date.UTC(postDateArray[0], postDateArray[1] - 1, postDateArray[2], postDateArray[3], postDateArray[4], postDateArray[5]));
+                        // Выводим первые 5 комментариев
+                        sortedComments.slice(0, 5).forEach(comment => {
+                            const commentDateArray = comment.created;
+                            const utcDate = new Date(Date.UTC(commentDateArray[0], commentDateArray[1] - 1, commentDateArray[2], commentDateArray[3], commentDateArray[4], commentDateArray[5]));
                             const localDate = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
 
-                            const postDate = `${localDate.getFullYear()}-${(localDate.getMonth() + 1).toString().padStart(2, '0')}-${localDate.getDate().toString().padStart(2, '0')} ${localDate.getHours().toString().padStart(2, '0')}:${localDate.getMinutes().toString().padStart(2, '0')}`;
+                            const commentDate = `${localDate.getFullYear()}-${(localDate.getMonth() + 1).toString().padStart(2, '0')}-${localDate.getDate().toString().padStart(2, '0')} ${localDate.getHours().toString().padStart(2, '0')}:${localDate.getMinutes().toString().padStart(2, '0')}`;
 
-                            const postItem = `
-                        <li>
-                            <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.png';" /></figure>
-                            <div class="content-wrapper">
-                                <div>
-                                    <h4><a href="post.html?id=${post.id}">${post.title}</a></h4>
-                                    <p class="post-content">${post.content.substring(0, 150)}...</p>
-                                    <p class="likes">Likes: ${post.likes} <span class="not-implemented">(not fully implemented)</span></p>
-                                    <p class="comments">The number of comments: ${post.commentsCount}</p>
-                                </div>
-                                <p class="date" style="text-align: right;">Created on: ${postDate}</p>
-                                <a href="post.html?id=${post.id}" class="button3">View Post</a>
-                            </div>
-                        </li>`;
-                            postList.insertAdjacentHTML('beforeend', postItem);
+                            // Формируем HTML для каждого комментария
+                            const commentItem = `
+<li class="picks-comment">
+    <div class="content-wrapper">
+        <p class="comment-content">
+            <a href="post.html?id=${comment.postId}" class="comment-link">${comment.message}</a>
+        </p>
+        <div class="comment-meta">
+            <p class="author">Commented by: ${comment.owner.username}</p>
+            <p class="date">On: ${commentDate}</p>
+            <div class="actions">
+                <a href="#" class="edit-comment">Edit</a>
+                <a href="#" class="delete-comment">Delete</a>
+            </div>
+        </div>
+    </div>
+</li>
+                        `;
+                            commentList.insertAdjacentHTML('beforeend', commentItem);
                         });
 
-                        postInfoContainer.innerHTML = `Total posts: ${data.payload.length}. Displaying latest 5.`;
+                        commentInfoContainer.innerHTML = `Total comments: ${data.payload.length}. Displaying latest 5.`;
                     } else {
-                        postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> to get started!</p>`;
-                        postInfoContainer.innerHTML = '';
+                        commentContainer.innerHTML = `<p class="no-comments-message">You don't have any comments yet. <a href="create-comment.html">Create a new comment</a> to get started!</p>`;
+                        commentInfoContainer.innerHTML = '';
                     }
                 })
                 .catch(error => {
-                    console.error('Error loading posts:', error);
+                    console.error('Error loading comments:', error);
                     preloader.style.display = 'none';
-                    postInfoContainer.innerHTML = '';
+                    commentContainer.innerHTML = `<p class="error-message">There was an error loading your comments. Please try again later.</p>`;
+                    commentInfoContainer.innerHTML = '';
                 });
         } else {
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
-            createPostContainer.style.display = 'none';
+            createCommentContainer.style.display = 'none';
 
-            postContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your posts.</p>`;
+            commentContainer.innerHTML = `<p class="no-comments-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to view and create your comments.</p>`;
             preloader.style.display = 'none';
-            postInfoContainer.innerHTML = '';
+            commentInfoContainer.innerHTML = '';
         }
 
         document.getElementById('logout-link').addEventListener('click', function() {
@@ -269,10 +253,11 @@
 
         if (currentPath.includes("index.html")) {
             document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
-        } else if (currentPath.includes("my-posts.html")) {
-            document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
+        } else if (currentPath.includes("my-comments.html")) {
+            document.querySelector('.sf-menu li a[href="my-comments.html"]').parentElement.classList.add('current');
         }
     });
+
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');

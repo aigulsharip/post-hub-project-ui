@@ -34,94 +34,87 @@ html {width:100%;}
 }
 
 /* Посты */
+/* Основной контейнер для каждого поста */
 .picks li {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px; /* Увеличиваем расстояние, но не слишком сильно */
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px; /* Добавляем небольшой padding снизу */
+    flex-direction: row;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #2b2b2b;
+    border-radius: 12px;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+/* Светящийся эффект вокруг блока при наведении */
+.picks li:hover {
+    box-shadow: 0 0 7px 5px rgba(255, 255, 255, 0.3);
 }
 
 .picks figure {
     flex: 0 0 150px;
     margin-right: 20px;
-    margin-bottom: 0; /* Убираем нижний отступ */
+    margin-bottom: 0;
 }
 
 .picks figure img {
     width: 150px;
     height: auto;
     object-fit: cover;
-    cursor: pointer; /* Курсор указатель */
+    cursor: pointer;
 }
 
 .picks .content-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    width: 100%;
     position: relative;
 }
 
-/* Стили для заголовка поста */
+/* Текст заголовка поста */
 .picks h4 a {
-    color: #ffffff; /* Белый цвет заголовка */
-    text-decoration: none; /* Убираем подчеркивание */
-    transition: color 0.3s ease; /* Плавный переход цвета */
-    font-size: 18px; /* Увеличенный размер шрифта */
-    font-family: 'Oswald', sans-serif; /* Применяем шрифт Oswald для приятного вида */
-    letter-spacing: 1px; /* Расширяем межбуквенный интервал */
-    font-weight: bold; /* Делаем шрифт полужирным */
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 18px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .picks h4 a:hover {
-    color: #8cc503; /* Зеленый цвет при наведении */
+    color: #8cc503;
 }
 
-
+/* Контент поста */
 .picks .post-content {
-    font-size: 14px; /* Больший размер для контента */
-    color: #ccc; /* Светлый цвет для контента */
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
 }
+
+/* Дополнительная информация о посте */
 .picks .likes,
 .picks .comments {
-    align-self: flex-start; /* Выровнять по левому краю */
-    font-size: 12px; /* Меньший размер текста */
-    color: #fff; /* Цвет текста */
-    margin-bottom: 5px; /* Добавляем отступ снизу */
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
 }
 
-.picks .likes {
-    margin-top: auto; /* Перемещаем блок в самый низ */
+.picks .date {
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+    position: absolute;
+    top: 10px;
+    right: 20px;
 }
 
-.picks .comments {
-    margin-top: 0;
-}
-
-.picks figure {
-    margin-right: 20px;
-    margin-bottom: 0;
-    flex: 0 0 150px;
-}
-
-.picks div.content-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Все элементы наверху */
-    padding-bottom: 10px;
-    position: relative;
-}
-
-.picks .content-wrapper p.likes,
-.picks .content-wrapper p.comments {
-    align-self: flex-end; /* Выровнять по правому краю */
-    margin-right: 0;
-    margin-top: auto; /* Перемещаем блок в самый низ */
-}
-
-
+/* Кнопка для постов */
 .picks .button3 {
     background-color: #ffffff; /* Полностью белый фон кнопки */
     color: #ffffff;
@@ -136,8 +129,9 @@ html {width:100%;}
 }
 
 .picks .button3:hover {
-    background-color: #e0e0e0; /* Светло-серый фон при наведении */
+    background-color: #e0e0e0;
 }
+
 /* Posts */
 .no-posts-message {
     font-size: 16px;
@@ -147,12 +141,12 @@ html {width:100%;}
 }
 
 .no-posts-message a {
-    color: #00ff00; /* Зеленый цвет для ссылок */
+    color: #00ff00;
     text-decoration: underline;
 }
 
 .no-posts-message a:hover {
-    color: #00cc00; /* Темно-зеленый цвет при наведении */
+    color: #00cc00;
 }
 
 .divider {
