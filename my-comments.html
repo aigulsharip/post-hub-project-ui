@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/view-comment.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/delete-post-modal.css">
     <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="js/superfish.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
@@ -152,26 +153,78 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const preloader = document.getElementById('preloader');
-        const username = localStorage.getItem('username');
-        const token = localStorage.getItem('token');
-        const commentContainer = document.getElementById('post-container'); // Изменено с comment-container на post-container
-        const commentList = document.getElementById('comment-list');
-        const commentInfoContainer = document.getElementById('post-info-container'); // Изменено с comment-info-container на post-info-container
-        const createCommentContainer = document.getElementById('create-post-container'); // Изменено с create-comment-container на create-post-container
+        let commentIdToDelete = null;
 
-        if (username && token) {
-            document.getElementById('auth-links').style.display = 'none';
-            const welcomeMessage = document.getElementById('welcome-message');
-            welcomeMessage.style.display = 'block';
-            document.getElementById('greeting').textContent = username;
-            createCommentContainer.style.display = 'block';
+        // Обработка кликов на кнопке удаления комментария
+        document.getElementById('comment-list').addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-comment')) {
+                event.preventDefault();
+                commentIdToDelete = event.target.getAttribute('data-comment-id');
+                document.getElementById('delete-comment-modal').style.display = 'flex';
+            }
+        });
+
+        // Подтверждение удаления комментария
+        document.getElementById('confirm-delete-comment').addEventListener('click', function() {
+            if (commentIdToDelete) {
+                // Показываем прелоадер при начале удаления
+                document.getElementById('delete-comment-preloader').style.display = 'flex';
+                deleteComment(commentIdToDelete);
+            }
+            document.getElementById('delete-comment-modal').style.display = 'none';
+        });
+
+        // Отмена удаления комментария
+        document.getElementById('cancel-delete-comment').addEventListener('click', function() {
+            document.getElementById('delete-comment-modal').style.display = 'none';
+            commentIdToDelete = null;
+        });
+
+        // Функция для удаления комментария
+        function deleteComment(commentId) {
+            const token = localStorage.getItem('token');
+
+            // Выполняем DELETE-запрос
+            fetch(`https://post-wave-swagger.fun/comments/${commentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
+                    }
+                    // Успешное удаление комментария
+                    loadComments(); // Перезагружаем список комментариев
+                })
+                .catch(error => {
+                    console.error('Error deleting comment:', error);
+                    alert('An error occurred while deleting the comment. Please try again.');
+                })
+                .finally(() => {
+                    // Скрываем прелоадер после завершения удаления
+                    document.getElementById('delete-comment-preloader').style.display = 'none';
+                });
+        }
+
+        // Функция для загрузки комментариев
+        function loadComments() {
+            const preloader = document.getElementById('preloader');
+            const commentList = document.getElementById('comment-list');
+            const commentInfoContainer = document.getElementById('post-info-container');
+            const token = localStorage.getItem('token');
+
+            preloader.style.display = 'flex';
 
             fetch('https://post-wave-swagger.fun/comments', {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 }
             })
                 .then(response => response.json())
@@ -181,12 +234,14 @@
                     if (data.success && data.payload.length > 0) {
                         commentList.innerHTML = '';
 
-                        // Сортируем комментарии по дате (от новых к старым)
-                        const sortedComments = data.payload.sort((a, b) => {
-                            const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
-                            const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
-                            return dateB - dateA;
-                        });
+                        // Сортируем и фильтруем комментарии
+                        const sortedComments = data.payload
+                            .filter(comment => !comment.deleted)
+                            .sort((a, b) => {
+                                const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
+                                const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
+                                return dateB - dateA;
+                            });
 
                         // Выводим первые 5 комментариев
                         sortedComments.slice(0, 5).forEach(comment => {
@@ -198,22 +253,22 @@
 
                             // Формируем HTML для каждого комментария
                             const commentItem = `
-<li class="picks-comment">
-    <div class="content-wrapper">
-        <p class="comment-content">
-            <a href="post.html?id=${comment.postId}" class="comment-link">${comment.message}</a>
-        </p>
-        <div class="comment-meta">
-            <p class="author">Commented by: ${comment.owner.username}</p>
-            <p class="date">On: ${commentDate}</p>
-            <div class="actions">
-                <a href="#" class="edit-comment">Edit</a>
-                <a href="#" class="delete-comment">Delete</a>
-            </div>
-        </div>
-    </div>
-</li>
-                        `;
+                    <li class="picks-comment">
+                        <div class="content-wrapper">
+                            <p class="comment-content">
+                                <a href="post.html?id=${comment.postId}" class="comment-link">${comment.message}</a>
+                            </p>
+                            <div class="comment-meta">
+                                <p class="author">Commented by: ${comment.owner.username}</p>
+                                <p class="date">On: ${commentDate}</p>
+                                <div class="actions">
+                                    <a href="#" class="edit-comment">Edit</a>
+                                    <a href="#" class="delete-comment" data-comment-id="${comment.id}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                `;
                             commentList.insertAdjacentHTML('beforeend', commentItem);
                         });
 
@@ -229,16 +284,12 @@
                     commentContainer.innerHTML = `<p class="error-message">There was an error loading your comments. Please try again later.</p>`;
                     commentInfoContainer.innerHTML = '';
                 });
-        } else {
-            document.getElementById('auth-links').style.display = 'block';
-            document.getElementById('welcome-message').style.display = 'none';
-            createCommentContainer.style.display = 'none';
-
-            commentContainer.innerHTML = `<p class="no-comments-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to view and create your comments.</p>`;
-            preloader.style.display = 'none';
-            commentInfoContainer.innerHTML = '';
         }
 
+        // Вызов loadComments для загрузки комментариев при загрузке страницы
+        loadComments();
+
+        // Логика для выхода
         document.getElementById('logout-link').addEventListener('click', function() {
             localStorage.removeItem('username');
             localStorage.removeItem('token');
@@ -246,6 +297,7 @@
             window.location.href = 'login-page.html';
         });
 
+        // Установка активного элемента меню в зависимости от текущего пути
         const currentPath = window.location.pathname;
         document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
             menuItem.classList.remove('current');
@@ -258,6 +310,7 @@
         }
     });
 
+    // Обработка поиска
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
@@ -270,6 +323,33 @@
             popup.style.display = 'none';
         }, 3000);
     }
+
 </script>
+
+
+<div class="modal-overlay" id="delete-comment-modal">
+    <div class="modal-window">
+        <div class="modal-title">Are you sure you want to delete this comment?</div>
+        <div class="modal-buttons">
+            <button class="modal-button confirm" id="confirm-delete-comment">Yes</button>
+            <button class="modal-button cancel" id="cancel-delete-comment">No</button>
+        </div>
+    </div>
+</div>
+<!-- Прелоудер для удаления комментария -->
+<div id="delete-comment-preloader" style="display: none;">
+    <div class="cube-grid">
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+    </div>
+</div>
+
 </body>
 </html>
