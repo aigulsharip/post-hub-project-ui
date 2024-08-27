@@ -261,19 +261,21 @@
                     <div class="box">
                         <h2 class="first">Latest Users</h2>
                         <div class="sub_box">
-                            <ul class="ext_list latest_r video">
-                                <li class="m_bottom_zero">
-                                    <div class="ext_box review">
-                                        <figure><a class="lightbox-video" href="flash/video_AS3.swf?width=512&amp;height=288&amp;fileVideo=intro06.flv" data-gal="prettyPhoto"><img src="images/latest3.jpg" alt="" /></a></figure>
-                                        <div>
-                                            <h3 class="ind2">XBOX 360</h3>
-                                            <h4 class="ind">ipsum dolor sit amet conse</h4>
-                                        </div>
+                            <ul class="ext_list users">
+                                <li class="latest-user-item">
+                                    <div class="latest-user-avatar">
+                                        <img src="images/user-avatar.png" alt="User Avatar">
                                     </div>
-                                    <div class="text"><a href="#">Lorem ipsum dolor sit amet conse ctetur.</a></div>
+                                    <div class="latest-user-details">
+                                        <p class="latest-user-text">Restricted Access</p>
+                                        <p class="latest-user-info">
+                                            Access to this information is only available to users with the role of
+                                            <span class="admin-role">admin</span> or
+                                            <span class="admin-role">super admin</span>.
+                                        </p>
+                                    </div>
                                 </li>
                             </ul>
-                            <a href="#" class="link1">see all</a>
                         </div>
                     </div>
                 </article>
@@ -413,6 +415,36 @@
             });
     });
 
+    document.addEventListener("DOMContentLoaded", function() {
+        const latestUsersContainer = document.getElementById('latest-users-container');
+        const userRole = localStorage.getItem('userRole'); // Assuming user role is stored in localStorage
+
+        if (userRole === 'admin' || userRole === 'super admin') {
+            // Display the latest users information
+            latestUsersContainer.innerHTML = `
+            <ul class="ext_list latest_r video">
+                <li class="m_bottom_zero">
+                    <div class="ext_box review">
+                        <figure><img src="images/admins-only.png" alt="Admin Only" /></figure>
+                        <div>
+                            <h3 class="ind2">Admin/Super Admin Users</h3>
+                            <p>Only admin and super admin can view this section.</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        `;
+        } else {
+            // Display the message for users without the required role
+            latestUsersContainer.innerHTML = `
+            <div class="restricted-access">
+                <figure><img src="images/restricted-access.png" alt="Restricted Access" /></figure>
+                <p>Access to this information is only available to users with the role of <strong>admin</strong> or <strong>super admin</strong>.</p>
+            </div>
+        `;
+        }
+    });
+
     // Fetch and display latest comments
     document.addEventListener("DOMContentLoaded", function() {
         const latestCommentsContainer = document.getElementById('latest-comments');
@@ -445,14 +477,17 @@
                         });
 
                         const commentItem = `
-                    <li class="latest-comment-item">
-                        <div class="latest-comment-avatar"></div>
-                        <div class="latest-comment-details">
-                            <p class="latest-comment-text">${comment.message.substring(0, 50)}...</p>
-                            <p class="latest-comment-author">Created by: ${comment.owner.username}</p>
-                            <p class="latest-comment-date">Created on: ${createdDate}</p>
-                        </div>
-                    </li>
+<li class="latest-comment-item">
+    <div class="latest-comment-avatar">
+        <img src="images/avatars/avatar-6.png" alt="User Avatar" class="comment-avatar">
+    </div>
+    <div class="latest-comment-details">
+        <p class="latest-comment-text">${comment.message.substring(0, 50)}...</p>
+        <p class="latest-comment-author">Created by: ${comment.owner.username}</p>
+        <p class="latest-comment-date">Created on: ${createdDate}</p>
+    </div>
+</li>
+
                 `;
                         latestCommentsContainer.insertAdjacentHTML('beforeend', commentItem);
                     });

@@ -159,9 +159,6 @@
                                     <!-- Dynamically loaded comments -->
                                 </ul>
                                 <div class="post-footer">
-                                    <div id="view-all-container" class="view-all-container">
-                                        <a href="my-posts.html" class="link2">Back To My Posts</a>
-                                    </div>
                                     <div id="comment-info-container" class="post-info-container">
                                         <!-- Comment count information will be displayed here -->
                                     </div>
@@ -245,9 +242,9 @@
         } else {
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
-            commentList.innerHTML = `<p class="no-comments-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your comments.</p>`;
+            commentList.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your comments.</p>`;
             preloader.style.display = 'none';
-            commentInfoContainer.innerHTML = '';
+            commentInfoContainer.style.display = 'none'; // Скрыть блок для неавторизованных пользователей
             paginationContainer.innerHTML = '';
         }
 
@@ -350,5 +347,6 @@
         }, 3000);
     }
 </script>
+
 </body>
 </html>
