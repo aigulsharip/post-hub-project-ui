@@ -68,7 +68,7 @@
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
-                    <li><a href="contatcs.html">contacts</a></li>
+                    <li><a href="contacts.html">contacts</a></li>
                 </ul>
             </div>
             <div class="login" id="auth-container">
@@ -95,9 +95,9 @@
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
                     <ul>
-                        <li><a href="create-user.html">Create user</a></li>
+                        <li><a href="#" id="create-user-link">Create user</a></li>
                         <li><a href="create-post.html">Create post</a></li>
-                        <li><a href="create-comment.html">Create comment</a></li>
+                        <li><a href="#" id="create-comment-link">Create comment</a></li>
                         <li><a href="get-list-of-users.html">Get list of users</a></li>
                     </ul>
                 </li>
@@ -157,12 +157,11 @@
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
-            <a href="#">home</a>
-            <a href="#">reviews</a>
-            <a href="#">news</a>
-            <a href="#">videos</a>
-            <a href="#">blog</a>
-            <a href="#">contacts</a>
+            <a href="index.html">home</a>
+            <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
+            <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
+            <a href="community.html">community</a>
+            <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
             <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
@@ -273,6 +272,51 @@
             document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
         }
     });
+
+    // Reuse the search popup for other actions
+    function showPopupMessage(message) {
+        const popup = document.getElementById('search-popup');
+
+        // Update the message in the popup
+        popup.querySelector('span').textContent = message;
+
+        // Show the popup
+        popup.style.display = 'block';
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 3000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Handle Create user link click
+        const createUserLink = document.getElementById('create-user-link');
+        if (createUserLink) {
+            createUserLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showPopupMessage("This functionality is not yet ready.");
+            });
+        }
+
+        // Handle Create comment link click
+        const createCommentLink = document.getElementById('create-comment-link');
+        if (createCommentLink) {
+            createCommentLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showPopupMessage("This functionality is not yet ready.");
+            });
+        }
+
+        // Existing search popup handling
+        function handleSearch(event) {
+            event.preventDefault();
+            showPopupMessage("Search functionality not implemented yet");
+        }
+
+        document.getElementById('search').addEventListener('submit', handleSearch);
+    });
+
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');

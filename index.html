@@ -74,7 +74,7 @@
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
-                    <li><a href="contatcs.html">contacts</a></li>
+                    <li><a href="contacts.html">contacts</a></li>
                 </ul>
             </div>
             <div class="login" id="auth-container">
@@ -101,9 +101,9 @@
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
                     <ul>
-                        <li><a href="create-user.html">Create user</a></li>
+                        <li><a href="#" id="create-user-link">Create user</a></li>
                         <li><a href="create-post.html">Create post</a></li>
-                        <li><a href="create-comment.html">Create comment</a></li>
+                        <li><a href="#" id="create-comment-link">Create comment</a></li>
                         <li><a href="get-list-of-users.html">Get list of users</a></li>
                     </ul>
                 </li>
@@ -137,7 +137,7 @@
                             <a href="https://nick8787.github.io/post-wave-documentation/" class="pulsing-text" target="_blank">this link</a>. You can also view information about GitLab CI/CD, Docker Hub, Swagger, and more.
                         </p><br><br><br><br><br>
                         <div class="but_wrap">
-                            <a href="#" class="button2">read more</a>
+                            <a href="more-about-project.html" class="button2">read more</a>
                         </div>
                     </div>
                 </li>
@@ -155,7 +155,7 @@
                             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank" class="pulsing-text">this page</a>.
                         </p>
                         <div class="but_wrap">
-                            <a href="#" class="button2">read more</a>
+                            <a href="more-about-project.html" class="button2">read more</a>
                         </div>
                     </div>
                 </li>
@@ -287,51 +287,60 @@
         <div class="container_12">
             <div class="wrapper">
                 <article class="grid_4">
-                    <h5>About project</h5>
-                    <p class="green p2">This project is created just to check how backend works. It includes 4 microservices which are sending info via Kafka</p>
-                    IAM-service - предназначен для регистрации и логина юзера, создания юзеров, постов и коммментариев. Также включает в себя настройку JWT, Security, Flyway, CORS PostgreSQL<br>
-                    UTILS-service - предназначен для получения action logs, таких как создания юзеров, создания постов и комментариев. Получает всю инфу по Кафке из IAM-service<br>
-                    GATEWAY-service - предназначен для того, чтоб все микросервисы шли через один Gateway service<br>
-                    DISCOVERY-service - предназначен для ...тут какой то текст.. Eureka server для регистрации всех серисов<br>
+                    <h5>About the Project</h5>
+                    <p class="green p2">This website is created just to check how backend works. It includes 4 microservices which are sending info via Kafka:</p>
+                    <span class="green">IAM-service</span> - Handles user registration and login, creation of users, posts, and comments. It also includes JWT setup, Security, Flyway, CORS, and PostgreSQL.<br>
+                    <span class="green">UTILS-service</span> - Collects action logs, such as user creation, and post and comment creation. It receives all information from IAM-service via Kafka.<br>
+                    <span class="green">GATEWAY-service</span> - Centralizes all microservices through a single Gateway service.<br>
+                    <span class="green">DISCOVERY-service</span> - Serves as a Eureka server for registering all services.<br>
                     <a href="more-about-project.html" class="link2">read more</a>
                 </article>
                 <article class="grid_4">
-                    <h5>access and restrictions</h5>
-                    <p class="green p3">Этот проект включает в себя 3 роли: User, Admin, Super Admin</p>
-                    <p class="p3">При регистрации юзер получает автоматически роль: User. </p>
-                    Роль Админа может получить юзер только если ему даст Супер Админ<br>
-                    <a href="#" class="link2 b_ind">read more</a>
+                    <h5>Access and Restrictions</h5>
+                    <p class="green p3">This project includes three roles: <span class="green">User</span>, <span class="green">Admin</span>, and <span class="green">Super Admin</span>.</p>
+                    <p class="p3">Upon registration, a user is automatically assigned the role of <span class="green">User</span>. This role grants access to basic features like viewing and creating content.</p>
+                    <p class="p3"><span class="green">Admin</span> role can be assigned to a user only by a <span class="green">Super Admin</span>. </p>
+                    <p class="p3"><span class="green">Super Admin</span> is the highest level of access and holds the authority to assign or revoke the <span class="green">Admin</span> role, as well as oversee all aspects of the system.</p>
+                    <a href="access-restrictions.html" class="link2">read more</a>
                 </article>
+
                 <article class="grid_4">
-                    <h5>Additional info:</h5>
+                    <h5>Additional Information:</h5>
                     <ul class="games_list">
                         <li>
                             <span class="green">Documentation</span><br>
-                            <a href="#">Перейдя по этой ссылке, можно найти API документацию, base code на ГитЛабе, как настроен deploy через докер и как настроена база данных и хостинг. </a>
+                            <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">Check API documentation (Swagger), base code on GitLab, details on Docker deployment, and database and hosting configurations.</a>
                         </li>
                         <li>
-                            <span class="green">Mobile</span><br>
-                            <a href="#">Dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor</a>
+                            <span class="green">Udemy Courses</span><br>
+                            <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">Here you can find my courses.</a>
                         </li>
                         <li class="last bd_none">
-                            <span class="green">XBOX 360</span><br>
-                            <a href="#">Sit amet conse ctetur adipisicing elit</a>
+                            <span class="green">Contact Me</span><br>
+                            <a href="https://www.linkedin.com/in/mykola-shchypailo-284997297/" target="_blank">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a><br>
+                            <a href="https://github.com/nick8787" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a><br>
+                            <a href="https://gitlab.com/post_wave-project" target="_blank">
+                                <i class="fab fa-gitlab"></i> GitLab
+                            </a>
                         </li>
                     </ul>
-                    <a href="#" class="link2">read more</a>
                 </article>
             </div>
         </div>
     </aside>
+
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
-            <a href="#">home</a>
-            <a href="#">reviews</a>
-            <a href="#">news</a>
-            <a href="#">videos</a>
-            <a href="#">blog</a>
-            <a href="#">contacts</a>
+            <a href="index.html">home</a>
+            <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
+            <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
+            <a href="community.html">community</a>
+            <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
             <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
@@ -512,6 +521,51 @@
                 }
             });
     });
+
+    // Reuse the search popup for other actions
+    function showPopupMessage(message) {
+        const popup = document.getElementById('search-popup');
+
+        // Update the message in the popup
+        popup.querySelector('span').textContent = message;
+
+        // Show the popup
+        popup.style.display = 'block';
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 3000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Handle Create user link click
+        const createUserLink = document.getElementById('create-user-link');
+        if (createUserLink) {
+            createUserLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showPopupMessage("This functionality is not yet ready.");
+            });
+        }
+
+        // Handle Create comment link click
+        const createCommentLink = document.getElementById('create-comment-link');
+        if (createCommentLink) {
+            createCommentLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showPopupMessage("This functionality is not yet ready.");
+            });
+        }
+
+        // Existing search popup handling
+        function handleSearch(event) {
+            event.preventDefault();
+            showPopupMessage("Search functionality not implemented yet");
+        }
+
+        document.getElementById('search').addEventListener('submit', handleSearch);
+    });
+
 
     function handleSearch(event) {
         event.preventDefault();
