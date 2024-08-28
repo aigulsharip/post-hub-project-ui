@@ -172,7 +172,7 @@
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId');
+        const userId = localStorage.getItem('userId'); // Убедитесь, что userId правильно загружается
         const userAvatar = document.getElementById('user-avatar');
         const userDetails = {
             username: document.getElementById('user-username'),
@@ -350,6 +350,7 @@
         function deleteAccount() {
             document.getElementById('delete-account-preloader').style.display = 'flex';
 
+            // Убедитесь, что идентификатор пользователя передается правильно
             fetch(`https://post-wave-swagger.fun/users/${userId}`, {
                 method: 'DELETE',
                 headers: {
@@ -397,18 +398,6 @@
         } else if (currentPath.includes("my-account.html")) {
             document.querySelector('.sf-menu li a[href="my-account.html"]').parentElement.classList.add('current');
         }
-
-        function handleSearch(event) {
-            event.preventDefault();
-            const popup = document.getElementById('search-popup');
-
-            popup.style.display = 'block';
-
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 3000);
-        }
-
         function showPreloader() {
             document.getElementById('preloader').style.display = 'flex';
         }
@@ -462,14 +451,13 @@
         document.getElementById('search').addEventListener('submit', handleSearch);
     });
 
+
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
 
-        // Показываем попап
         popup.style.display = 'block';
 
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
