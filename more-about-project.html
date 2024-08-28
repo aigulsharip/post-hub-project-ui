@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Comments - Post-Wave</title>
+    <title>More about project - Post-Wave</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
@@ -63,9 +63,9 @@
         </div>
         <nav>
             <ul class="sf-menu">
-                <li><a href="index.html">HOME</a></li>
+                <li class="current f_item"><a href="index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
-                <li class="current f_item"><a href="my-comments.html">MY COMMENTS</a></li>
+                <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a href="#">ACTIONS</a>
                     <ul>
                         <li><a href="create-user.html">Create user</a></li>
@@ -97,7 +97,7 @@
                 <div class="wrapper">
                     <article class="grid_12">
                         <div class="box">
-                            <h2 class="first">My Comments</h2>
+                            <h2 class="first">More info about project</h2>
                             <div class="button-container">
                                 <div id="create-post-container">
                                     <a href="create-comment.html" class="create-post-button">
@@ -169,18 +169,10 @@
             document.getElementById('auth-links').style.display = 'block';
             document.getElementById('welcome-message').style.display = 'none';
             createCommentContainer.style.display = 'none';
-            commentContainer.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your comments.</p>`;
+            commentContainer.innerHTML = `<p class="no-comments-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your comments.</p>`;
             document.getElementById('preloader').style.display = 'none';
             commentInfoContainer.innerHTML = '';
         }
-
-        // Обработка кликов на кнопке Logout
-        document.getElementById('logout-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
-            window.location.reload(); // Перезагрузка страницы после выхода
-        });
 
         // Обработка кликов на кнопке редактирования комментария
         document.getElementById('comment-list').addEventListener('click', function(event) {
@@ -418,7 +410,6 @@
             });
     }
 </script>
-
 
 <div class="modal-overlay" id="delete-comment-modal">
     <div class="modal-window">

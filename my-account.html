@@ -100,8 +100,9 @@
                             <h2 class="first">My Account</h2>
                             <div class="button-container">
                                 <div id="edit-delete-container">
-                                    <a href="edit-account.html" class="edit-button">EDIT</a>
+                                    <a href="#" class="edit-button" id="edit-account-button">EDIT</a>
                                     <a href="#" class="delete-button" id="delete-account-button">DELETE</a>
+                                    <button id="save-account-button" class="save-button" style="display:none;">SAVE</button>
                                 </div>
                             </div>
                             <hr class="divider">
@@ -168,11 +169,11 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId'); // Предполагается, что ID пользователя хранится в localStorage
+        const userId = localStorage.getItem('userId');
         const userAvatar = document.getElementById('user-avatar');
         const userDetails = {
             username: document.getElementById('user-username'),
@@ -182,6 +183,11 @@
             status: document.getElementById('user-status'),
             role: document.getElementById('user-role')
         };
+        const editButton = document.getElementById('edit-account-button');
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'error-message';
+        errorMessage.style.display = 'none';
+        document.querySelector('.account-details').appendChild(errorMessage);
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
@@ -205,21 +211,37 @@
 
                         userDetails.username.textContent = payload.username;
                         userDetails.email.textContent = payload.email;
-                        userDetails.phone.textContent = payload.phoneNumber;
 
-                        const lastLoginDate = new Date(Date.UTC(...payload.lastLogin)).toLocaleString('en-GB', {
-                            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                        if (payload.phoneNumber) {
+                            userDetails.phone.textContent = payload.phoneNumber;
+                        } else {
+                            userDetails.phone.textContent = "Add your phone number here";
+                            userDetails.phone.classList.add('no-phone');
+                        }
+
+                        const lastLoginArray = payload.lastLogin;
+                        const lastLoginDate = new Date(
+                            lastLoginArray[0],
+                            lastLoginArray[1] - 1,
+                            lastLoginArray[2],
+                            lastLoginArray[3],
+                            lastLoginArray[4],
+                            lastLoginArray[5]
+                        ).toLocaleString('en-GB', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
                         });
                         userDetails.lastLogin.textContent = lastLoginDate;
 
                         userDetails.status.textContent = payload.registrationStatus;
                         userDetails.role.textContent = payload.roles.map(role => role.name).join(', ');
 
-                        // Назначение фиксированной аватарки
                         const fixedAvatar = `avatar-6.png`;
                         userAvatar.src = `images/avatars/${fixedAvatar}`;
 
-                        // Сохраняем ID пользователя в localStorage для дальнейшего использования
                         localStorage.setItem('userId', payload.id);
 
                     } else {
@@ -231,27 +253,102 @@
                     preloader.style.display = 'none';
                 });
         } else {
-            window.location.href = 'login-page.html'; // Redirect to login if no user information
+            window.location.href = 'login-page.html';
         }
 
-        document.getElementById('logout-link').addEventListener('click', function() {
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            localStorage.removeItem('userId');
-            window.location.href = 'login-page.html';
+        editButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            if (editButton.textContent === 'EDIT') {
+                toggleEditMode(true);
+            } else if (editButton.textContent === 'SAVE') {
+                const updatedUsername = document.getElementById('user-username-input').value.trim();
+                const updatedEmail = document.getElementById('user-email-input').value.trim();
+                const updatedPhone = document.getElementById('user-phone-input').value.trim();
+
+                if (updatedUsername && updatedEmail) {
+                    saveAccountDetails(updatedUsername, updatedEmail, updatedPhone);
+                } else {
+                    showErrorMessage("Username and Email are required.");
+                }
+            }
         });
 
-        // Обработчик для открытия модального окна удаления аккаунта
-        document.getElementById('delete-account-button').addEventListener('click', function(event) {
+        function toggleEditMode(isEdit) {
+            if (isEdit) {
+                convertToEditable(userDetails.username, 'user-username-input');
+                convertToEditable(userDetails.email, 'user-email-input');
+                convertToEditable(userDetails.phone, 'user-phone-input');
+
+                editButton.textContent = 'SAVE';
+            } else {
+                editButton.textContent = 'EDIT';
+            }
+        }
+
+        function convertToEditable(element, inputId) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = inputId;
+            input.className = 'editable-input';
+            input.value = element.textContent.trim();
+            element.replaceWith(input);
+        }
+
+        function saveAccountDetails(username, email, phone) {
+            showPreloader();
+
+            fetch(`https://post-wave-swagger.fun/users/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    email: email,
+                    phoneNumber: phone || null
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            throw new Error(data.error || 'Failed to update account details');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        window.location.reload(); // Reload the page to apply changes
+                    } else {
+                        throw new Error('Failed to update account details');
+                    }
+                })
+                .catch(error => {
+                    showErrorMessage(error.message);
+                })
+                .finally(hidePreloader);
+        }
+
+        function showErrorMessage(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        document.getElementById('delete-account-button').addEventListener('click', function (event) {
             event.preventDefault();
             document.getElementById('delete-account-modal').style.display = 'flex';
         });
 
-        // Обработчик для подтверждения удаления аккаунта
-        document.getElementById('confirm-delete-account').addEventListener('click', function() {
-            const token = localStorage.getItem('token');
-            const userId = localStorage.getItem('userId');
+        document.getElementById('confirm-delete-account').addEventListener('click', function () {
+            deleteAccount();
+        });
+
+        document.getElementById('cancel-delete-account').addEventListener('click', function () {
+            document.getElementById('delete-account-modal').style.display = 'none';
+        });
+
+        function deleteAccount() {
             document.getElementById('delete-account-preloader').style.display = 'flex';
 
             fetch(`https://post-wave-swagger.fun/users/${userId}`, {
@@ -267,12 +364,11 @@
                             throw new Error(text);
                         });
                     }
-                    // Немедленно выполняем перенаправление после успешного удаления
                     localStorage.removeItem('username');
                     localStorage.removeItem('token');
                     localStorage.removeItem('refreshToken');
                     localStorage.removeItem('userId');
-                    window.location.href = 'index.html'; // Redirect to the home page
+                    window.location.href = 'index.html';
                 })
                 .catch(error => {
                     console.error('Error deleting account:', error);
@@ -282,15 +378,18 @@
                     document.getElementById('delete-account-preloader').style.display = 'none';
                     document.getElementById('delete-account-modal').style.display = 'none';
                 });
-        });
+        }
 
-        // Обработчик для отмены удаления аккаунта
-        document.getElementById('cancel-delete-account').addEventListener('click', function() {
-            document.getElementById('delete-account-modal').style.display = 'none';
+        document.getElementById('logout-link').addEventListener('click', function () {
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('userId');
+            window.location.href = 'login-page.html';
         });
 
         const currentPath = window.location.pathname;
-        document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
+        document.querySelectorAll('.sf-menu li').forEach(function (menuItem) {
             menuItem.classList.remove('current');
         });
 
@@ -299,20 +398,28 @@
         } else if (currentPath.includes("my-account.html")) {
             document.querySelector('.sf-menu li a[href="my-account.html"]').parentElement.classList.add('current');
         }
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const popup = document.getElementById('search-popup');
+
+            popup.style.display = 'block';
+
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000);
+        }
+
+        function showPreloader() {
+            document.getElementById('preloader').style.display = 'flex';
+        }
+
+        function hidePreloader() {
+            document.getElementById('preloader').style.display = 'none';
+        }
     });
 
-    function handleSearch(event) {
-        event.preventDefault();
-        const popup = document.getElementById('search-popup');
 
-        // Show the popup
-        popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 3000);
-    }
 </script>
 
 
