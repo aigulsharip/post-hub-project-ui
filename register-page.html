@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register</title>
+    <title>Registration - Post Wave</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -71,14 +71,14 @@
         </div>
         <nav>
             <ul class="sf-menu">
-                <li class="current f_item"><a href="index.html">HOME</a></li>
+                <li><a href="index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
                     <ul>
-                        <li><a href="create-user.html">Create user</a></li>
+                        <li><a href="#" id="create-user-link">Create user</a></li>
                         <li><a href="create-post.html">Create post</a></li>
-                        <li><a href="create-comment.html">Create comment</a></li>
+                        <li><a href="#" id="create-comment-link">Create comment</a></li>
                         <li><a href="get-list-of-users.html">Get list of users</a></li>
                     </ul>
                 </li>
@@ -126,6 +126,15 @@
                                 <div class="form-group">
                                     <input class="btn btn-primary btn-register" type="submit" value="Create account" name="commit">
                                 </div>
+                                <div class="social-login">
+                                    <h3>Or sign up using</h3>
+                                    <div class="social-buttons">
+                                        <a href="#" class="btn-social btn-google" id="google-login">Sign up with Google</a>
+                                        <a href="#" class="btn-social btn-facebook" id="facebook-login">Sign up with Facebook</a>
+                                        <a href="#" class="btn-social btn-github" id="github-login">Sign up with GitHub</a>
+                                    </div>
+                                </div>
+
                                 <div id="error-message" class="error-message" style="display: none;"></div>
                                 <div class="form-group">
                                     <p class="login-link">Already have an account? <a href="login-page.html">Login</a></p>
@@ -292,6 +301,51 @@
         preloader.style.display = 'none';
         document.querySelector('.main').style.display = 'block';
     });
+
+    // Reuse the search popup for other actions
+    function showPopupMessage(message) {
+        const popup = document.getElementById('search-popup');
+
+        // Update the message in the popup
+        popup.querySelector('span').textContent = message;
+
+        // Show the popup
+        popup.style.display = 'block';
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 3000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Handle Create user link click
+        const createUserLink = document.getElementById('create-user-link');
+        if (createUserLink) {
+            createUserLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showPopupMessage("This functionality is not yet ready.");
+            });
+        }
+
+        // Handle Create comment link click
+        const createCommentLink = document.getElementById('create-comment-link');
+        if (createCommentLink) {
+            createCommentLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showPopupMessage("This functionality is not yet ready.");
+            });
+        }
+
+        // Existing search popup handling
+        function handleSearch(event) {
+            event.preventDefault();
+            showPopupMessage("Search functionality not implemented yet");
+        }
+
+        document.getElementById('search').addEventListener('submit', handleSearch);
+    });
+
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
@@ -304,6 +358,30 @@
             popup.style.display = 'none';
         }, 3000);
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Обработчик для регистрации через Google
+        document.getElementById('google-login').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.location.href = '/oauth2/authorization/google';
+        });
+
+        // Вы можете добавить аналогичные обработчики для Facebook и GitHub,
+        // если в будущем решите их интегрировать.
+        // Пример:
+        // document.getElementById('facebook-login').addEventListener('click', function(event) {
+        //     event.preventDefault();
+        //     window.location.href = '/oauth2/authorization/facebook';
+        // });
+
+        // document.getElementById('github-login').addEventListener('click', function(event) {
+        //     event.preventDefault();
+        //     window.location.href = '/oauth2/authorization/github';
+        // });
+
+        // ...остальной ваш существующий код...
+    });
+
 </script>
 </body>
 </html>

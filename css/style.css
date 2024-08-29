@@ -26,6 +26,51 @@ html {width:100%;}
         color: #8cc503;
     }
 }
+
+.social-login {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-social {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-google {
+    background-color: #db4437;
+}
+
+.btn-google:hover {
+    background-color: #c33d2e;
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+}
+
+.btn-facebook:hover {
+    background-color: #334d84;
+}
+
+.btn-github {
+    background-color: #333;
+}
+
+.btn-github:hover {
+    background-color: #24292e;
+}
+
 /* Увеличить размер иконок */
 .fab {
     font-size: 28px; /* Увеличить размер иконок */
