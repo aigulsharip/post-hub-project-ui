@@ -172,7 +172,7 @@
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId'); // Убедитесь, что userId правильно загружается
+        const userId = localStorage.getItem('userId'); // Проверяем, загружен ли userId
         const userAvatar = document.getElementById('user-avatar');
         const userDetails = {
             username: document.getElementById('user-username'),
@@ -188,7 +188,7 @@
         errorMessage.style.display = 'none';
         document.querySelector('.account-details').appendChild(errorMessage);
 
-        if (username && token) {
+        if (username && token && userId) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
@@ -201,7 +201,12 @@
                     'Authorization': `Bearer ${token}`
                 }
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user information');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     preloader.style.display = 'none';
 
@@ -309,6 +314,7 @@
                 })
             })
                 .then(response => {
+                    hidePreloader();
                     if (!response.ok) {
                         return response.json().then(data => {
                             throw new Error(data.error || 'Failed to update account details');
@@ -325,8 +331,7 @@
                 })
                 .catch(error => {
                     showErrorMessage(error.message);
-                })
-                .finally(hidePreloader);
+                });
         }
 
         function showErrorMessage(message) {
@@ -350,7 +355,6 @@
         function deleteAccount() {
             document.getElementById('delete-account-preloader').style.display = 'flex';
 
-            // Убедитесь, что идентификатор пользователя передается правильно
             fetch(`https://post-wave-swagger.fun/users/${userId}`, {
                 method: 'DELETE',
                 headers: {
