@@ -395,7 +395,8 @@
 
                     commentInfoContainer.innerHTML = `Total comments: ${data.payload.length}. Displaying latest 5.`;
                 } else {
-                    commentList.innerHTML = `<p class="no-comments-message">You don't have any comments yet. <a href="create-comment.html">Create a new comment</a> to get started!</p>`;
+                    commentList.innerHTML = `<p class="no-posts-message">You don't have any comments yet.
+                    <br>To get started, choose a post from the <a href="my-posts.html">My Posts</a> page or the <a href="index.html">Home</a> page!</p>`;
                     commentInfoContainer.innerHTML = '';
                 }
             })
