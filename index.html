@@ -104,7 +104,7 @@
                         <li><a href="#" id="create-user-link">Create user</a></li>
                         <li><a href="create-post.html">Create post</a></li>
                         <li><a href="#" id="create-comment-link">Create comment</a></li>
-                        <li><a href="get-list-of-users.html">Get list of users</a></li>
+                        <li><a href="#" id="get-list-of-users-link">Get list of users</a></li>
                     </ul>
                 </li>
                 <li><a href="actions.html">LOGS</a></li>
@@ -557,6 +557,15 @@
             });
         }
 
+        // Handle Get list of users link click
+        const getListOfUsersLink = document.getElementById('get-list-of-users-link');
+        if (getListOfUsersLink) {
+            getListOfUsersLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showPopupMessage("You do not have the required permissions. This feature is only for administrators.");
+            });
+        }
+
         // Existing search popup handling
         function handleSearch(event) {
             event.preventDefault();
@@ -565,7 +574,6 @@
 
         document.getElementById('search').addEventListener('submit', handleSearch);
     });
-
 
     function handleSearch(event) {
         event.preventDefault();
