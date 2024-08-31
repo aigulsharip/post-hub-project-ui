@@ -265,6 +265,7 @@
         // Подтверждение удаления комментария
         document.getElementById('confirm-delete-comment').addEventListener('click', function() {
             if (commentIdToDelete) {
+                showPreloader();  // Показать общий прелоадер
                 deleteComment(commentIdToDelete);
             }
             document.getElementById('delete-comment-modal').style.display = 'none';
@@ -276,10 +277,7 @@
             commentIdToDelete = null;
         });
 
-        // Функция для удаления комментария
         function deleteComment(commentId) {
-            document.getElementById('delete-comment-preloader').style.display = 'flex';
-
             fetch(`https://post-wave-swagger.fun/comments/${commentId}`, {
                 method: 'DELETE',
                 headers: {
@@ -290,13 +288,14 @@
                 .then(response => {
                     if (!response.ok) {
                         return response.text().then(text => {
-                            throw new Error(text);
+                            throw new Error(text || 'Unknown error');
                         });
                     }
-                    return response.json();
+                    // Если нет тела ответа, просто вернем пустой объект
+                    return response.json().catch(() => ({}));
                 })
                 .then(data => {
-                    if (data.success) {
+                    if (data.success || Object.keys(data).length === 0) { // также учитываем случай с пустым ответом
                         // Удаление комментария из DOM
                         document.querySelector(`[data-comment-id="${commentId}"]`).closest('li.picks-comment').remove();
                     } else {
@@ -308,7 +307,7 @@
                     alert('An error occurred while deleting the comment. Please try again.');
                 })
                 .finally(() => {
-                    document.getElementById('delete-comment-preloader').style.display = 'none';
+                    hidePreloader();  // Скрыть прелоадер после завершения
                 });
         }
 
@@ -483,7 +482,6 @@
         }, 3000);
     }
 </script>
-
 
 <div class="modal-overlay" id="delete-comment-modal">
     <div class="modal-window">
