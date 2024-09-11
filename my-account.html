@@ -172,7 +172,7 @@
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId');
+        const userId = localStorage.getItem('userId'); // Проверяем, загружен ли userId
         const userAvatar = document.getElementById('user-avatar');
         const userDetails = {
             username: document.getElementById('user-username'),
@@ -182,8 +182,13 @@
             status: document.getElementById('user-status'),
             role: document.getElementById('user-role')
         };
+        const editButton = document.getElementById('edit-account-button');
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'error-message';
+        errorMessage.style.display = 'none';
+        document.querySelector('.account-details').appendChild(errorMessage);
 
-        if (token && userId) {
+        if (username && token && userId) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
@@ -197,11 +202,6 @@
                 }
             })
                 .then(response => {
-                    if (response.status === 401) {
-                        localStorage.removeItem('token');
-                        localStorage.removeItem('userId');
-                        window.location.href = 'login-page.html';
-                    }
                     if (!response.ok) {
                         throw new Error('Failed to fetch user information');
                     }
@@ -212,6 +212,7 @@
 
                     if (data.success && data.payload) {
                         const payload = data.payload;
+
                         userDetails.username.textContent = payload.username;
                         userDetails.email.textContent = payload.email;
 
@@ -238,6 +239,7 @@
                             minute: '2-digit'
                         });
                         userDetails.lastLogin.textContent = lastLoginDate;
+
                         userDetails.status.textContent = payload.registrationStatus;
                         userDetails.role.textContent = payload.roles.map(role => role.name).join(', ');
 
@@ -245,6 +247,7 @@
                         userAvatar.src = `images/avatars/${fixedAvatar}`;
 
                         localStorage.setItem('userId', payload.id);
+
                     } else {
                         console.error('Failed to load user information');
                     }
@@ -253,7 +256,6 @@
                     console.error('Error loading user information:', error);
                     preloader.style.display = 'none';
                 });
-
         } else {
             window.location.href = 'login-page.html';
         }
