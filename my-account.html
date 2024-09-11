@@ -183,14 +183,12 @@
             role: document.getElementById('user-role')
         };
 
-        // Убедимся, что пользователь залогинен
         if (token && userId) {
             document.getElementById('auth-links').style.display = 'none';
             const welcomeMessage = document.getElementById('welcome-message');
             welcomeMessage.style.display = 'block';
             document.getElementById('greeting').textContent = username;
 
-            // Выполняем запрос для получения информации о пользователе
             fetch('https://post-wave-swagger.fun/users/info', {
                 method: 'GET',
                 headers: {
@@ -200,7 +198,6 @@
             })
                 .then(response => {
                     if (response.status === 401) {
-                        // Если сессия истекла или ошибка аутентификации, перенаправляем на страницу логина
                         localStorage.removeItem('token');
                         localStorage.removeItem('userId');
                         window.location.href = 'login-page.html';
@@ -258,7 +255,6 @@
                 });
 
         } else {
-            // Если нет токена или идентификатора, редирект на страницу логина
             window.location.href = 'login-page.html';
         }
 
