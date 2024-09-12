@@ -182,7 +182,7 @@
             status: document.getElementById('user-status'),
             role: document.getElementById('user-role')
         };
-        const editButton = document.getElementById('edit-account-button'); // Добавляем объявление editButton
+        const editButton = document.getElementById('edit-account-button');
         const errorMessage = document.createElement('div');
         errorMessage.className = 'error-message';
         errorMessage.style.display = 'none';
@@ -198,7 +198,6 @@
         welcomeMessage.style.display = 'block';
         document.getElementById('greeting').textContent = username;
 
-        // Запрос информации о пользователе
         fetch(`https://post-wave-swagger.fun/users/info`, {
             method: 'GET',
             headers: {
@@ -244,7 +243,6 @@
                 window.location.href = 'login-page.html';
             });
 
-        // Обработчик кнопки редактирования
         editButton.addEventListener('click', function (event) {
             event.preventDefault();
             if (editButton.textContent === 'EDIT') {
@@ -398,10 +396,6 @@
             popup.style.display = 'none';
         }, 3000);
     }
-
-
 </script>
-
-
 </body>
 </html>
