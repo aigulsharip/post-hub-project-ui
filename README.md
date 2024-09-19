@@ -45,10 +45,3 @@ The deployment process involves the following steps:
 
 The project uses a managed PostgreSQL database hosted on the ScaleGrid platform, leveraging AWS for high availability and scalability. The application is hosted on a dedicated server that uses Docker for deployment, ensuring flexible resource management and maintaining high performance.
 
-### 📦 Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/nick8787/post-wave-demo-project.git
-   cd post-wave
