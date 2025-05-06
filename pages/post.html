@@ -3,17 +3,17 @@
 <head>
     <title>Post Details - Post-Wave</title>
     <meta charset="utf-8">
-    <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/view-post.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/edit-delete-post.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/delete-post-modal.css">
-    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/tms-0.4.1.js"></script>
+    <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/tms.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/view-post.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/edit-delete-post.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/delete-post-modal.css">
+    <script type="text/javascript" src="../js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="../js/tms-0.4.1.js"></script>
     <style>
         /* Preloader styles (existing) */
         #comment-preloader, #delete-preloader {
@@ -71,8 +71,8 @@
     </div>
     <![endif]-->
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="js/html5.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+    <script type="text/javascript" src="../js/html5.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/ie.css">
     <![endif]-->
 </head>
 <body>
@@ -82,7 +82,7 @@
         <div class="top">
             <div class="nav">
                 <ul class="sf-menu">
-                    <li><a href="index.html">home</a></li>
+                    <li><a href="../index.html">home</a></li>
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
@@ -103,12 +103,12 @@
             <div class="clear"></div>
         </div>
         <div class="middle">
-            <h1><a class="logo" href="index.html"><span>Post</span>Wave</a></h1>
-            <a href="index.html" class="h_banner"></a>
+            <h1><a class="logo" href="../index.html"><span>Post</span>Wave</a></h1>
+            <a href="../index.html" class="h_banner"></a>
         </div>
         <nav>
             <ul class="sf-menu">
-                <li><a href="index.html">HOME</a></li>
+                <li><a href="../index.html">HOME</a></li>
                 <li class="current f_item"><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
@@ -213,15 +213,15 @@
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
-            <a href="index.html">home</a>
+            <a href="../index.html">home</a>
             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
             <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
             <a href="community.html">community</a>
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
+            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
 </div>
@@ -272,30 +272,39 @@
                 'Authorization': `Bearer ${token}`
             }
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Response not OK:', response);
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
+                if (!data || !data.payload) {
+                    console.warn('Missing payload in response:', data);
+                    return;
+                }
+
                 if (data.success) {
                     // Заполняем контент данными
                     postTitle.textContent = data.payload.title;
                     postText.textContent = data.payload.content;
                     postLikes.innerHTML = `Likes: ${data.payload.likes} <span class="not-implemented">(not fully implemented)</span>`;
-                    postImage.src = data.payload.image || 'images/here-your-photo.png';
+                    postImage.src = data.payload.image || '../images/here-your-photo.png';
 
-                    const createdDate = new Date(
-                        data.payload.created[0],
-                        data.payload.created[1] - 1,
-                        data.payload.created[2],
-                        data.payload.created[3],
-                        data.payload.created[4],
-                        data.payload.created[5]
-                    );
+                    const createdDate = new Date(data.payload.created);
+
                     postDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
 
                     // Проверяем, является ли пользователь владельцем поста
-                    if (data.payload.owner.username === username) {
-                        dropdown.style.display = 'block'; // Показываем меню редактирования и удаления
+                    const role = localStorage.getItem('role');
+                    const isAuthor = data.payload.createdBy === username;
+                    const isAdmin = role === 'SUPER_ADMIN' || role === 'ADMIN';
+
+                    if (isAuthor || isAdmin) {
+                        dropdown.style.display = 'block'; // Показываем меню
                     } else {
-                        dropdown.style.display = 'none'; // Скрываем меню редактирования и удаления
+                        dropdown.style.display = 'none'; // Прячем меню
                     }
 
                     // Показываем контент
@@ -371,12 +380,13 @@
         const preloader = document.getElementById('comment-preloader');
         preloader.style.display = 'flex';
 
-        fetch(`https://post-wave-swagger.fun/comments?postId=${postId}`, {
-            method: 'GET',
+        fetch('https://post-wave-swagger.fun/comments/search', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify({ postId: parseInt(postId) }) // передаем postId в теле запроса
         })
             .then(response => response.json())
             .then(data => {
@@ -385,24 +395,12 @@
                 const commentsInfo = document.querySelector('.comments-info');
                 commentsList.innerHTML = '';
 
-                // Убедимся, что данные соответствуют конкретному посту
-                const filteredComments = data.payload.filter(comment => comment.postId === parseInt(postId));
+                const comments = (data.payload.content || []).filter(comment => !comment.isDeleted);
 
-                if (filteredComments.length > 0) {
+                if (comments.length > 0) {
                     noCommentsMessage.style.display = 'none';
 
-                    // Сортируем комментарии по дате создания
-                    const sortedComments = filteredComments.sort((a, b) => {
-                        const dateA = new Date(
-                            a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]
-                        );
-                        const dateB = new Date(
-                            b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]
-                        );
-                        return dateB - dateA;
-                    });
-
-                    // Отображаем последние 3 комментария
+                    const sortedComments = comments.sort((a, b) => new Date(b.created) - new Date(a.created));
                     const commentsToShow = sortedComments.slice(0, 3);
 
                     commentsToShow.forEach(comment => {
@@ -418,14 +416,7 @@
 
                         const commentDate = document.createElement('p');
                         commentDate.classList.add('comment-date');
-                        const createdDate = new Date(
-                            comment.created[0],
-                            comment.created[1] - 1,
-                            comment.created[2],
-                            comment.created[3],
-                            comment.created[4],
-                            comment.created[5]
-                        );
+                        const createdDate = new Date(comment.created);
                         commentDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
 
                         commentItem.appendChild(commentText);
@@ -435,9 +426,7 @@
                         commentsList.appendChild(commentItem);
                     });
 
-                    // Обновляем информацию о комментариях
-                    commentsInfo.textContent = `Total comments: ${filteredComments.length}. Displaying latest 3.`;
-
+                    commentsInfo.textContent = `Total comments: ${comments.length}. Displaying latest 3.`;
                 } else {
                     noCommentsMessage.style.display = 'block';
                     commentsInfo.textContent = 'Total comments: 0. Displaying latest 3.';
@@ -448,7 +437,7 @@
                 alert('An error occurred while loading comments.');
             })
             .finally(() => {
-                preloader.style.display = 'none'; // Hide preloader when done
+                preloader.style.display = 'none';
             });
     }
 
@@ -556,6 +545,20 @@
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
+    }
+
+    const logoutLink = document.getElementById('logout-link');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            localStorage.removeItem('email');
+            localStorage.removeItem('role');
+
+            window.location.href = 'login-page.html';
+        });
     }
 </script>
 

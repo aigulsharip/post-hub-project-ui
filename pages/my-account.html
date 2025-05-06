@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Account - Post-Wave</title>
+    <title>My Account - Post-Hub</title>
     <meta charset="utf-8">
-    <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/my-account.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/edit-delete-post.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/delete-post-modal.css">
-    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/tms-0.4.1.js"></script>
+    <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/tms.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/my-account.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/edit-delete-post.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/delete-post-modal.css">
+    <script type="text/javascript" src="../js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="../js/tms-0.4.1.js"></script>
 </head>
 <body>
 <!-- Preloader -->
@@ -37,7 +37,7 @@
         <div class="top">
             <div class="nav">
                 <ul class="sf-menu">
-                    <li><a href="index.html">home</a></li>
+                    <li><a href="../index.html">home</a></li>
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
@@ -58,12 +58,12 @@
             <div class="clear"></div>
         </div>
         <div class="middle">
-            <h1><a class="logo" href="index.html"><span>Post</span>Wave</a></h1>
-            <a href="index.html" class="h_banner"></a>
+            <h1><a class="logo" href="../index.html"><span>Post</span>Wave</a></h1>
+            <a href="../index.html" class="h_banner"></a>
         </div>
         <nav>
             <ul class="sf-menu">
-                <li><a href="index.html">HOME</a></li>
+                <li><a href="../index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
@@ -100,7 +100,7 @@
                             <h2 class="first">My Account</h2>
                             <div class="button-container">
                                 <div id="edit-delete-container">
-                                    <a href="#" class="edit-button" id="edit-account-button">EDIT</a>
+<!--                                    <a href="#" class="edit-button" id="edit-account-button">EDIT</a>-->
                                     <a href="#" class="delete-button" id="delete-account-button">DELETE</a>
                                     <button id="save-account-button" class="save-button" style="display:none;">SAVE</button>
                                 </div>
@@ -108,12 +108,11 @@
                             <hr class="divider">
                             <div class="account-details">
                                 <div class="avatar-container">
-                                    <img src="images/avatars/avatar-6.png" alt="Avatar" class="user-avatar" id="user-avatar">
+                                    <img src="../images/avatars/avatar-6.png" alt="Avatar" class="user-avatar" id="user-avatar">
                                 </div>
                                 <div class="user-details">
                                     <p><strong>Username:</strong> <span id="user-username">Loading...</span></p>
                                     <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
-                                    <p><strong>Phone Number:</strong> <span id="user-phone">Loading...</span></p>
                                     <p><strong>Last Login:</strong> <span id="user-last-login">Loading...</span></p>
                                     <p><strong>Status:</strong> <span id="user-status">Loading...</span></p>
                                     <p><strong>Role:</strong> <span id="user-role">Loading...</span></p>
@@ -129,15 +128,15 @@
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
-            <a href="index.html">home</a>
+            <a href="../index.html">home</a>
             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
             <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
             <a href="community.html">community</a>
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
+            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
 </div>
@@ -172,12 +171,14 @@
         const preloader = document.getElementById('preloader');
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId');
+        let userId; // глобально
+
+
+
         const userAvatar = document.getElementById('user-avatar');
         const userDetails = {
             username: document.getElementById('user-username'),
             email: document.getElementById('user-email'),
-            phone: document.getElementById('user-phone'),
             lastLogin: document.getElementById('user-last-login'),
             status: document.getElementById('user-status'),
             role: document.getElementById('user-role')
@@ -186,6 +187,52 @@
         const errorMessage = document.createElement('div');
         errorMessage.className = 'error-message';
         errorMessage.style.display = 'none';
+
+        function fetchUserInfo() {
+            fetch(`https://post-wave-swagger.fun/users/info`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user information');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    preloader.style.display = 'none';
+                    if (data.success && data.payload) {
+                        const payload = data.payload;
+
+                        userId = payload.id;
+                        localStorage.setItem("userId", userId);
+                        localStorage.setItem("username", payload.username); // сохраняем новое имя
+
+                        userDetails.username.textContent = payload.username;
+                        userDetails.email.textContent = payload.email;
+                        userDetails.status.textContent = payload.registrationStatus;
+                        userDetails.role.textContent = payload.roles.map(role => role.name).join(', ');
+                        userDetails.lastLogin.textContent = new Date(payload.lastLogin).toLocaleString('en-GB', {
+                            day: 'numeric', month: 'short', year: 'numeric',
+                            hour: '2-digit', minute: '2-digit'
+                        });
+
+                        const fixedAvatar = `avatar-6.png`;
+                        userAvatar.src = `../images/avatars/${fixedAvatar}`;
+                    } else {
+                        throw new Error('User data loading failed');
+                    }
+                })
+                .catch(error => {
+                    showErrorMessage(error.message);
+                });
+        }
+
+        fetchUserInfo(); // 👈 вызывать при загрузке
+
         document.querySelector('.account-details').appendChild(errorMessage);
 
         if (!token) {
@@ -198,79 +245,32 @@
         welcomeMessage.style.display = 'block';
         document.getElementById('greeting').textContent = username;
 
-        fetch(`https://post-wave-swagger.fun/users/info`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user information');
-                }
-                return response.json();
-            })
-            .then(data => {
-                preloader.style.display = 'none';
-                if (data.success && data.payload) {
-                    const payload = data.payload;
+        // editButton.addEventListener('click', function (event) {
+        //     event.preventDefault();
+        //     if (editButton.textContent === 'EDIT') {
+        //         toggleEditMode(true);
+        //     } else if (editButton.textContent === 'SAVE') {
+        //         const updatedUsername = document.getElementById('user-username-input').value.trim();
+        //         const updatedEmail = document.getElementById('user-email-input').value.trim();
+        //
+        //         if (updatedUsername && updatedEmail) {
+        //             saveAccountDetails(updatedUsername, updatedEmail, null);
+        //         } else {
+        //             showErrorMessage("Username and Email are required.");
+        //         }
+        //     }
+        // });
 
-                    userDetails.username.textContent = payload.username;
-                    userDetails.email.textContent = payload.email;
-                    userDetails.phone.textContent = payload.phoneNumber || "Add your phone number here";
-                    userDetails.status.textContent = payload.registrationStatus;
-                    userDetails.role.textContent = payload.roles.map(role => role.name).join(', ');
-
-                    const lastLoginArray = payload.lastLogin;
-                    const lastLoginDate = new Date(
-                        lastLoginArray[0], lastLoginArray[1] - 1, lastLoginArray[2],
-                        lastLoginArray[3], lastLoginArray[4], lastLoginArray[5]
-                    ).toLocaleString('en-GB', {
-                        day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                    });
-                    userDetails.lastLogin.textContent = lastLoginDate;
-
-                    const fixedAvatar = `avatar-6.png`;
-                    userAvatar.src = `images/avatars/${fixedAvatar}`;
-                } else {
-                    throw new Error('User data loading failed');
-                }
-            })
-            .catch(error => {
-                console.error('Error loading user data:', error);
-                preloader.style.display = 'none';
-                window.location.href = 'login-page.html';
-            });
-
-        editButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            if (editButton.textContent === 'EDIT') {
-                toggleEditMode(true);
-            } else if (editButton.textContent === 'SAVE') {
-                const updatedUsername = document.getElementById('user-username-input').value.trim();
-                const updatedEmail = document.getElementById('user-email-input').value.trim();
-                const updatedPhone = document.getElementById('user-phone-input').value.trim();
-
-                if (updatedUsername && updatedEmail) {
-                    saveAccountDetails(updatedUsername, updatedEmail, updatedPhone);
-                } else {
-                    showErrorMessage("Username and Email are required.");
-                }
-            }
-        });
-
-        function toggleEditMode(isEdit) {
-            if (isEdit) {
-                convertToEditable(userDetails.username, 'user-username-input');
-                convertToEditable(userDetails.email, 'user-email-input');
-                convertToEditable(userDetails.phone, 'user-phone-input');
-
-                editButton.textContent = 'SAVE';
-            } else {
-                editButton.textContent = 'EDIT';
-            }
-        }
+        // function toggleEditMode(isEdit) {
+        //     if (isEdit) {
+        //         convertToEditable(userDetails.username, 'user-username-input');
+        //         convertToEditable(userDetails.email, 'user-email-input');
+        //
+        //         editButton.textContent = 'SAVE';
+        //     } else {
+        //         editButton.textContent = 'EDIT';
+        //     }
+        // }
 
         function convertToEditable(element, inputId) {
             const input = document.createElement('input');
@@ -307,7 +307,10 @@
                 })
                 .then(data => {
                     if (data.success) {
-                        window.location.reload();
+                        localStorage.setItem("username", username);
+
+                        toggleEditMode(false);
+                        fetchUserInfo();
                     } else {
                         throw new Error('Failed to update account details');
                     }
@@ -329,6 +332,56 @@
         function hidePreloader() {
             document.getElementById('preloader').style.display = 'none';
         }
+
+        // получаем элементы модалки
+        const deleteAccountButton = document.getElementById('delete-account-button');
+        const deleteModal         = document.getElementById('delete-account-modal');
+        const confirmDelete       = document.getElementById('confirm-delete-account');
+        const cancelDelete        = document.getElementById('cancel-delete-account');
+
+        deleteAccountButton.addEventListener('click', e => {
+            e.preventDefault();
+            // показываем модалку
+            deleteModal.style.display = 'block';
+        });
+
+        cancelDelete.addEventListener('click', e => {
+            e.preventDefault();
+            // прячем модалку без удаления
+            deleteModal.style.display = 'none';
+        });
+
+        confirmDelete.addEventListener('click', async e => {
+            e.preventDefault();
+            // прячем модалку и показываем прелоадер
+            deleteModal.style.display = 'none';
+            showPreloader();
+
+            try {
+                const res = await fetch(`https://post-wave-swagger.fun/users/${userId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!res.ok) {
+                    // попробуем прочитать ошибку из ответа
+                    let err = 'Failed to delete account';
+                    try {
+                        const j = await res.json();
+                        if (j.error) err = j.error;
+                    } catch {}
+                    throw new Error(err);
+                }
+                // если всё ок — убираем всё из localStorage и редиректим на логин
+                localStorage.clear();
+                window.location.href = 'login-page.html';
+            } catch (err) {
+                hidePreloader();
+                showErrorMessage(err.message);
+            }
+        });
+
     });
 
 
@@ -396,6 +449,15 @@
             popup.style.display = 'none';
         }, 3000);
     }
+
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
+        window.location.href = 'login-page.html';
+    });
+
 </script>
 </body>
 </html>

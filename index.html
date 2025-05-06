@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
-    <!-- Подключаем Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/prettyPhoto.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
@@ -74,14 +73,14 @@
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
-                    <li><a href="contacts.html">contacts</a></li>
+                    <li><a href="pages/contacts.html">contacts</a></li>
                 </ul>
             </div>
             <div class="login" id="auth-container">
                 <div id="auth-links">
                     You have not yet registered to our club? &nbsp;&nbsp;
-                    <a href="register-page.html" id="register-link">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp;
-                    <a href="login-page.html" id="login-link">Log in</a>
+                    <a href="pages/register-page.html" id="register-link">Register</a> &nbsp;&nbsp; or &nbsp;&nbsp;
+                    <a href="pages/login-page.html" id="login-link">Log in</a>
                 </div>
                 <div id="welcome-message" style="display: none;">
                     Welcome on board, <span id="greeting"></span>!
@@ -97,18 +96,18 @@
         <nav>
             <ul class="sf-menu">
                 <li class="current f_item"><a href="index.html">HOME</a></li>
-                <li><a href="my-posts.html">MY POSTS</a></li>
-                <li><a href="my-comments.html">MY COMMENTS</a></li>
+                <li><a href="pages/my-posts.html">MY POSTS</a></li>
+                <li><a href="pages/my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
                     <ul>
                         <li><a href="#" id="create-user-link">Create user</a></li>
-                        <li><a href="create-post.html">Create post</a></li>
+                        <li><a href="pages/create-post.html">Create post</a></li>
                         <li><a href="#" id="create-comment-link">Create comment</a></li>
                         <li><a href="#" id="get-list-of-users-link">Get list of users</a></li>
                     </ul>
                 </li>
-                <li><a href="actions.html">LOGS</a></li>
-                <li><a href="my-account.html">MY ACCOUNT</a></li>
+                <li><a href="pages/actions.html">LOGS</a></li>
+                <li><a href="pages/my-account.html">MY ACCOUNT</a></li>
             </ul>
             <form id="search" onsubmit="return handleSearch(event)" accept-charset="utf-8" style="position: relative;">
                 <label for="search-query"></label><input type="text" id="search-query" name="s" placeholder="Enter search term..." />
@@ -128,7 +127,7 @@
         <div class="slider">
             <ul class="items">
                 <li>
-                    <img src="images/slider/slide1-1.png" width="640" height="385" alt="slide1" />
+                    <img src="images/slider/slide-2-1.svg" width="640" height="385" alt="slide1" />
                     <div class="banner">
                         <div class="title1">Project Documentation</div>
                         <div class="title2">Learn More About the Project</div>
@@ -137,7 +136,7 @@
                             <a href="https://nick8787.github.io/post-wave-documentation/" class="pulsing-text" target="_blank">this link</a>. You can also view information about GitLab CI/CD, Docker Hub, Swagger, and more.
                         </p><br><br><br><br><br>
                         <div class="but_wrap">
-                            <a href="more-about-project.html" class="button2">read more</a>
+                            <a href="pages/more-about-project.html" class="button2">read more</a>
                         </div>
                     </div>
                 </li>
@@ -155,7 +154,7 @@
                             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank" class="pulsing-text">this page</a>.
                         </p>
                         <div class="but_wrap">
-                            <br><br><a href="more-about-project.html" class="button2">read more</a>
+                            <br><br><a href="pages/more-about-project.html" class="button2">read more</a>
                         </div>
                     </div>
                 </li>
@@ -220,14 +219,12 @@
                                 </div>
                             </div>
                             <ul class="ext_list topics" id="latest-posts">
-                                <!-- Posts will be dynamically loaded here -->
                             </ul>
                             <div class="post-footer">
                                 <div id="view-all-container" class="view-all-container">
-                                    <a href="list-of-all-posts.html" class="link2">View All List of Posts</a>
+                                    <a href="pages/list-of-all-posts.html" class="link2">View All List of Posts</a>
                                 </div>
                                 <div id="post-info-container" class="post-info-container">
-                                    <!-- Here information about the total posts will be displayed -->
                                 </div>
                             </div>
                         </div>
@@ -239,7 +236,6 @@
                     <div class="box">
                         <h2 class="first">Latest Comments</h2>
                         <div class="sub_box">
-                            <!-- Preloader for Latest Comments -->
                             <div id="latest-comments-preloader" class="latest-posts-preloader">
                                 <div class="loader">
                                     <div class="loader-bar"></div>
@@ -249,10 +245,8 @@
                                 </div>
                             </div>
                             <ul class="ext_list comments" id="latest-comments">
-                                <!-- Comments will be dynamically loaded here -->
                             </ul>
                             <div id="comments-info-container" class="post-info-container">
-                                <!-- Here information about the total comments will be displayed -->
                             </div>
                         </div>
                     </div>
@@ -261,21 +255,11 @@
                     <div class="box">
                         <h2 class="first">Latest Users</h2>
                         <div class="sub_box">
-                            <ul class="ext_list users">
-                                <li class="latest-user-item">
-                                    <div class="latest-user-avatar">
-                                        <img src="images/user-avatar.png" alt="User Avatar">
-                                    </div>
-                                    <div class="latest-user-details">
-                                        <p class="latest-user-text">Restricted Access</p>
-                                        <p class="latest-user-info">
-                                            Access to this information is only available to users with the role of
-                                            <span class="admin-role">admin</span> or
-                                            <span class="admin-role">super admin</span>.
-                                        </p>
-                                    </div>
-                                </li>
+                            <ul class="ext_list users" id="latest-users">
                             </ul>
+                            <div id="users-info-container" class="user-info-container">
+                            </div>
+
                         </div>
                     </div>
                 </article>
@@ -293,7 +277,7 @@
                     <span class="green">UTILS-service</span> - Collects action logs, such as user creation, and post and comment creation. It receives all information from IAM-service via Kafka.<br>
                     <span class="green">GATEWAY-service</span> - Centralizes all microservices through a single Gateway service.<br>
                     <span class="green">DISCOVERY-service</span> - Serves as a Eureka server for registering all services.<br>
-                    <a href="more-about-project.html" class="link2">read more</a>
+                    <a href="pages/more-about-project.html" class="link2">read more</a>
                 </article>
                 <article class="grid_4">
                     <h5>Access and Restrictions</h5>
@@ -301,7 +285,7 @@
                     <p class="p3">Upon registration, a user is automatically assigned the role of <span class="green">User</span>. This role grants access to basic features like viewing and creating content.</p>
                     <p class="p3"><span class="green">Admin</span> role can be assigned to a user only by a <span class="green">Super Admin</span>. </p>
                     <p class="p3"><span class="green">Super Admin</span> is the highest level of access and holds the authority to assign or revoke the <span class="green">Admin</span> role, as well as oversee all aspects of the system.</p>
-                    <a href="access-restrictions.html" class="link2">read more</a>
+                    <a href="pages/access-restrictions.html" class="link2">read more</a>
                 </article>
 
                 <article class="grid_4">
@@ -340,18 +324,16 @@
             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
             <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
             <a href="community.html">community</a>
-            <a href="contacts.html">contacts</a>
+            <a href="pages/contacts.html">contacts</a>
         </div>
         <div class="privacy">
             <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span><br>
-            <!-- {%FOOTER_LINK} -->
+            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="pages/index-2.html">Privacy Policy</a></span><br>
         </div>
     </footer>
 </div>
 
 <script>
-    // Скрипт для скрытия прелоадера после полной загрузки страницы
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
         preloader.style.display = 'none';
@@ -363,12 +345,14 @@
         const preloader = document.getElementById('latest-posts-preloader');
         const postInfoContainer = document.getElementById('post-info-container');
         const token = localStorage.getItem('token');
+        const latestUsersContainer = document.getElementById('latest-users');
 
         // Show preloader and hide posts container
         latestPostsContainer.style.display = 'none';
         preloader.style.display = 'flex';
 
-        fetch('https://post-wave-swagger.fun/posts/all', {
+
+        fetch('https://post-wave-swagger.fun/posts/all?page=0&limit=10', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -376,36 +360,35 @@
         })
             .then(response => response.json())
             .then(data => {
-                preloader.style.display = 'none'; // Hide preloader after data is loaded
-                if (data.success && data.payload.length > 0) {
-                    const sortedPosts = data.payload.sort((a, b) => {
-                        const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
-                        const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
+                preloader.style.display = 'none';
+                if (data.success && Array.isArray(data.payload.content) && data.payload.content.length > 0) {
+                    const sortedPosts = data.payload.content.sort((a, b) => {
+                        const dateA = new Date(a.created);
+                        const dateB = new Date(b.created);
                         return dateB - dateA;
                     });
 
                     // Display only the latest three posts
                     sortedPosts.slice(0, 3).forEach(post => {
-                        const createdDate = new Date(Date.UTC(post.created[0], post.created[1] - 1, post.created[2], post.created[3], post.created[4], post.created[5])).toLocaleString('en-GB', {
+                        const createdDate = new Date(post.created).toLocaleString('en-GB', {
                             day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
                         });
 
                         const postItem = `
-<li class="latest-post-item">
-    <figure>
-        <a href="post.html?id=${post.id}">
-            <img src="${post.image}" alt="${post.title}" class="latest-post-image" onerror="this.onerror=null;this.src='images/here-your-photo.png';" />
-        </a>
-    </figure>
-    <div class="latest-post-details">
-        <h3 class="latest-post-title"><a href="post.html?id=${post.id}" style="text-decoration: none; color: inherit;">${post.title}</a></h3>
-        <p class="latest-post-content">${post.content.substring(0, 50)}...</p>
-        <p class="latest-post-comments">The number of comments: ${post.commentsCount || 0}</p>
-        <p class="latest-post-author">Created by: ${post.owner.username}</p>
-        <p class="latest-post-date">Created on: ${createdDate}</p>
-    </div>
-</li>
-`;
+                            <li class="latest-post-item">
+                                <figure>
+                                    <a href="pages/post.html?id=${post.id}">
+                                        <img src="${post.image}" alt="${post.title}" class="latest-post-image" onerror="this.onerror=null;this.src='../images/here-your-photo.png';" />
+                                    </a>
+                                </figure>
+                                <div class="latest-post-details">
+                                    <h3 class="latest-post-title"><a href="pages/post.html?id=${post.id}" style="text-decoration: none; color: inherit;">${post.title}</a></h3>
+                                    <p class="latest-post-content">${post.content.substring(0, 50)}...</p>
+                                    <p class="latest-post-comments">The number of comments: ${post.commentsCount || 0}</p>
+                                    <p class="latest-post-author">Created by: ${post.createdBy}</p>
+                                    <p class="latest-post-date">Created on: ${createdDate}</p>
+                                </div>
+                            </li>`;
                         latestPostsContainer.insertAdjacentHTML('beforeend', postItem);
                     });
 
@@ -413,7 +396,7 @@
                     latestPostsContainer.style.display = 'block';
 
                     // Display the number of posts and information about displaying the latest 3 posts
-                    postInfoContainer.textContent = `Total posts: ${data.payload.length}. Displaying latest 3.`;
+                    postInfoContainer.textContent = `Total posts: ${data.payload.pagination.total}. Displaying latest 3.`;
                 } else {
                     latestPostsContainer.innerHTML = '<li>No recent posts available.</li>';
                     latestPostsContainer.style.display = 'block';
@@ -429,10 +412,9 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         const latestUsersContainer = document.getElementById('latest-users-container');
-        const userRole = localStorage.getItem('userRole'); // Assuming user role is stored in localStorage
+        const userRole = localStorage.getItem('userRole');
 
         if (userRole === 'admin' || userRole === 'super admin') {
-            // Display the latest users information
             latestUsersContainer.innerHTML = `
             <ul class="ext_list latest_r video">
                 <li class="m_bottom_zero">
@@ -458,11 +440,11 @@
     });
 
     // Fetch and display latest comments
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const latestCommentsContainer = document.getElementById('latest-comments');
-        const commentInfoContainer = document.getElementById('comments-info-container'); // Updated ID to match the HTML
+        const commentInfoContainer = document.getElementById('comments-info-container');
 
-        fetch('https://post-wave-swagger.fun/comments/all', {
+        fetch('https://post-wave-swagger.fun/comments/all?page=0&limit=10', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -475,50 +457,96 @@
                 return response.json();
             })
             .then(data => {
-                if (data.success && data.payload.length > 0) {
-                    const sortedComments = data.payload.sort((a, b) => {
-                        const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
-                        const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
-                        return dateB - dateA;
-                    });
+                if (data.success && Array.isArray(data.payload.content)) {
+                    const filteredComments = data.payload.content
+                        .filter(comment => comment.isDeleted !== true && comment.created);
 
-                    // Display only the latest two comments
+                    const sortedComments = filteredComments.sort((a, b) => new Date(b.created) - new Date(a.created));
+
                     sortedComments.slice(0, 2).forEach(comment => {
-                        const createdDate = new Date(Date.UTC(comment.created[0], comment.created[1] - 1, comment.created[2], comment.created[3], comment.created[4], comment.created[5])).toLocaleString('en-GB', {
-                            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                        const createdDate = new Date(comment.created).toLocaleString('en-GB', {
+                            day: 'numeric', month: 'short', year: 'numeric',
+                            hour: '2-digit', minute: '2-digit'
                         });
 
-                        const commentItem = `
-<li class="latest-comment-item">
-    <div class="latest-comment-avatar">
-        <img src="images/avatars/avatar-6.png" alt="User Avatar" class="comment-avatar">
-    </div>
-    <div class="latest-comment-details">
-        <p class="latest-comment-text">${comment.message.substring(0, 50)}...</p>
-        <p class="latest-comment-author">Created by: ${comment.owner.username}</p>
-        <p class="latest-comment-date">Created on: ${createdDate}</p>
-    </div>
-</li>
+                        const authorEmail = comment.owner?.email || 'Unknown';
 
-                `;
+                        const commentItem = `
+                            <li class="latest-comment-item">
+                                <div class="latest-comment-avatar">
+                                    <img src="images/avatars/avatar-6.png" alt="User Avatar" class="comment-avatar">
+                                </div>
+                                <div class="latest-comment-details">
+                                    <p class="latest-comment-text">${comment.message.substring(0, 50)}...</p>
+                                    <p class="latest-comment-author">Created by: ${authorEmail}</p>
+                                    <p class="latest-comment-date">Created on: ${createdDate}</p>
+                                </div>
+                            </li>`;
                         latestCommentsContainer.insertAdjacentHTML('beforeend', commentItem);
                     });
 
-                    // Display the number of comments and information
-                    commentInfoContainer.textContent = `Total comments: ${data.payload.length}. Displaying latest 2.`;
+                    commentInfoContainer.textContent = `Total comments: ${filteredComments.length}. Displaying latest 2.`;
                 } else {
                     latestCommentsContainer.innerHTML = '<li>No recent comments available.</li>';
                 }
             })
-            .catch(error => {
+                .catch(error => {
                 console.error('Error fetching comments:', error);
                 latestCommentsContainer.innerHTML = '<li>Error loading comments. Please try again later.</li>';
             })
             .finally(() => {
                 const preloader = document.getElementById('latest-comments-preloader');
                 if (preloader) {
-                    preloader.style.display = 'none'; // Ensure preloader is hidden after load
+                    preloader.style.display = 'none';
                 }
+            });
+    });
+
+    // Fetch and display latest users
+    const token = localStorage.getItem('token');
+    document.addEventListener("DOMContentLoaded", function () {
+        const latestUsersContainer = document.getElementById('latest-users');
+        const usersInfoContainer = document.getElementById('users-info-container');
+
+        fetch('https://post-wave-swagger.fun/users/all?page=0&limit=10', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && Array.isArray(data.payload.content)) {
+                    latestUsersContainer.innerHTML = ''; // Clear old content
+                    const users = data.payload.content;
+
+                    users.slice(0, 3).forEach(user => {
+                        const username = user.username || 'Unknown';
+                        const email = user.email || 'Unknown';
+                        const role = user.roles?.[0]?.name || 'User';
+                        const userItem = `
+                            <li class="latest-user-item">
+                                <div class="latest-user-avatar">
+                                    <img src="images/avatars/avatar-6.png" alt="User Avatar" class="comment-avatar">
+                                </div>
+                                <div class="latest-user-details">
+                                    <p class="latest-user-text">${username}</p>
+                                    <p class="latest-user-info">${email}</p>
+                                    <p class="latest-user-info">Role: <span class="admin-role">${role}</span></p>
+                                </div>
+                            </li>`;
+                        latestUsersContainer.insertAdjacentHTML('beforeend', userItem);
+                    });
+
+                    usersInfoContainer.textContent = `Total users: ${data.payload.pagination.total}. Displaying latest 3.`;
+                } else {
+                    latestUsersContainer.innerHTML = '<li>No recent users available.</li>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching users:', error);
+                latestUsersContainer.innerHTML = '<li>Error loading users. Please try again later.</li>';
             });
     });
 
@@ -578,20 +606,27 @@
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
     }
 
+    document.addEventListener('click', function(e) {
+        const a = e.target.closest('a[href^="pages/post.html"]');
+        if (!a) return;
+        const token = localStorage.getItem('token');
+        if (!token) {
+            e.preventDefault();
+            window.location.href = 'pages/login-page.html';
+        }
+    });
+
     // Auth and logout handling
     document.addEventListener("DOMContentLoaded", function() {
-        const username = localStorage.getItem('username');
+        const email = localStorage.getItem('email');
         const token = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
 
         if (username && token) {
             document.getElementById('auth-links').style.display = 'none';
@@ -603,8 +638,9 @@
         }
 
         document.getElementById('logout-link').addEventListener('click', function() {
-            localStorage.removeItem('username');
+            localStorage.removeItem('email');
             localStorage.removeItem('token');
+            localStorage.removeItem('username');
             window.location.reload();
         });
     });

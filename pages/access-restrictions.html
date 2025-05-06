@@ -3,31 +3,31 @@
 <head>
     <title>Post Wave - Privacy Policy</title>
     <meta charset="utf-8">
-    <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-	<!--[if lt IE 8]>
-   <div style=' clear: both; text-align:center; position: relative;'>
-     <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-       <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-    </a>
-  </div>
-<![endif]-->
+    <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <!--[if lt IE 8]>
+    <div style=' clear: both; text-align:center; position: relative;'>
+        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+    </div>
+    <![endif]-->
     <!--[if lt IE 9]>
-   	<script type="text/javascript" src="js/html5.js"></script>
-    	<link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+    <script type="text/javascript" src="../js/html5.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/ie.css">
     <![endif]-->
 </head>
 <body>
 <div class="main">
-<!--==============================header=================================-->
+    <!--==============================header=================================-->
     <header>
         <div class="top">
             <div class="nav">
                 <ul class="sf-menu">
-                    <li><a href="index.html">home</a></li>
+                    <li><a href="../index.html">home</a></li>
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
@@ -48,12 +48,12 @@
             <div class="clear"></div>
         </div>
         <div class="middle">
-            <h1><a class="logo" href="index.html"><span>Post</span>Wave</a></h1>
-            <a href="index.html" class="h_banner"></a>
+            <h1><a class="logo" href="../index.html"><span>Post</span>Wave</a></h1>
+            <a href="../index.html" class="h_banner"></a>
         </div>
         <nav>
             <ul class="sf-menu">
-                <li><a href="index.html">HOME</a></li>
+                <li><a href="../index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
@@ -80,44 +80,58 @@
             <div class="clear"></div>
         </nav>
     </header>
-<!--==============================content================================-->
+    <!--==============================content================================-->
     <section id="content" class="cont_pad">
         <div class="container_12">
             <div class="wrapper">
                 <article class="grid_12">
                     <div class="box">
-                        <h2 class="first">Privacy Policy</h2>
+                        <h2 class="first">Access and Restrictions</h2>
                         <div class="sub_box4">
-                            <h4>Introduction</h4>
+                            <h4>Role-Based Access Control</h4>
                             <p>
-                                We value your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, and safeguard your information when you interact with our website.
+                                The system is designed with role-based access control (RBAC) to ensure that users have appropriate permissions based on their roles. The project includes three primary roles: <span class="green">User</span>, <span class="green">Admin</span>, and <span class="green">Super Admin</span>. Each role has distinct permissions and responsibilities within the system.
                             </p>
                             <div class="line"></div>
 
-                            <h4>Data Collection</h4>
+                            <h4>User Role</h4>
                             <p>
-                                We collect personal data that you voluntarily provide to us when registering on the site, subscribing to our newsletter, or using our services. This information may include your name, email address, and any other details you choose to share.
+                                When a new user registers, they are automatically assigned the <span class="green">User</span> role. This role provides the user with basic access to the system's functionalities, such as creating posts and comments. Users can interact with content, manage their profile, and access general features of the application. However, they have no administrative privileges and cannot manage other users or alter system-wide settings.
                             </p>
                             <div class="line"></div>
 
-                            <h4>Use of Data</h4>
+                            <h4>Admin Role</h4>
                             <p>
-                                The personal data we collect is used to provide you with the services you request, to improve our website, and to communicate with you regarding updates and other relevant information. We do not share your data with third parties except as required by law.
+                                The <span class="green">Admin</span> role is assigned to users who require elevated privileges. Admins can manage content across the platform, including posts and comments created by other users. They have the ability to moderate user activity, approve or remove posts and comments, and access more detailed logs related to user actions. Admins are also responsible for maintaining the integrity of the platform by ensuring that content adheres to the community guidelines.
+                            </p>
+                            <p>
+                                Unlike the User role, Admins can perform administrative tasks but do not have full control over the system. For example, they cannot assign roles to other users or alter critical system configurations.
                             </p>
                             <div class="line"></div>
 
-                            <h4>Data Security</h4>
+                            <h4>Super Admin Role</h4>
                             <p>
-                                We implement security measures to protect your personal data from unauthorized access, use, or disclosure. However, no method of transmission over the Internet or electronic storage is 100% secure.
+                                The <span class="green">Super Admin</span> role is the highest level of access within the system. Super Admins have full control over the platform, including the ability to manage all users and assign roles. They can create new Admins, revoke administrative privileges, and alter system-wide settings. This role is typically reserved for the system owner or trusted personnel who are responsible for the overall management and security of the platform.
+                            </p>
+                            <p>
+                                Super Admins also have access to advanced features, such as system logs, configuration settings, and the ability to perform critical actions like database migrations and updates to the system architecture.
                             </p>
                             <div class="line"></div>
 
-                            <h4>Contact Us</h4>
+                            <h4>Role Assignment and Management</h4>
                             <p>
-                                If you have any questions or concerns about our Privacy Policy, please contact us at:
-                                <a href="mailto:privacy@demolink.org" class="demo">kolyakol8787@gmail.com</a>.
+                                Role assignment is managed through the IAM-service, which handles user authentication and role management. By default, all new users are assigned the <span class="green">User</span> role. Only <span class="green">Super Admins</span> have the authority to promote a user to <span class="green">Admin</span> or to grant <span class="green">Super Admin</span> privileges to another user.
                             </p>
+                            <p>
+                                This hierarchical structure ensures that only trusted users can perform sensitive operations, maintaining the security and integrity of the platform. Any changes in user roles are logged by the UTILS-service to ensure transparency and accountability.
+                            </p>
+                            <div class="line"></div>
 
+                            <h4>Contact Information</h4>
+                            <p>
+                                If you have any questions or need further details about the access and restrictions in the system, feel free to reach out via email at
+                                <a href="mailto:kolyakol8787@gmail.com" class="demo">kolyakol8787@gmail.com</a>.
+                            </p>
                         </div>
                     </div>
                 </article>
@@ -127,16 +141,16 @@
 
     <!--==============================footer=================================-->
     <footer>
-      <div class="menu">
-          <a href="index.html">home</a>
-          <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
-          <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
-          <a href="community.html">community</a>
-          <a href="contacts.html">contacts</a>
-      </div>
+        <div class="menu">
+            <a href="../index.html">home</a>
+            <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
+            <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
+            <a href="community.html">community</a>
+            <a href="contacts.html">contacts</a>
+        </div>
         <div class="privacy">
-            <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
+            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
 </div>

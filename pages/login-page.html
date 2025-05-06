@@ -3,14 +3,14 @@
 <head>
     <title>Login - Post Wave</title>
     <meta charset="utf-8">
-    <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
-    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/tms-0.4.1.js"></script>
+    <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/tms.css">
+    <script type="text/javascript" src="../js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="../js/tms-0.4.1.js"></script>
     <!--[if lt IE 8]>
     <div style=' clear: both; text-align:center; position: relative;'>
         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -19,8 +19,8 @@
     </div>
     <![endif]-->
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="js/html5.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+    <script type="text/javascript" src="../js/html5.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/ie.css">
     <![endif]-->
 </head>
 <body>
@@ -66,12 +66,12 @@
             <div class="clear"></div>
         </div>
         <div class="middle">
-            <h1><a class="logo" href="index.html"><span>Post</span>Wave</a></h1>
-            <a href="index.html" class="h_banner"></a>
+            <h1><a class="logo" href="../index.html"><span>Post</span>Wave</a></h1>
+            <a href="../index.html" class="h_banner"></a>
         </div>
         <nav>
             <ul class="sf-menu">
-                <li><a href="index.html">HOME</a></li>
+                <li><a href="../index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
@@ -108,8 +108,8 @@
                         <div class="sub_box4">
                             <form id="login-form" method="post" accept-charset="UTF-8" class="login-form">
                                 <div class="form-group">
-                                    <label for="username">Username: <span class="required">*</span></label>
-                                    <input id="username" class="form-control" type="text" placeholder="Enter your username" name="username" required>
+                                    <label for="email">Email: <span class="required">*</span></label>
+                                    <input id="email" class="form-control" type="text" placeholder="Enter your email" name="email" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password: <span class="required">*</span></label>
@@ -120,7 +120,7 @@
                                 <!-- Error message container -->
                                 <div id="error-message" class="error-message">
                                     <h3>Login failed</h3>
-                                    <p>Incorrect username or password.</p>
+                                    <p>Incorrect email or password.</p>
                                 </div>
 
                                 <div class="form-group">
@@ -143,84 +143,76 @@
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
-            <a href="index.html">home</a>
+            <a href="../index.html">home</a>
             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
             <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
             <a href="community.html">community</a>
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
+            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const preloader = document.getElementById('preloader');
         const form = document.getElementById("login-form");
 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the default form submission behavior
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-            // Get form field values
-            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
 
-            // Clear previous error message
             errorMessage.style.display = 'none';
-            // Показываем прелоадер
             preloader.style.display = 'flex';
 
-            // Send data to the server
             fetch('https://post-wave-swagger.fun/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ email, password })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Save the username and token in localStorage
-                        localStorage.setItem('username', data.payload.username); // предполагаем, что username в payload
                         localStorage.setItem('token', data.payload.token);
+                        localStorage.setItem('email', data.payload.email);
 
-                        // Прячем прелоадер после успешного запроса
+                        const username = data.payload.username;
+                        localStorage.setItem('username', username);
+
+                        const role = data.payload.roles?.[0]?.name || 'USER';
+                        localStorage.setItem('role', role);
+
                         preloader.style.display = 'none';
-
-                        // Redirect to the homepage
-                        window.location.href = 'index.html';
+                        window.location.href = '../index.html';
                     } else {
-                        // Show the error message
                         errorMessage.querySelector('h3').textContent = 'Login Failed';
-                        errorMessage.querySelector('p').textContent = 'Incorrect username or password.';
+                        errorMessage.querySelector('p').textContent = 'Incorrect email or password.';
                         errorMessage.style.display = 'block';
-
-                        // Прячем прелоадер после успешного запроса
                         preloader.style.display = 'none';
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
                     errorMessage.querySelector('h3').textContent = 'Login Failed';
-                    errorMessage.querySelector('p').textContent = 'Incorrect username or password.';
+                    errorMessage.querySelector('p').textContent = 'Incorrect email or password.';
                     errorMessage.style.display = 'block';
-
-                    // Прячем прелоадер после успешного запроса
                     preloader.style.display = 'none';
                 });
         });
     });
-    // Скрипт для скрытия прелоадера после полной загрузки страницы
+
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
         preloader.style.display = 'none';
     });
-    // Скрипт для скрытия прелоадера после полной загрузки страницы
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
         preloader.style.display = 'none';
@@ -230,10 +222,8 @@
         event.preventDefault();
         const popup = document.getElementById('search-popup');
 
-        // Показываем попап
         popup.style.display = 'block';
 
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);

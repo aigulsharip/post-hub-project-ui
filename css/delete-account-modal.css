@@ -1,29 +1,32 @@
 /* Общий стиль для оверлея на странице My Account */
+/* Сама «подложка» — занимает весь экран и центрует всё внутреннее */
 #delete-account-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Темный фон с полупрозрачностью */
+    /* правый и нижний: вместо width/height можно сразу inset */
+    right: 0;
+    bottom: 0;
+    display: none;           /* по-умолчанию скрыт */
+    justify-content: center; /* центр по горизонтали */
+    align-items: center;     /* центр по вертикали */
+    background: rgba(0, 0, 0, 0.8);
     z-index: 9998;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(8px); /* Эффект размытия фона */
+    backdrop-filter: blur(8px);
 }
 
-/* Стиль для модального окна удаления аккаунта с неоновыми акцентами */
+/* само модальное окно */
 #delete-account-modal-window {
-    background: #1a1a1a; /* Темный фон для модального окна */
+    background: #1a1a1a;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 255, 191, 0.7), 0 0 30px rgba(0, 255, 191, 0.5); /* Неоновая тень */
+    box-shadow: 0 0 15px rgba(0, 255, 191, 0.7),
+    0 0 30px rgba(0, 255, 191, 0.5);
     max-width: 400px;
-    width: 100%;
+    width: 90%;        /* чуть отзывчивее */
     text-align: center;
-    color: #e0e0e0; /* Светлый текст */
-    position: relative;
+    color: #e0e0e0;
+    /* больше не нужно position: absolute или margin-top — flex сам по центру */
     animation: neonGlow 1.5s infinite alternate;
 }
 

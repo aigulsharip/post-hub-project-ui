@@ -3,14 +3,14 @@
 <head>
     <title>Post-Wave demo</title>
     <meta charset="utf-8">
-    <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
-    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/tms-0.4.1.js"></script>
+    <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/tms.css">
+    <script type="text/javascript" src="../js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="../js/tms-0.4.1.js"></script>
     <script>
         $(function(){
             $('.slider')._TMS({
@@ -38,8 +38,8 @@
     </div>
     <![endif]-->
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="js/html5.js"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+    <script type="text/javascript" src="../js/html5.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/ie.css">
     <![endif]-->
 </head>
 <body>
@@ -64,7 +64,7 @@
         <div class="top">
             <div class="nav">
                 <ul class="sf-menu">
-                    <li><a href="index.html">home</a></li>
+                    <li><a href="../index.html">home</a></li>
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
@@ -85,12 +85,12 @@
             <div class="clear"></div>
         </div>
         <div class="middle">
-            <h1><a class="logo" href="index.html"><span>Post</span>Wave</a></h1>
-            <a href="index.html" class="h_banner"></a>
+            <h1><a class="logo" href="../index.html"><span>Post</span>Wave</a></h1>
+            <a href="../index.html" class="h_banner"></a>
         </div>
         <nav>
             <ul class="sf-menu">
-                <li class="current f_item"><a href="index.html">HOME</a></li>
+                <li class="current f_item"><a href="../index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a >ACTIONS</a>
@@ -149,15 +149,15 @@
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
-            <a href="index.html">home</a>
+            <a href="../index.html">home</a>
             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
             <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
             <a href="community.html">community</a>
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
+            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
 </div>
@@ -202,7 +202,7 @@
                         data.payload.forEach(post => {
                             const postItem = `
                     <li>
-                        <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='images/here-your-photo.png';" /></figure>
+                        <figure><img src="${post.image}" alt="${post.title}" onerror="this.onerror=null;this.src='../images/here-your-photo.png';" /></figure>
                         <div class="content-wrapper">
                             <div>
                                 <h4><a href="#">${post.title}</a></h4>
@@ -247,8 +247,8 @@
 
         if (currentPath.includes("index.html")) {
             document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
-        } else if (currentPath.includes("my-posts.html")) {
-            document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
+        } else if (currentPath.includes("pages/my-posts.html")) {
+            document.querySelector('.sf-menu li a[href="pages/my-posts.html"]').parentElement.classList.add('current');
         }
     });
 
@@ -287,8 +287,8 @@
             // Проверяем, какая страница открыта, и добавляем класс 'current' соответствующему пункту меню
             if (currentPath.includes("index.html")) {
                 document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
-            } else if (currentPath.includes("my-posts.html")) {
-                document.querySelector('.sf-menu li a[href="my-posts.html"]').parentElement.classList.add('current');
+            } else if (currentPath.includes("pages/my-posts.html")) {
+                document.querySelector('.sf-menu li a[href="pages/my-posts.html"]').parentElement.classList.add('current');
             }
             // Добавьте здесь аналогичные условия для других страниц
         });

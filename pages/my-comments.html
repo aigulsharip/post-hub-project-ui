@@ -3,17 +3,17 @@
 <head>
     <title>My Comments - Post-Wave</title>
     <meta charset="utf-8">
-    <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/tms.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/view-comment.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/delete-post-modal.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/edit-comment.css">
-    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/tms-0.4.1.js"></script>
+    <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/tms.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/view-comment.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/delete-post-modal.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/edit-comment.css">
+    <script type="text/javascript" src="../js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="../js/tms-0.4.1.js"></script>
 </head>
 <body>
 <!-- Прелоадер -->
@@ -37,7 +37,7 @@
         <div class="top">
             <div class="nav">
                 <ul class="sf-menu">
-                    <li><a href="index.html">home</a></li>
+                    <li><a href="../index.html">home</a></li>
                     <li><a target="_blank" href="https://nick8787.github.io/post-wave-documentation/">documentation</a></li>
                     <li><a target="_blank" href="https://www.udemy.com/user/mykola-shchypailo/">udemy-courses</a></li>
                     <li><a href="#">community</a></li>
@@ -58,12 +58,12 @@
             <div class="clear"></div>
         </div>
         <div class="middle">
-            <h1><a class="logo" href="index.html"><span>Post</span>Wave</a></h1>
-            <a href="index.html" class="h_banner"></a>
+            <h1><a class="logo" href="../index.html"><span>Post</span>Wave</a></h1>
+            <a href="../index.html" class="h_banner"></a>
         </div>
         <nav>
             <ul class="sf-menu">
-                <li><a href="index.html">HOME</a></li>
+                <li><a href="../index.html">HOME</a></li>
                 <li><a href="my-posts.html">MY POSTS</a></li>
                 <li class="current f_item"><a href="my-comments.html">MY COMMENTS</a></li>
                 <li><a href="#">ACTIONS</a>
@@ -131,15 +131,15 @@
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
-            <a href="index.html">home</a>
+            <a href="../index.html">home</a>
             <a href="https://nick8787.github.io/post-wave-documentation/" target="_blank">documentation</a>
             <a href="https://www.udemy.com/user/mykola-shchypailo/" target="_blank">udemy-courses</a>
             <a href="community.html">community</a>
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="index.html"><img src="images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2024 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
+            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
 </div>
@@ -291,13 +291,24 @@
                             throw new Error(text || 'Unknown error');
                         });
                     }
-                    // Если нет тела ответа, просто вернем пустой объект
-                    return response.json().catch(() => ({}));
+                    return response.json().catch(() => ({})); // если пустой ответ
                 })
                 .then(data => {
-                    if (data.success || Object.keys(data).length === 0) { // также учитываем случай с пустым ответом
-                        // Удаление комментария из DOM
-                        document.querySelector(`[data-comment-id="${commentId}"]`).closest('li.picks-comment').remove();
+                    if (data.success || Object.keys(data).length === 0) {
+                        const commentElement = document.querySelector(`[data-comment-id="${commentId}"]`).closest('li.picks-comment');
+                        commentElement.remove();
+
+                        // Проверка, остались ли еще комментарии
+                        const remainingComments = document.querySelectorAll('li.picks-comment').length;
+                        const commentInfoContainer = document.getElementById('post-info-container');
+                        if (remainingComments === 0) {
+                            document.getElementById('comment-list').innerHTML = `
+                    <p class="no-posts-message">You don't have any comments yet.
+                    <br>To get started, choose a post from the <a href="my-posts.html">My Posts</a> page or the <a href="../index.html">Home</a> page!</p>`;
+                            commentInfoContainer.innerHTML = '';
+                        } else {
+                            commentInfoContainer.innerHTML = `Total comments: ${remainingComments}. Displaying latest ${remainingComments}.`;
+                        }
                     } else {
                         alert('Error deleting comment: ' + data.message);
                     }
@@ -307,9 +318,10 @@
                     alert('An error occurred while deleting the comment. Please try again.');
                 })
                 .finally(() => {
-                    hidePreloader();  // Скрыть прелоадер после завершения
+                    hidePreloader();
                 });
         }
+
 
         const currentPath = window.location.pathname;
         document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
@@ -358,7 +370,7 @@
                     commentList.innerHTML = '';
 
                     const sortedComments = data.payload
-                        .filter(comment => !comment.deleted)
+                        .filter(comment => !comment.isDeleted)
                         .sort((a, b) => {
                             const dateA = new Date(a.created[0], a.created[1] - 1, a.created[2], a.created[3], a.created[4], a.created[5]);
                             const dateB = new Date(b.created[0], b.created[1] - 1, b.created[2], b.created[3], b.created[4], b.created[5]);
@@ -366,36 +378,33 @@
                         });
 
                     sortedComments.slice(0, 5).forEach(comment => {
-                        const commentDateArray = comment.created;
-                        const utcDate = new Date(Date.UTC(commentDateArray[0], commentDateArray[1] - 1, commentDateArray[2], commentDateArray[3], commentDateArray[4], commentDateArray[5]));
-                        const localDate = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
-
-                        const commentDate = `${localDate.getFullYear()}-${(localDate.getMonth() + 1).toString().padStart(2, '0')}-${localDate.getDate().toString().padStart(2, '0')} ${localDate.getHours().toString().padStart(2, '0')}:${localDate.getMinutes().toString().padStart(2, '0')}`;
+                        const commentDate = new Date(comment.created).toLocaleString();
 
                         const commentItem = `
-                            <li class="picks-comment" data-post-id="${comment.postId}" data-comment-id="${comment.id}">
-                                <div class="content-wrapper">
-                                    <p class="comment-content">
-                                        <a href="post.html?id=${comment.postId}" class="comment-link">${comment.message}</a>
-                                    </p>
-                                    <div class="comment-meta">
-                                        <p class="author">Commented by: ${comment.owner.username}</p>
-                                        <p class="date">On: ${commentDate}</p>
-                                        <div class="actions">
-                                            <a href="#" class="edit-comment">Edit</a>
-                                            <a href="#" class="delete-comment" data-comment-id="${comment.id}">Delete</a>
+                                    <li class="picks-comment" data-post-id="${comment.postId}" data-comment-id="${comment.id}">
+                                        <div class="content-wrapper">
+                                            <p class="comment-content">
+                                                <a href="post.html?id=${comment.postId}" class="comment-link">${comment.message}</a>
+                                            </p>
+                                            <div class="comment-meta">
+                                                <p class="author">Commented by: ${comment.owner.username}</p>
+                                                <p class="date">Created on: ${commentDate}</p>
+                                                <div class="actions">
+                                                    <a href="#" class="edit-comment">Edit</a>
+                                                    <a href="#" class="delete-comment" data-comment-id="${comment.id}">Delete</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </li>
-                        `;
-                        commentList.insertAdjacentHTML('beforeend', commentItem);
+                                    </li>
+                                `;
+
+                        commentList.insertAdjacentHTML('afterbegin', commentItem);
                     });
 
                     commentInfoContainer.innerHTML = `Total comments: ${data.payload.length}. Displaying latest 5.`;
                 } else {
                     commentList.innerHTML = `<p class="no-posts-message">You don't have any comments yet.
-                    <br>To get started, choose a post from the <a href="my-posts.html">My Posts</a> page or the <a href="index.html">Home</a> page!</p>`;
+                    <br>To get started, choose a post from the <a href="my-posts.html">My Posts</a> page or the <a href="../index.html">Home</a> page!</p>`;
                     commentInfoContainer.innerHTML = '';
                 }
             })
