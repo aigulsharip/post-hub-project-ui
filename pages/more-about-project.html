@@ -96,7 +96,7 @@
                                 <li><span class="green">IAM-service</span>: Handles user authentication, registration, and management. It also manages the creation of posts and comments. Security features include JWT (JSON Web Token) for securing endpoints, along with Flyway for database migrations and CORS (Cross-Origin Resource Sharing) configurations to ensure secure cross-origin requests.</li>
                                 <li><span class="green">UTILS-service</span>: Responsible for logging actions such as user creation, post creation, and comment creation. It consumes messages from the IAM-service via Kafka, aggregating and processing logs for further analysis.</li>
                                 <li><span class="green">GATEWAY-service</span>: Acts as the entry point for all external requests to the microservices. It centralizes and manages routing to other microservices, enforcing security policies and ensuring that requests are properly authenticated and authorized.</li>
-                                <li><span class="green">DISCOVERY-service</span>: Utilizes Eureka server for service registration and discovery. This allows microservices to dynamically find and communicate with each other, ensuring scalability and fault tolerance within the system.</li>
+                                <li><span class="green">DISCOVERY-service</span>: Uses Consul for dynamic service registration and discovery, enabling smooth communication and resilience between microservices.</li>
                             </ul>
                             <div class="line"></div>
 
@@ -121,7 +121,7 @@
                             <h4>Contact Information</h4>
                             <p>
                                 If you have any questions or need further details, feel free to reach out via email at
-                                <a href="mailto:kolyakol8787@gmail.com" class="demo">kolyakol8787@gmail.com</a>.
+                                <a href="mailto:mykola.shchypailo@gmail.com" class="demo">mykola.shchypailo@gmail.com</a>.
                             </p>
                         </div>
                     </div>
