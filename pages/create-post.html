@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Create Post - Post-Wave</title>
+    <title>Create Post - Post-Hub</title>
     <meta charset="utf-8">
     <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
@@ -94,7 +94,6 @@
             <div class="wrapper">
                 <article class="grid_12">
                     <div class="box create-post-box">
-                        <!-- Кнопка Назад -->
                         <a href="my-posts.html" class="back-button">
                             <span class="arrow-icon">←</span>
                             <span class="back-text">Back to My Posts</span>
@@ -141,7 +140,7 @@
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            <a href="../index.html"><img src="../images/logo/logo2.svg" width="74" height="35" alt="f_logo" /></a>
             &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
@@ -277,14 +276,8 @@
     // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 4 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 4000);
@@ -326,8 +319,6 @@
 
         document.getElementById('search').addEventListener('submit', handleSearch);
     });
-
 </script>
-
 </body>
 </html>

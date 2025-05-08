@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Post-Wave demo</title>
+    <title>Post-Hub demo</title>
     <meta charset="utf-8">
     <link rel="icon" href="images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="images/icons8-favicon-64.png" type="image/x-icon" />
@@ -307,8 +307,8 @@
                         </li>
                         <li class="last bd_none">
                             <span class="green">Contact Me</span><br>
-                            <a href="https://www.linkedin.com/in/mykola-shchypailo-284997297/" target="_blank">
-                                <i class="fab fa-linkedin"></i> LinkedIn
+                            <a href="mailto:mykola.shchypailo@gmail.com" target="_blank">
+                                <i class="fab fa-google"></i> Gmail
                             </a><br>
                             <a href="https://github.com/nick8787" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
@@ -332,9 +332,16 @@
             <a href="community.html">community</a>
             <a href="pages/contacts.html">contacts</a>
         </div>
-        <div class="privacy">
-            <a href="index.html"><img src="images/logo/logo2.svg" width="74" height="35" alt="f_logo" /></a>
-            &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="pages/index-2.html">Privacy Policy</a></span><br>
+        <div style="position: relative; top: -5px;">
+            <div class="privacy" style="display: flex; align-items: center; gap: 20px; color: #aaa; font-size: 13px; font-family: 'Trebuchet MS', sans-serif;">
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span style="position: relative; top: -3px;">You are visitor #</span>
+                    <a href="https://www.freecounterstat.com" title="web counter" style="display: flex; align-items: center;">
+                        <img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=hd6l9gse6l6t3qxyswflmczhl4s49w6x" alt="web counter" style="height: 16px;" />
+                    </a>
+                </div><a href="index.html" style="display: flex; align-items: center;"><img src="images/logo/logo2.svg" width="74" height="35" alt="f_logo" /></a>
+                <span style="position: relative; top: -3px;">© 2025&nbsp;&nbsp;<a href="pages/index-2.html" style="color: #aaa;">Privacy Policy</a></span>
+            </div>
         </div>
     </footer>
 </div>
@@ -538,7 +545,7 @@
                                 </div>
                                 <div class="latest-user-details">
                                     <p class="latest-user-text">${username}</p>
-                                    <p class="latest-user-info">${email}</p>
+                                    <p class="latest-user-info" title="${email}">${email}</p>
                                     <p class="latest-user-info">Role: <span class="admin-role">${role}</span></p>
                                 </div>
                             </li>`;
@@ -659,7 +666,14 @@
             window.location.reload();
         });
     });
-</script>
 
+    document.addEventListener('DOMContentLoaded', function () {
+        let visits = localStorage.getItem('visitCount') || 0;
+        visits++;
+        localStorage.setItem('visitCount', visits);
+        const counter = document.getElementById('visitor-count');
+        if (counter) counter.textContent = visits;
+    });
+</script>
 </body>
 </html>

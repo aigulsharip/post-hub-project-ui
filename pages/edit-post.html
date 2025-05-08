@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Edit Post - Post-Wave</title>
+    <title>Edit Post - Post-Hub</title>
     <meta charset="utf-8">
     <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
@@ -94,7 +94,6 @@
             <div class="wrapper">
                 <article class="grid_12">
                     <div class="box edit-post-box">
-                        <!-- Кнопка Назад -->
                         <a href="#" id="back-to-post" class="back-button">
                             <span class="arrow-icon">←</span>
                             <span class="back-text">Back to My Post</span>
@@ -141,7 +140,7 @@
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            <a href="../index.html"><img src="../images/logo/logo2.svg" width="74" height="35" alt="f_logo" /></a>
             &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
@@ -251,7 +250,7 @@
             const content = document.getElementById('post-content').value.trim();
             const image = document.getElementById('post-image-url').value.trim() ||
                 document.getElementById('file-preview').querySelector('img')?.src;
-            const likes = window.currentLikes; // Используем сохраненное значение лайков
+            const likes = window.currentLikes;
 
             if (!token) {
                 alert("You are not logged in. Please log in to edit the post.");
@@ -276,7 +275,7 @@
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ title, content, image, likes }) // Передаем количество лайков
+                body: JSON.stringify({ title, content, image, likes })
             })
                 .then(response => {
                     if (!response.ok) {
@@ -306,14 +305,8 @@
     // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -370,17 +363,11 @@
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
     }
-
 </script>
-
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>All My Posts - Post-Wave</title>
+    <title>All My Posts - Post-Hub</title>
     <meta charset="utf-8">
     <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
@@ -34,20 +34,20 @@
         }
 
         .pagination li {
-            margin: 0 4px; /* Slightly reduce the margin to make them closer */
+            margin: 0 4px;
         }
 
         .pagination a {
             text-decoration: none;
-            padding: 6px 12px; /* Reduce padding for a smaller button */
-            background-color: #1e1e1e; /* Dark background color */
-            color: #00BBFF; /* Blue text color */
-            border: 1px solid #00BBFF; /* Blue border */
-            border-radius: 3px; /* Slightly rounded corners */
-            font-size: 14px; /* Smaller font size */
+            padding: 6px 12px;
+            background-color: #1e1e1e;
+            color: #00BBFF;
+            border: 1px solid #00BBFF;
+            border-radius: 3px;
+            font-size: 14px;
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0px 0px 5px rgba(0, 187, 255, 0.4); /* Subtle neon glow */
+            box-shadow: 0px 0px 5px rgba(0, 187, 255, 0.4);
             transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -55,10 +55,10 @@
         }
 
         .pagination a:hover {
-            background-color: #00BBFF; /* Blue background on hover */
-            color: #ffffff; /* White text on hover */
-            box-shadow: 0px 0px 7px rgba(0, 187, 255, 0.4), 0 0 10px rgba(0, 187, 255, 0.2); /* Less intense neon glow */
-            transform: translateY(-1px) scale(1.01); /* Slight scaling on hover */
+            background-color: #00BBFF;
+            color: #ffffff;
+            box-shadow: 0px 0px 7px rgba(0, 187, 255, 0.4), 0 0 10px rgba(0, 187, 255, 0.2);
+            transform: translateY(-1px) scale(1.01);
         }
 
         .pagination a::after {
@@ -74,19 +74,19 @@
         }
 
         .pagination a:hover::after {
-            transform: scale(1); /* Expands the radial gradient on hover */
+            transform: scale(1);
         }
 
         .pagination .active a {
-            background-color: #00BBFF; /* Active page */
+            background-color: #00BBFF;
             color: #ffffff;
-            transform: translateY(-1px) scale(1.01); /* Slight scaling */
+            transform: translateY(-1px) scale(1.01);
         }
 
         .pagination a:active {
-            background-color: #0088cc; /* Darker blue on active */
+            background-color: #0088cc;
             box-shadow: 0px 0px 5px rgba(0, 136, 204, 0.5);
-            transform: translateY(0) scale(1); /* Return to normal on click */
+            transform: translateY(0) scale(1);
         }
 
     </style>
@@ -176,19 +176,17 @@
                             <h2 class="first">All My Posts</h2>
                             <div class="sub_box" id="post-container">
                                 <ul class="ext_list picks" id="post-list">
-                                    <!-- Dynamically loaded posts -->
                                 </ul>
                                 <div class="post-footer">
                                     <div id="view-all-container" class="view-all-container">
                                         <a href="my-posts.html" class="link2">Back To My Posts</a>
                                     </div>
                                     <div id="post-info-container" class="post-info-container">
-                                        <!-- Здесь будет отображаться информация о количестве постов -->
                                     </div>
                             </div>
                             <div id="pagination-container">
-                                <!-- Pagination buttons will be dynamically generated here -->
                             </div>
+                        </div>
                         </div>
                     </article>
                 </div>
@@ -206,7 +204,7 @@
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            <a href="../index.html"><img src="../images/logo/logo2.svg" width="74" height="35" alt="f_logo" /></a>
             &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
@@ -353,17 +351,10 @@
         }
     });
 
-    // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -409,16 +400,11 @@
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
     }
-
 </script>
 </body>
 </html>

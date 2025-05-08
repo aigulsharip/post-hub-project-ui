@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>All My Comments - Post-Wave</title>
+    <title>All My Comments - Post-Hub</title>
     <meta charset="utf-8">
     <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/tms.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/view-comment.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/edit-comment.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/delete-comment-modal.css">
     <script type="text/javascript" src="../js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="../js/superfish.js"></script>
@@ -156,17 +157,15 @@
                             <h2 class="first">All My Comments</h2>
                             <div class="sub_box" id="comment-container">
                                 <ul class="ext_list picks" id="comment-list">
-                                    <!-- Dynamically loaded comments -->
                                 </ul>
                                 <div class="post-footer">
                                     <div id="comment-info-container" class="post-info-container">
-                                        <!-- Comment count information will be displayed here -->
                                     </div>
                                 </div>
                                 <div id="pagination-container">
-                                    <!-- Pagination buttons will be dynamically generated here -->
                                 </div>
                             </div>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -183,7 +182,7 @@
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            <a href="../index.html"><img src="../images/logo/logo2.svg" width="74" height="35" alt="f_logo" /></a>
             &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
@@ -240,7 +239,7 @@
             document.getElementById('welcome-message').style.display = 'none';
             commentList.innerHTML = `<p class="no-posts-message">Please <a href="register-page.html">register</a> or <a href="login-page.html">log in</a> to create and view your comments.</p>`;
             preloader.style.display = 'none';
-            commentInfoContainer.style.display = 'none'; // Скрыть блок для неавторизованных пользователей
+            commentInfoContainer.style.display = 'none';
             paginationContainer.innerHTML = '';
         }
 
@@ -262,28 +261,124 @@
                 });
 
                 const commentItem = `
-            <li class="picks-comment">
-                <div class="content-wrapper">
-                    <p class="comment-content">
-                        <a href="post.html?id=${comment.postId}" class="comment-link">${comment.message}</a>
-                    </p>
-                    <div class="comment-meta">
-                        <p class="author">Commented by: ${comment.owner.username}</p>
-                        <p class="date">Created on: ${commentDate}</p>
-                        <div class="actions">
-                            <a href="#" class="edit-comment">Edit</a>
-                            <a href="#" class="delete-comment">Delete</a>
+                    <li class="picks-comment" data-post-id="${comment.postId}" data-comment-id="${comment.id}">
+                        <div class="content-wrapper">
+                            <p class="comment-content">
+                                <a href="post.html?id=${comment.postId}" class="comment-link">${comment.message}</a>
+                            </p>
+                            <div class="comment-meta">
+                                <p class="author">Commented by: ${comment.owner.username}</p>
+                                <p class="date">Created on: ${commentDate}</p>
+                                <div class="actions">
+                                    <a href="#" class="edit-comment">Edit</a>
+                                    <a href="#" class="delete-comment">Delete</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </li>
-        `;
+                    </li>
+                    `;
                 commentList.insertAdjacentHTML('beforeend', commentItem);
             });
 
             commentInfoContainer.innerHTML = `Total comments: ${comments.length}. Displaying comments ${startIndex + 1} - ${endIndex}.`;
         }
 
+        commentList.addEventListener('click', function(event) {
+            const commentItem = event.target.closest('.picks-comment');
+            if (!commentItem) return;
+
+            const commentId = commentItem.getAttribute('data-comment-id');
+            const postId = commentItem.getAttribute('data-post-id');
+
+            if (event.target.classList.contains('edit-comment')) {
+                event.preventDefault();
+                const commentContent = commentItem.querySelector('.comment-content a');
+                const textArea = document.createElement('textarea');
+                textArea.classList.add('editable');
+                textArea.value = commentContent.textContent;
+                commentContent.replaceWith(textArea);
+
+                const saveButton = document.createElement('span');
+                saveButton.classList.add('save-comment');
+                saveButton.textContent = 'Save changes';
+                event.target.replaceWith(saveButton);
+
+                saveButton.addEventListener('click', function () {
+                    const updatedContent = textArea.value.trim();
+                    if (updatedContent && commentId && postId) {
+                        saveComment(commentId, updatedContent, postId, commentItem);
+                    }
+                });
+            }
+
+            // Delete logic
+            if (event.target.classList.contains('delete-comment')) {
+                event.preventDefault();
+                if (confirm('Are you sure you want to delete this comment?')) {
+                    deleteComment(commentId, commentItem);
+                }
+            }
+        });
+
+        function saveComment(commentId, newContent, postId, commentItem) {
+            showPreloader();
+            fetch(`https://post-wave-swagger.fun/comments/${commentId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ postId: postId, message: newContent })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        const textArea = commentItem.querySelector('textarea.editable');
+                        const link = document.createElement('a');
+                        link.href = `post.html?id=${postId}`;
+                        link.classList.add('comment-link');
+                        link.textContent = newContent;
+                        textArea.replaceWith(link);
+
+                        const editLink = document.createElement('a');
+                        editLink.href = '#';
+                        editLink.classList.add('edit-comment');
+                        editLink.textContent = 'Edit';
+                        commentItem.querySelector('.save-comment').replaceWith(editLink);
+                    } else {
+                        alert('Failed to update comment: ' + data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Error while saving comment.');
+                })
+                .finally(hidePreloader);
+        }
+
+        function deleteComment(commentId, commentItem) {
+            showPreloader();
+            fetch(`https://post-wave-swagger.fun/comments/${commentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success || Object.keys(data).length === 0) {
+                        commentItem.remove();
+                    } else {
+                        alert('Failed to delete comment: ' + data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Error while deleting comment.');
+                })
+                .finally(hidePreloader);
+        }
 
         function renderPagination(totalComments, commentsPerPage) {
             paginationContainer.innerHTML = '';

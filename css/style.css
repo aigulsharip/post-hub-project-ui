@@ -197,6 +197,8 @@ html {width:100%;}
 
 .latest-user-details {
     flex: 1;
+    max-width: 100%; /* это критично для ограничения ширины внутри flex-контейнера */
+    overflow: hidden;
 }
 
 .latest-user-text {
@@ -209,6 +211,11 @@ html {width:100%;}
 .latest-user-info {
     font-size: 12px;
     color: #8f8f8f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 140px;
 }
 
 
@@ -218,7 +225,7 @@ html {width:100%;}
     align-items: flex-start;
     margin-bottom: 15px;
     padding: 12px;
-    background-color: #1c1c1c; /* Dark background for comments */
+    background-color: #1c1c1c;
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -234,7 +241,7 @@ html {width:100%;}
     overflow: hidden;
     border-radius: 50%;
     margin-right: 10px;
-    background-color: #2c2c2c; /* Fallback color in case the image doesn't load */
+    background-color: #2c2c2c;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -244,7 +251,7 @@ html {width:100%;}
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%; /* Ensures the image is circular */
+    border-radius: 50%;
 }
 
 .latest-comment-details {
@@ -286,7 +293,6 @@ html {width:100%;}
     overflow: hidden;
 }
 
-/* Светящийся эффект вокруг блока при наведении */
 .picks li:hover {
     box-shadow: 0 0 7px 5px rgba(255, 255, 255, 0.3);
 }
@@ -312,7 +318,6 @@ html {width:100%;}
     position: relative;
 }
 
-/* Текст заголовка поста */
 .picks h4 a {
     color: #ffffff;
     text-decoration: none;
@@ -328,7 +333,6 @@ html {width:100%;}
     color: #8cc503;
 }
 
-/* Контент поста */
 .picks .post-content {
     font-size: 14px;
     color: #ccc;
@@ -336,7 +340,6 @@ html {width:100%;}
     font-family: 'Arial', sans-serif;
 }
 
-/* Дополнительная информация о посте */
 .picks .likes,
 .picks .comments {
     font-size: 12px;
@@ -353,16 +356,15 @@ html {width:100%;}
     right: 20px;
 }
 
-/* Кнопка для постов */
 .picks .button3 {
-    background-color: #ffffff; /* Полностью белый фон кнопки */
+    background-color: #ffffff;
     color: #ffffff;
     padding: 5px 15px;
     text-align: center;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    border: 1px solid #000; /* Черная рамка */
+    border: 1px solid #000;
     cursor: pointer;
     align-self: flex-end;
 }
@@ -390,39 +392,38 @@ html {width:100%;}
 
 .divider {
     border: none;
-    border-top: 0.5px solid #3e3e3e; /* Синий цвет линии */
-    width: 90%; /* Ширина линии уменьшена, чтобы справа она заканчивалась раньше */
-    margin: 0 0 10px 24px; /* Центрирование линии с отступом слева */
+    border-top: 0.5px solid #3e3e3e;
+    width: 90%;
+    margin: 0 0 10px 24px;
 }
 
 .link-wrapper {
     text-align: left;
-    padding-left: 22px; /* Отступ слева для выравнивания */
-    margin-top: -10px; /* Поднятие текста */
-    padding-bottom: 20px; /* Отступ снизу внутри блока My users */
+    padding-left: 22px;
+    margin-top: -10px;
+    padding-bottom: 20px;
 }
 
 .link2 {
-    color: #8cc503; /* Зеленый цвет */
-    text-transform: uppercase; /* Заглавные буквы */
-    font-family: 'Oswald', sans-serif; /* Шрифт */
-    font-size: 18px !important; /* Увеличенный размер текста с !important */
+    color: #8cc503;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px !important;
     display: inline-block;
 }
 
 .link2:hover {
-    color: #66a300; /* Цвет ссылки при наведении */
-    /*text-decoration: underline; !* Подчеркнуть ссылку при наведении *!*/
+    color: #66a300;
 }
 
-/* Прелоадер */
+/* preloader */
 #preloader {
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+    background: rgba(0, 0, 0, 0.7);
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -439,7 +440,7 @@ html {width:100%;}
 .cube {
     width: 33%;
     height: 33%;
-    background-color: #8cc503; /* Зеленый цвет */
+    background-color: #8cc503;
     animation: cubeGridScaleDelay 1.3s infinite ease-in-out;
 }
 
@@ -467,11 +468,11 @@ html {width:100%;}
     background-color: #1e1e1e;
     color: #00BBFF;
     border: 2px solid #00BBFF;
-    padding: 5px 10px; /* Уменьшены отступы справа и слева */
+    padding: 5px 10px;
     border-radius: 8px;
     font-weight: bold;
     text-decoration: none;
-    margin: 5px 0 0 0; /* Уменьшенный отступ сверху */
+    margin: 5px 0 0 0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     font-size: 14px;
@@ -481,7 +482,7 @@ html {width:100%;}
     position: relative;
     overflow: hidden;
     width: auto;
-    max-width: 130px; /* Еще более уменьшена максимальная ширина */
+    max-width: 130px;
 }
 
 .back-button:hover {
@@ -542,7 +543,7 @@ html {width:100%;}
     justify-content: flex-end;
     position: absolute;
     right: 10px;
-    bottom: 0px; /* Увеличьте значение, чтобы поднять кнопку выше */
+    bottom: 0px;
 }
 
 
@@ -608,7 +609,7 @@ html {width:100%;}
 
 .content-wrapper {
     position: relative;
-    padding-bottom: 50px; /* Это нужно для обеспечения пространства для кнопки */
+    padding-bottom: 50px;
 }
 
 figure {
@@ -623,7 +624,7 @@ figure {
     text-align: right;
     margin-bottom: 20px;
     display: flex;
-    justify-content: flex-end; /* Выровнять по правому краю */
+    justify-content: flex-end;
 }
 
 #create-post-container {
@@ -632,30 +633,30 @@ figure {
 
 .create-post-button {
     display: inline-block;
-    background-color: #1e1e1e; /* Темный фон кнопки */
-    color: #00BBFF; /* Синий текст */
-    border: 2px solid #00BBFF; /* Синяя рамка */
+    background-color: #1e1e1e;
+    color: #00BBFF;
+    border: 2px solid #00BBFF;
     padding: 12px 25px;
-    border-radius: 12px; /* Более округлые углы */
+    border-radius: 12px;
     font-weight: bold;
     text-decoration: none;
-    margin-right: 20px; /* Правый отступ */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Глубокая тень для эффекта "парения" */
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Плавные переходы всех свойств */
-    font-size: 16px; /* Оптимальный размер текста */
+    margin-right: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Центрирование текста и иконки */
+    justify-content: center;
     position: relative;
     overflow: hidden;
-    width: auto; /* Оставляем ширину кнопки такой, как была */
+    width: auto;
 }
 
 .create-post-button:hover {
-    background-color: #00BBFF; /* Синий фон при наведении */
-    color: #ffffff; /* Белый текст */
-    box-shadow: 0px 0px 20px rgba(0, 187, 255, 0.75), 0 0 30px rgba(0, 187, 255, 0.5); /* Умеренный неоновый эффект */
-    transform: translateY(-2px) scale(1.02); /* Подъем и легкое увеличение */
+    background-color: #00BBFF;
+    color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(0, 187, 255, 0.75), 0 0 30px rgba(0, 187, 255, 0.5);
+    transform: translateY(-2px) scale(1.02);
 }
 
 .create-post-button::after {
@@ -671,19 +672,19 @@ figure {
 }
 
 .create-post-button:hover::after {
-    transform: scale(1); /* Радиальный градиент расширяется при наведении */
+    transform: scale(1);
 }
 
 .create-post-button:active {
-    background-color: #0088cc; /* Темный синий при нажатии */
+    background-color: #0088cc;
     box-shadow: 0px 0px 10px rgba(0, 136, 204, 0.75);
-    transform: translateY(0) scale(1); /* Возвращение кнопки в исходное положение при нажатии */
+    transform: translateY(0) scale(1);
 }
 
 .plus-icon {
-    font-size: 22px; /* Размер иконки плюс */
+    font-size: 22px;
     margin-right: 8px;
-    transition: none; /* Убираем эффект поворота */
+    transition: none;
 }
 
 .add-post-text {
@@ -695,7 +696,7 @@ figure {
 .post-meta {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Выравниваем дату и автора по левому краю */
+    align-items: flex-start;
     margin-bottom: 10px;
 }
 
@@ -716,7 +717,7 @@ figure {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding-right: 10px; /* Отступ справа для выравнивания с контентом */
+    padding-right: 10px;
 }
 
 .content-wrapper > div {
@@ -724,42 +725,41 @@ figure {
 }
 
 .button3 {
-    align-self: flex-start; /* Выравниваем кнопку по левому краю */
-    margin-top: 10px; /* Добавляем отступ сверху для кнопки */
+    align-self: flex-start;
+    margin-top: 10px;
 }
 
 
  .line {
-     border-bottom: 0.5px solid #00BBFF; /* Синий цвет линии */
-     margin: 10px 0; /* Отступы сверху и снизу */
+     border-bottom: 0.5px solid #00BBFF;
+     margin: 10px 0;
  }
 
-/* Основные стили для страницы */
+/* Basic styles for the page */
 .middle {
-    padding: 0; /* Убираем padding для центральной части */
+    padding: 0;
 }
 
 .middle h1.logo {
-    margin-left: 0; /* Убираем сдвиг логотипа вправо */
+    margin-left: 0;
 }
 
 nav {
-    padding: 0; /* Убираем отступы для навигации */
+    padding: 0;
 }
 
 #slider {
-    margin: 0; /* Убираем отступы для слайдера */
+    margin: 0;
 }
 
-/* Корректировка ширины формы поиска */
 form#search {
     display: flex;
-    justify-content: flex-end; /* Выравниваем поиск вправо */
+    justify-content: flex-end;
 }
 
 form#search input[type="text"] {
-    width: 200px; /* Устанавливаем фиксированную ширину */
-    padding: 5px 10px; /* Добавляем padding для лучшего вида */
+    width: 200px;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
 }
@@ -896,18 +896,14 @@ form#search .button1:hover {
 .error-message h3 { /* Исправляем на h3 */
     margin: 0 0 5px 0;
     font-size: 18px;
-    color: #b22222; /* Темно-красный заголовок */
+    color: #b22222;
 }
 
 .error-message p {
     margin: 0;
     font-size: 14px;
-    color: #b22222; /* Темно-красный текст */
+    color: #b22222;
 }
-
-
-
-/* Reuse the CSS styles from the registration page for consistency */
 
 /* Styling the LOGIN box similarly to the registration box */
 .login-box {

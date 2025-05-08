@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Registration - Post Wave</title>
+    <title>Registration - Post Hub</title>
     <meta charset="utf-8">
     <link rel="icon" href="../images/icons8-favicon-64.png" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icons8-favicon-64.png" type="image/x-icon" />
@@ -161,7 +161,7 @@
             <a href="contacts.html">contacts</a>
         </div>
         <div class="privacy">
-            <a href="../index.html"><img src="../images/logo/logo7.svg" width="74" height="35" alt="f_logo" /></a>
+            <a href="../index.html"><img src="../images/logo/logo2.svg" width="74" height="35" alt="f_logo" /></a>
             &nbsp; &nbsp;<span>© 2025 &nbsp; &nbsp;&nbsp; <a href="index-2.html">Privacy Policy</a></span>
         </div>
     </footer>
@@ -196,11 +196,8 @@
                 showError("Password does not meet the required criteria:<br>" + passwordErrors.join("<br>"));
                 return;
             }
-
-            // Показываем прелоадер
             preloader.style.display = 'flex';
 
-            // Send data to the server
             fetch('https://post-wave-swagger.fun/auth/register', {
                 method: 'POST',
                 headers: {
@@ -210,14 +207,13 @@
             })
                 .then(response => response.json().then(data => ({ status: response.status, body: data })))
                 .then(({ status, body }) => {
-                    if (status === 409) { // Conflict
+                    if (status === 409) {
                         if (body.message.includes('Username already exists')) {
                             showError("Username already exists. Please choose a different one.");
                         } else if (body.message.includes('Email already exists')) {
                             showError("Email already exists. Please use a different one.");
                         }
                     } else if (body.success) {
-                        // Save the token, username, and other necessary details to localStorage
                         localStorage.setItem('username', body.payload.username);
                         localStorage.setItem('token', body.payload.token);
                         localStorage.setItem('refreshToken', body.payload.refreshToken);
@@ -225,13 +221,11 @@
                         const role = body.payload.roles?.[0]?.name || 'USER';
                         localStorage.setItem('role', role);
 
-                        // Redirect to the homepage
                         window.location.href = '../index.html';
                         preloader.style.display = 'none';
                     } else {
                         showError("Registration error: " + body.message);
 
-                        // Прячем прелоадер после успешного запроса
                         preloader.style.display = 'none';
                     }
                 })
@@ -239,7 +233,6 @@
                     console.error("Error:", error);
                     showError("Email or username is already taken. Please try another one.");
 
-                    // Прячем прелоадер после успешного запроса
                     preloader.style.display = 'none';
                 });
         });
@@ -292,12 +285,10 @@
             return errors;
         }
     });
-    // Скрипт для скрытия прелоадера после полной загрузки страницы
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
         preloader.style.display = 'none';
     });
-    // Скрипт для скрытия прелоадера после полной загрузки страницы
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
         preloader.style.display = 'none';
@@ -307,21 +298,15 @@
     // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
     }
 
+    // Handle Create user link click
     document.addEventListener("DOMContentLoaded", function() {
-        // Handle Create user link click
         const createUserLink = document.getElementById('create-user-link');
         if (createUserLink) {
             createUserLink.addEventListener('click', function(event) {
@@ -360,39 +345,18 @@
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Обработчик для регистрации через Google
         document.getElementById('google-login').addEventListener('click', function(event) {
             event.preventDefault();
             window.location.href = 'https://post-wave-swagger.fun/login/oauth2/code/google';
         });
-
-        // Вы можете добавить аналогичные обработчики для Facebook и GitHub,
-        // если в будущем решите их интегрировать.
-        // Пример:
-        // document.getElementById('facebook-login').addEventListener('click', function(event) {
-        //     event.preventDefault();
-        //     window.location.href = '/oauth2/authorization/facebook';
-        // });
-
-        // document.getElementById('github-login').addEventListener('click', function(event) {
-        //     event.preventDefault();
-        //     window.location.href = '/oauth2/authorization/github';
-        // });
-
-        // ...остальной ваш существующий код...
     });
-
 </script>
 </body>
 </html>

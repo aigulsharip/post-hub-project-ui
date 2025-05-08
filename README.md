@@ -1,4 +1,4 @@
-<h1 align="center"> Post-Wave Project </h1>
+<h1 align="center"> Post-Hub live-demo project</h1>
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/74038190/213844263-a8897a51-32f4-4b3b-b5c2-e1528b89f6f3.png" width="50px" />
@@ -13,35 +13,50 @@
   <img src="images/post-wave-gif-1-last.gif" alt="Post-Wave Logo" />
 </p>
 
-## ⚙️ Project Overview
+# 📬 Post-Hub – microservices demo project
 
-Post-Wave is a microservices-based platform that enables users to register, create posts and comments, and track all actions performed on the platform. The project serves as a learning tool for understanding microservices architecture, integration, and deployment.
+**Post-Hub** is a demo microservices project built to learn and showcase how different services work together in a modern backend system. It allows users to register, log in, create posts and comments, and tracks all user actions through a logging system.
 
-## 🛠️ Tech Stack
+## 🔍 What the project does
 
-The following technologies and tools were used in this project:
+- User registration and login
+- Post and comment creation
+- Action logging via Kafka
+- Secure endpoints using JWT
+- Web access via Gateway and Nginx
+- Full microservices architecture + CI/CD deployment
 
-- **Java:** The primary programming language for developing microservices.
-- **Spring Boot:** Used to build the microservices with RESTful APIs.
-- **JWT & Spring Security:** Ensures secure user authentication and authorization.
-- **Kafka:** Facilitates asynchronous communication between microservices.
-- **Flyway:** Manages database migrations.
-- **H2 & PostgreSQL:** H2 is used for local development, and PostgreSQL is used for production.
-- **Docker:** Containerizes the application and its services.
-- **IntelliJ IDEA Ultimate:** Integrated Development Environment (IDE) used for coding.
+## 🧩 Microservices overview
 
-## 🚀 Deployment Workflow
+The project is divided into four key services:
 
-The deployment process involves the following steps:
+- **IAM-service:** Handles user accounts, authentication, and post/comment creation. Uses JWT for security and Flyway for database migrations.
+- **UTILS-service:** Logs user activities like post/comment creation. Receives events from IAM-service via Kafka.
+- **GATEWAY-service:** Main entry point for all external requests. Routes traffic to the correct service and checks authentication.
+**DISCOVERY-service:** Uses Consul for automatic service registration and communication.
 
-1. **Image Logs Stage:** Retrieve the last 1000 lines of Docker container logs from the remote server via SSH.
-2. **Docker Stop Stage:** Stop and remove the current Docker container to prepare the server for deployment.
-3. **Data Check Stage:** Validate the Docker environment, network, and user data on the server.
-4. **Build JAR Stage:** Compile the application code into a JAR file using Maven.
-5. **Build Docker Stage:** Create a new Docker image from the JAR file and push it to the Docker Registry.
-6. **Deploy Stage:** Pull the new Docker image from the registry and deploy it on the server.
+## ⚙️ Tech stack
+
+- **Java + Spring Boot** — backend microservices
+- **Spring Security + JWT** — authentication and authorization
+- **Kafka** — messaging between services
+- **Docker** — containerized deployment
+- **PostgreSQL (on AWS)** — main production database
+- **Flyway** — database migration tool
+- **Consul** — service discovery
+- **Nginx** — reverse proxy and SSL termination
+
+## 🚀 Deployment Process
+
+Each microservice is packaged as a Docker image and pushed to Docker Hub. CI/CD is managed through GitLab, and the deployment pipeline includes:
+
+1. Fetching logs from the server
+2. Stopping and removing running containers
+3. Building the project JAR files
+4. Creating and pushing Docker images
+5. Deploying updated containers on the server
 
 ## 🗄️ Database & Hosting
 
-The project uses a managed PostgreSQL database hosted on the ScaleGrid platform, leveraging AWS for high availability and scalability. The application is hosted on a dedicated server that uses Docker for deployment, ensuring flexible resource management and maintaining high performance.
-
+- **Database:** PostgreSQL hosted on AWS via ScaleGrid
+- **Hosting:** Deployed on a VPS with Docker and Nginx configured for routing, HTTPS, and performance
