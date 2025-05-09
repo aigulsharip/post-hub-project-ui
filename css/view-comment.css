@@ -23,13 +23,27 @@
 }
 
 .picks-comment .comment-content {
-    font-size: 16px;
+    font-size: 18px;
     color: #ffffff;
-    margin-bottom: auto;
+    margin-bottom: 15px;
     font-family: 'Oswald', sans-serif;
     letter-spacing: 1px;
     font-weight: bold;
     text-transform: uppercase;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.comment-link {
+    display: inline-block;
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
 }
 
 .picks-comment .comment-content .comment-link {
