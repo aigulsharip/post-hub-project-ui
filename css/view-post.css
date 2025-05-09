@@ -1,22 +1,19 @@
-/* Основной контейнер контента поста */
 #post-content-wrapper {
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    max-width: 960px; /* Растягиваем контейнер до границы зеленого меню */
+    max-width: 960px;
     margin: 0 auto;
 }
 
-/* Контейнер для изображения и информации о посте */
 .post-wrapper {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    margin-bottom: 40px; /* Увеличенный отступ снизу */
+    margin-bottom: 40px;
 }
 
-/* Стили для картинки поста */
 .post-image {
     flex: 0 0 300px;
     margin-right: 20px;
@@ -28,7 +25,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Стили для информации о посте */
 .post-info {
     flex: 1;
     color: #fff;
@@ -46,8 +42,8 @@
 .post-content {
     font-size: 16px;
     line-height: 1.8;
-    margin-bottom: 120px; /* Увеличенный отступ снизу для разделения контента и мета-информации */
-    word-wrap: break-word; /* Добавляем перенос слов, чтобы текст не выходил за пределы контейнера */
+    margin-bottom: 120px;
+    word-wrap: break-word;
 }
 
 .post-likes, .post-comments, .post-date {
@@ -55,31 +51,28 @@
     color: #bbb;
     margin-bottom: 10px;
     font-weight: bold;
-    margin-right: 40px; /* Увеличенный отступ между строками */
+    margin-right: 40px;
 }
 
 .post-likes {
-    margin-top: 40px; /* Добавляем отступ сверху для разделения от контента */
+    margin-top: 40px;
 }
 
 .post-comments {
-    margin-top: 5px; /* Дополнительный отступ между лайками и комментариями */
+    margin-top: 5px;
 }
 
 .post-date {
-    margin-top: 5px; /* Дополнительный отступ между комментариями и датой */
+    margin-top: 5px;
     font-style: italic;
 }
 
-
-/* Контейнер для кнопок редактирования и удаления */
 .button-container {
     display: flex;
     justify-content: flex-start;
     margin-top: 20px;
 }
 
-/* Стили для кнопок редактирования и удаления */
 .button3 {
     display: inline-block;
     padding: 10px 20px;
@@ -94,16 +87,15 @@
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #00BBFF;
     cursor: pointer;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Уменьшили яркость */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .button3:hover {
     background-color: #00BBFF;
     color: #1e1e1e;
-    box-shadow: 0 0 10px #00BBFF, 0 0 15px #00BBFF, 0 0 20px #00BBFF; /* Уменьшили яркость */
+    box-shadow: 0 0 10px #00BBFF, 0 0 15px #00BBFF, 0 0 20px #00BBFF;
 }
 
-/* Стили для комментариев */
 .comments-section {
     margin-top: 40px;
     background-color: #2a2a2a;
@@ -133,7 +125,7 @@
     background-color: #1e1e1e;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* To position the three-dot menu */
+    position: relative;
 }
 
 .comment-item:hover {
@@ -141,7 +133,6 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Текст комментария */
 .comment-item p {
     font-size: 16px;
     color: #ccc;
@@ -149,7 +140,6 @@
     line-height: 1.6;
 }
 
-/* Имя автора комментария */
 .comment-item .comment-owner {
     font-size: 16px;
     color: rgba(0, 187, 255, 0.7);
@@ -167,7 +157,6 @@
     text-shadow: 0 0 5px rgba(0, 187, 255, 0.5);
 }
 
-/* Дата создания комментария */
 .comment-item .comment-date {
     font-size: 12px;
     color: #999;
@@ -324,8 +313,6 @@
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
-
-/* Форма добавления комментариев */
 #comment-form {
     display: flex;
     flex-direction: row;
@@ -494,29 +481,29 @@
     background-color: #444;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
-/* Форма добавления комментариев */
+
 #comment-form {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between; /* Кнопка внутри блока с комментарием */
+    justify-content: space-between;
 }
 
 #comment-form textarea {
     flex: 1;
-    padding: 15px; /* Увеличиваем высоту поля */
+    padding: 15px;
     border-radius: 5px;
     border: 1px solid #555;
     background-color: #333;
     color: #fff;
     resize: none;
     margin-right: 10px;
-    min-height: 50px; /* Минимальная высота текстового поля */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for border and shadow */
+    min-height: 50px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #comment-form button {
-    flex-shrink: 0; /* Кнопка занимает только необходимое пространство */
+    flex-shrink: 0;
     padding: 10px 20px;
     border-radius: 5px;
     background-color: #1e1e1e;
@@ -527,17 +514,16 @@
     font-weight: bold;
     border: 1px solid #00BBFF;
     cursor: pointer;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Уменьшили яркость */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #comment-form button:hover {
     background-color: #00BBFF;
     color: #1e1e1e;
-    box-shadow: 0 0 10px #00BBFF, 0 0 15px #00BBFF, 0 0 20px #00BBFF; /* Уменьшили яркость */
+    box-shadow: 0 0 10px #00BBFF, 0 0 15px #00BBFF, 0 0 20px #00BBFF;
 }
 
-/* Общие стили для секции комментариев */
 .comments-section {
     margin-top: 40px;
     background-color: #2a2a2a;
@@ -546,7 +532,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Заголовок Comments */
 .comments-section h3 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -558,12 +543,10 @@
     margin-bottom: 30px;
 }
 
-/* Стили для списка комментариев */
 #comments-list {
     margin-bottom: 20px;
 }
 
-/* Стили для каждого комментария */
 .comment-item {
     margin-bottom: 20px;
     padding: 15px;
@@ -573,13 +556,11 @@
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Новый эффект при наведении на комментарий */
 .comment-item:hover {
     background-color: #2a2a2a;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Текст комментария */
 .comment-item p {
     font-size: 16px;
     color: #ccc;
@@ -587,39 +568,34 @@
     line-height: 1.6;
 }
 
-/* Имя автора комментария */
 .comment-item .comment-owner {
     font-size: 16px;
-    color: rgba(0, 187, 255, 0.7); /* Прозрачный синий цвет */
-    margin-top: 15px; /* Добавляем отступ сверху */
+    color: rgba(0, 187, 255, 0.7);
+    margin-top: 15px;
     font-style: italic;
-    font-weight: normal; /* Меняем шрифт на более тонкий */
-    text-transform: none; /* Убираем uppercase для более спокойного вида */
-    letter-spacing: 0.5px; /* Уменьшаем межбуквенный интервал */
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: 0.5px;
     text-align: left;
     display: block;
-    font-family: 'Roboto', sans-serif; /* Применяем новый шрифт */
+    font-family: 'Roboto', sans-serif;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Эффект при наведении на имя автора */
 .comment-item .comment-owner:hover {
-    color: rgba(0, 187, 255, 1); /* Увеличиваем непрозрачность при наведении */
-    text-shadow: 0 0 5px rgba(0, 187, 255, 0.5); /* Добавляем свечение */
+    color: rgba(0, 187, 255, 1);
+    text-shadow: 0 0 5px rgba(0, 187, 255, 0.5);
 }
 
-
-/* Дата создания комментария */
 .comment-item .comment-date {
     font-size: 12px;
     color: #999;
     font-style: italic;
     margin-top: 5px;
     text-align: right;
-    margin-top: -25px; /* Подняли дату на одну линию с owner */
+    margin-top: -25px;
 }
 
-/* Стили для формы добавления комментария */
 #comment-form {
     display: flex;
     flex-direction: row;
@@ -638,7 +614,7 @@
     resize: none;
     margin-right: 10px;
     min-height: 50px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for border and shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #comment-form button {
@@ -749,7 +725,8 @@
 
 .divider {
     border: none;
-    border-top: 0.5px solid #3e3e3e; /* Adjust the color if needed */
-    width: 90%; /* Ensure the width matches the bottom divider */
-    margin: 0 0 10px 24px; /* Match the bottom divider's margin */
+    border-top: 0.5px solid #3e3e3e;
+    width: 90%;
+    margin: 0 0 10px 24px;
 }
+

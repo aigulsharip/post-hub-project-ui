@@ -16,7 +16,6 @@
     <script type="text/javascript" src="../js/tms-0.4.1.js"></script>
 </head>
 <body>
-<!-- Прелоадер -->
 <div id="preloader">
     <div class="cube-grid">
         <div class="cube cube1"></div>
@@ -109,7 +108,6 @@
                             <hr class="divider">
                             <div class="sub_box" id="post-container">
                                 <ul id="comment-list" class="picks comments-list">
-                                    <!-- Комментарии будут динамически загружаться здесь -->
                                 </ul>
 
                                 <div class="post-footer">
@@ -117,7 +115,6 @@
                                         <a href="all-my-comments.html" class="link2">View All My Comments</a>
                                     </div>
                                     <div id="post-info-container" class="post-info-container">
-                                        <!-- Здесь будет отображаться информация о количестве комментариев -->
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +124,6 @@
             </div>
         </section>
     </div>
-
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -148,7 +144,6 @@
     document.addEventListener("DOMContentLoaded", function() {
         let commentIdToDelete = null;
 
-        // Проверка аутентификации пользователя
         const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
         const createCommentContainer = document.getElementById('create-post-container');
@@ -162,7 +157,6 @@
             document.getElementById('greeting').textContent = username;
             createCommentContainer.style.display = 'block';
 
-            // Загружаем комментарии пользователя
             loadComments();
         } else {
             document.getElementById('auth-links').style.display = 'block';
@@ -173,35 +167,30 @@
             commentInfoContainer.innerHTML = '';
         }
 
-        // Обработка кликов на кнопке Logout
         document.getElementById('logout-link').addEventListener('click', function(event) {
             event.preventDefault();
             localStorage.removeItem('username');
             localStorage.removeItem('token');
-            window.location.reload(); // Перезагрузка страницы после выхода
+            window.location.reload();
         });
 
-        // Обработка кликов на кнопке редактирования комментария
         document.getElementById('comment-list').addEventListener('click', function(event) {
             if (event.target.classList.contains('edit-comment')) {
                 event.preventDefault();
                 const commentItem = event.target.closest('.picks-comment');
                 const commentContent = commentItem.querySelector('.comment-content a');
 
-                // Превращаем текст в редактируемое поле
                 const textArea = document.createElement('textarea');
                 textArea.classList.add('editable');
                 textArea.value = commentContent.textContent;
-                textArea.required = true;  // Поле обязательно для заполнения
+                textArea.required = true;
                 commentContent.replaceWith(textArea);
 
-                // Меняем кнопку "Edit" на "Save"
                 const saveButton = document.createElement('span');
                 saveButton.classList.add('save-comment');
                 saveButton.innerHTML = 'Save changes';
                 event.target.replaceWith(saveButton);
 
-                // Обработчик для сохранения комментария
                 saveButton.addEventListener('click', function() {
                     const updatedContent = textArea.value.trim();
                     const postId = commentItem.getAttribute('data-post-id');
@@ -212,7 +201,6 @@
             }
         });
 
-        // Функция для сохранения комментария
         function saveComment(commentId, newContent, postId, commentItem) {
             showPreloader();
 
@@ -253,7 +241,6 @@
                 .finally(hidePreloader);
         }
 
-        // Обработка кликов на кнопке удаления комментария
         document.getElementById('comment-list').addEventListener('click', function(event) {
             if (event.target.classList.contains('delete-comment')) {
                 event.preventDefault();
@@ -262,16 +249,14 @@
             }
         });
 
-        // Подтверждение удаления комментария
         document.getElementById('confirm-delete-comment').addEventListener('click', function() {
             if (commentIdToDelete) {
-                showPreloader();  // Показать общий прелоадер
+                showPreloader();
                 deleteComment(commentIdToDelete);
             }
             document.getElementById('delete-comment-modal').style.display = 'none';
         });
 
-        // Отмена удаления комментария
         document.getElementById('cancel-delete-comment').addEventListener('click', function() {
             document.getElementById('delete-comment-modal').style.display = 'none';
             commentIdToDelete = null;
@@ -291,14 +276,13 @@
                             throw new Error(text || 'Unknown error');
                         });
                     }
-                    return response.json().catch(() => ({})); // если пустой ответ
+                    return response.json().catch(() => ({}));
                 })
                 .then(data => {
                     if (data.success || Object.keys(data).length === 0) {
                         const commentElement = document.querySelector(`[data-comment-id="${commentId}"]`).closest('li.picks-comment');
                         commentElement.remove();
 
-                        // Проверка, остались ли еще комментарии
                         const remainingComments = document.querySelectorAll('li.picks-comment').length;
                         const commentInfoContainer = document.getElementById('post-info-container');
                         if (remainingComments === 0) {
@@ -322,7 +306,6 @@
                 });
         }
 
-
         const currentPath = window.location.pathname;
         document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
             menuItem.classList.remove('current');
@@ -342,11 +325,9 @@
             document.getElementById('preloader').style.display = 'none';
         }
 
-        // Вызов loadComments для загрузки комментариев при загрузке страницы
         loadComments();
     });
 
-    // Загрузка комментариев при загрузке страницы
     function loadComments() {
         const preloader = document.getElementById('preloader');
         const commentList = document.getElementById('comment-list');
@@ -481,11 +462,7 @@
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -501,7 +478,6 @@
         </div>
     </div>
 </div>
-<!-- Прелоудер для удаления комментария -->
 <div id="delete-comment-preloader" style="display: none;">
     <div class="cube-grid">
         <div class="cube cube1"></div>
@@ -515,6 +491,5 @@
         <div class="cube cube9"></div>
     </div>
 </div>
-
 </body>
 </html>

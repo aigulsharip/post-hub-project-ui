@@ -15,15 +15,14 @@
     <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="../js/tms-0.4.1.js"></script>
     <style>
-        /* Preloader styles (existing) */
         #comment-preloader, #delete-preloader {
-            display: none; /* Hidden by default */
+            display: none;
             position: fixed;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+            background: rgba(0, 0, 0, 0.7);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -40,7 +39,7 @@
         .cube {
             width: 33%;
             height: 33%;
-            background-color: #8cc503; /* Зеленый цвет */
+            background-color: #8cc503;
             animation: cubeGridScaleDelay 1.3s infinite ease-in-out;
         }
 
@@ -76,7 +75,7 @@
     <![endif]-->
 </head>
 <body>
-<div class="main main-content"> <!-- Класс main-content для скрытия контента -->
+<div class="main main-content">
     <!--==============================header=================================-->
     <header>
         <div class="top">
@@ -174,7 +173,6 @@
                             <div class="comments-section">
                                 <h3>Comments</h3>
                                 <div id="comments-list">
-                                    <!-- Комментарии будут загружены сюда -->
                                 </div>
                                 <div id="no-comments-message" style="display: none;">No comments yet. Be the first to leave a comment!</div>
 
@@ -262,7 +260,6 @@
             document.getElementById('greeting').textContent = username;
         }
 
-        // Показываем прелоудер
         preloader.style.display = 'flex';
 
         fetch(`https://post-wave-swagger.fun/posts/${postId}`, {
@@ -286,7 +283,6 @@
                 }
 
                 if (data.success) {
-                    // Заполняем контент данными
                     postTitle.textContent = data.payload.title;
                     postText.textContent = data.payload.content;
                     postLikes.innerHTML = `Likes: ${data.payload.likes} <span class="not-implemented">(not fully implemented)</span>`;
@@ -296,20 +292,18 @@
 
                     postDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
 
-                    // Проверяем, является ли пользователь владельцем поста
                     const role = localStorage.getItem('role');
                     const isAuthor = data.payload.createdBy === username;
                     const isAdmin = role === 'SUPER_ADMIN' || role === 'ADMIN';
 
                     if (isAuthor || isAdmin) {
-                        dropdown.style.display = 'block'; // Показываем меню
+                        dropdown.style.display = 'block';
                     } else {
-                        dropdown.style.display = 'none'; // Прячем меню
+                        dropdown.style.display = 'none';
                     }
 
-                    // Показываем контент
                     postContentWrapper.style.display = 'block';
-                    loadComments(postId, token); // Загружаем комментарии
+                    loadComments(postId, token);
                 } else {
                     alert('Error loading post details');
                 }
@@ -319,12 +313,11 @@
                 alert('An error occurred while loading the post.');
             })
             .finally(() => {
-                preloader.style.display = 'none'; // Скрываем прелоудер после загрузки данных
+                preloader.style.display = 'none';
             });
 
-        // Функция для удаления поста
         function deletePost() {
-            deletePreloader.style.display = 'flex'; // Показываем прелоудер
+            deletePreloader.style.display = 'flex';
 
             fetch(`https://post-wave-swagger.fun/posts/${postId}`, {
                 method: 'DELETE',
@@ -337,37 +330,34 @@
                     if (response.ok) {
                         window.location.href = 'my-posts.html';
                     } else {
-                        deletePreloader.style.display = 'none'; // Скрываем прелоудер при ошибке
+                        deletePreloader.style.display = 'none';
                     }
                 })
                 .catch(error => {
                     console.error('Error deleting post:', error);
-                    deletePreloader.style.display = 'none'; // Скрываем прелоудер при ошибке
+                    deletePreloader.style.display = 'none';
                 });
         }
 
-        // Обработчик нажатия на кнопку удаления
         deletePostButton.addEventListener('click', function(event) {
             event.preventDefault();
-            deleteModal.style.display = 'flex'; // Показываем модальное окно
+            deleteModal.style.display = 'flex';
         });
 
-        // Обработчик подтверждения удаления
         confirmDeleteButton.addEventListener('click', function() {
-            deleteModal.style.display = 'none'; // Закрываем модальное окно
-            deletePost(); // Удаляем пост
+            deleteModal.style.display = 'none';
+            deletePost();
         });
 
-        // Обработчик отмены удаления
         cancelDeleteButton.addEventListener('click', function() {
-            deleteModal.style.display = 'none'; // Закрываем модальное окно
+            deleteModal.style.display = 'none';
         });
 
         document.getElementById('edit-post').addEventListener('click', function(event) {
-            event.preventDefault(); // предотвращает переход по ссылке по умолчанию
-            const postId = new URLSearchParams(window.location.search).get('id'); // Получаем ID поста из текущего URL
+            event.preventDefault();
+            const postId = new URLSearchParams(window.location.search).get('id');
             if (postId) {
-                window.location.href = `edit-post.html?id=${postId}`; // Перенаправляем на страницу редактирования с ID в URL
+                window.location.href = `edit-post.html?id=${postId}`;
             } else {
                 console.error('Post ID is missing or null');
                 alert('Post ID is missing. Unable to proceed to edit page.');
@@ -375,7 +365,6 @@
         });
     });
 
-    // Функция для загрузки комментариев
     function loadComments(postId, token) {
         const preloader = document.getElementById('comment-preloader');
         preloader.style.display = 'flex';
@@ -386,7 +375,7 @@
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ postId: parseInt(postId) }) // передаем postId в теле запроса
+            body: JSON.stringify({ postId: parseInt(postId) })
         })
             .then(response => response.json())
             .then(data => {
@@ -477,21 +466,15 @@
                 alert('An error occurred while posting the comment.');
             })
             .finally(() => {
-                preloader.style.display = 'none'; // Hide preloader when done
+                preloader.style.display = 'none';
             });
     });
 
     // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -537,11 +520,7 @@
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -571,7 +550,6 @@
         </div>
     </div>
 </div>
-<!-- Прелоудер для удаления -->
 <div id="delete-preloader" style="display: none;">
     <div class="cube-grid">
         <div class="cube cube1"></div>
@@ -585,6 +563,5 @@
         <div class="cube cube9"></div>
     </div>
 </div>
-
 </body>
 </html>

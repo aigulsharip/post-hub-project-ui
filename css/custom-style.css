@@ -1,4 +1,3 @@
-/* custom-style.css */
 .middle {
     display: flex;
     align-items: center;
@@ -7,16 +6,16 @@
 }
 
 .logo {
-    font-size: 36px; /* Размер шрифта */
-    font-weight: bold; /* Жирность шрифта */
-    color: #4CAF50; /* Цвет текста */
-    text-transform: uppercase; /* Преобразование текста в верхний регистр */
-    text-decoration: none; /* Убрать подчеркивание */
+    font-size: 36px;
+    font-weight: bold;
+    color: #4CAF50;
+    text-transform: uppercase;
+    text-decoration: none;
     display: inline-block;
 }
 
 .logo span {
-    color: #333; /* Цвет для первой части текста, например "Post" */
+    color: #333;
 }
 
 

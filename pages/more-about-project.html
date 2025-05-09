@@ -129,8 +129,6 @@
             </div>
         </div>
     </section>
-
-
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -161,7 +159,6 @@
             window.location.reload();
         });
     });
-
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -188,14 +185,8 @@
     // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -241,16 +232,11 @@
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
     }
-
 </script>
 </body>
 </html>

@@ -1,17 +1,17 @@
 .container_12 {
     display: flex;
     justify-content: center;
-    padding: 0 15px; /* Увеличение отступов контейнера */
+    padding: 0 15px;
 }
 
 .edit-post-box {
     background-color: #2e2e2e;
     padding: 30px;
     border-radius: 10px;
-    width: calc(100% - 1px); /* Увеличиваем ширину блока */
-    max-width: 1170px; /* Еще немного увеличиваем максимальную ширину */
+    width: calc(100% - 1px);
+    max-width: 1170px;
     box-sizing: border-box;
-    margin-left: -10px; /* Сохраняем центральное выравнивание */
+    margin-left: -10px;
 }
 
 .edit-post-box h2 {
@@ -28,7 +28,7 @@
 }
 
 .form-group label {
-    font-size: 18px; /* Установлен одинаковый размер шрифта для всех заголовков */
+    font-size: 18px;
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
     font-weight: bold;
@@ -39,7 +39,7 @@
 .form-group textarea,
 .form-group input[type="file"] {
     width: 100%;
-    padding: 12px; /* Немного увеличены внутренние отступы */
+    padding: 12px;
     border-radius: 5px;
     border: 1px solid #cccccc;
     background-color: #1e1e1e;
@@ -83,7 +83,7 @@
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
     overflow: hidden;
-    margin-top: 20px; /* Отступ сверху */
+    margin-top: 20px;
 }
 
 .submit-button:hover {

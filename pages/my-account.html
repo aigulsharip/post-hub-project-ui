@@ -124,7 +124,6 @@
             </div>
         </section>
     </div>
-
     <!--==============================footer=================================-->
     <footer>
         <div class="menu">
@@ -333,7 +332,6 @@
             document.getElementById('preloader').style.display = 'none';
         }
 
-        // получаем элементы модалки
         const deleteAccountButton = document.getElementById('delete-account-button');
         const deleteModal         = document.getElementById('delete-account-modal');
         const confirmDelete       = document.getElementById('confirm-delete-account');
@@ -341,19 +339,16 @@
 
         deleteAccountButton.addEventListener('click', e => {
             e.preventDefault();
-            // показываем модалку
             deleteModal.style.display = 'block';
         });
 
         cancelDelete.addEventListener('click', e => {
             e.preventDefault();
-            // прячем модалку без удаления
             deleteModal.style.display = 'none';
         });
 
         confirmDelete.addEventListener('click', async e => {
             e.preventDefault();
-            // прячем модалку и показываем прелоадер
             deleteModal.style.display = 'none';
             showPreloader();
 
@@ -365,7 +360,6 @@
                     }
                 });
                 if (!res.ok) {
-                    // попробуем прочитать ошибку из ответа
                     let err = 'Failed to delete account';
                     try {
                         const j = await res.json();
@@ -373,7 +367,6 @@
                     } catch {}
                     throw new Error(err);
                 }
-                // если всё ок — убираем всё из localStorage и редиректим на логин
                 localStorage.clear();
                 window.location.href = 'login-page.html';
             } catch (err) {
@@ -384,18 +377,11 @@
 
     });
 
-
     // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -457,7 +443,6 @@
         localStorage.removeItem('userId');
         window.location.href = 'login-page.html';
     });
-
 </script>
 </body>
 </html>

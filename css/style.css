@@ -4,12 +4,12 @@ article,aside,audio,canvas,command,datalist,details,embed,figcaption,figure,foot
 html {width:100%;}
 
 .pulsing-text {
-    font-family: 'Barlow', sans-serif; /* Используйте свой шрифт */
-    font-size: 1em; /* Подберите нужный размер */
-    color: #8cc503; /* Зеленый цвет текста */
+    font-family: 'Barlow', sans-serif;
+    font-size: 1em;
+    color: #8cc503;
     text-align: center;
     animation: pulsingGlow 2s infinite;
-    text-decoration: none; /* Убираем стандартное подчеркивание у ссылок */
+    text-decoration: none;
 }
 
 @keyframes pulsingGlow {
@@ -71,11 +71,10 @@ html {width:100%;}
     background-color: #24292e;
 }
 
-/* Увеличить размер иконок */
 .fab {
-    font-size: 28px; /* Увеличить размер иконок */
-    margin-right: 8px; /* Отступ справа для выравнивания с текстом */
-    vertical-align: middle; /* Вертикальное выравнивание иконки с текстом */
+    font-size: 28px;
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
 /* Style for editable input fields */
@@ -197,7 +196,7 @@ html {width:100%;}
 
 .latest-user-details {
     flex: 1;
-    max-width: 100%; /* это критично для ограничения ширины внутри flex-контейнера */
+    max-width: 100%;
     overflow: hidden;
 }
 
@@ -779,26 +778,24 @@ form#search .button1:hover {
 }
 
 .not-implemented {
-    font-size: 10px; /* Уменьшенный размер текста */
-    color: rgba(255, 255, 255, 0.5); /* Белый более прозрачный текст */
-    background-color: rgba(70, 70, 70, 0.3); /* Темный более прозрачный фон */
-    padding: 2px 8px; /* Меньшие отступы внутри блока */
-    border-radius: 6px; /* Менее круглые углы */
-    margin-left: 5px; /* Меньший отступ слева от количества лайков */
-    display: inline-block; /* Отображение как встроенный блок */
-    box-shadow: none; /* Убираем тень */
-    transition: background-color 0.3s ease; /* Плавный переход для фона */
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(70, 70, 70, 0.3);
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 5px;
+    display: inline-block;
+    box-shadow: none;
+    transition: background-color 0.3s ease;
 }
 
 .not-implemented:hover {
-    background-color: rgba(90, 90, 90, 0.4); /* Легкое увеличение яркости фона при наведении */
+    background-color: rgba(90, 90, 90, 0.4);
 }
 
-
-/* !!!!! Стили для формы регистрации !!!!! */
 .register-box {
-    max-width: 960px; /* Максимальная ширина формы регистрации */
-    margin: 0 auto; /* Центрируем форму */
+    max-width: 960px;
+    margin: 0 auto;
     padding: 20px;
     background-color: #222;
     border-radius: 10px;
@@ -806,8 +803,8 @@ form#search .button1:hover {
 }
 
 .register-form {
-    max-width: 600px; /* Ширина формы регистрации */
-    margin: 0 auto; /* Центрируем форму */
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .register-form .form-group {
@@ -883,17 +880,17 @@ form#search .button1:hover {
 
 /* FOR ERROR MESSAGES */
 .error-message {
-    display: none; /* Изначально скрыто */
-    width: 100%; /* Ширина блока ошибки будет равна ширине родительского элемента */
-    background-color: #ffe6e6; /* Светлый фон внутри */
-    border: 1px solid #ff4c4c; /* Красная рамка */
-    color: #b22222; /* Темно-красный текст */
+    display: none;
+    width: 100%;
+    background-color: #ffe6e6;
+    border: 1px solid #ff4c4c;
+    color: #b22222;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
 }
 
-.error-message h3 { /* Исправляем на h3 */
+.error-message h3 {
     margin: 0 0 5px 0;
     font-size: 18px;
     color: #b22222;
@@ -1060,6 +1057,27 @@ h2.first {
 .user-info-container:hover {
     background: linear-gradient(145deg, #555, #333);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.post-title {
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3em;
+}
+
+.post-title a {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
 }
 
 body {font-family:Arial, Arial, Helvetica, sans-serif; font-size:12px; line-height:19px; color:#6a6a73; min-width:960px; background:url(../images/body_bg.jpg) 50% 0 no-repeat #1b1b1c;padding:59px 0 0;}

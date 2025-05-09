@@ -20,11 +20,11 @@
                 duration:800,
                 easing:'easeOutQuad',
                 preset:'diagonalFade',
-                pagination:true,//'.pagination',true,'<ul></ul>'
+                pagination:true,
                 pagNums:false,
                 slideshow:7000,
                 numStatus:false,
-                banners:'fade',// fromLeft, fromRight, fromTop, fromBottom
+                banners:'fade',
                 waitBannerAnimation:false,
                 progressBar:false
             })
@@ -193,11 +193,10 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    // Скрываем прелоадер после загрузки данных
                     preloader.style.display = 'none';
 
                     if (data.success && data.payload.length > 0) {
-                        postList.innerHTML = ''; // Clear existing content
+                        postList.innerHTML = '';
 
                         data.payload.forEach(post => {
                             const postItem = `
@@ -216,7 +215,6 @@
                             postList.innerHTML += postItem;
                         });
 
-                        // Add the "View All My Posts" link
                         postContainer.appendChild(linkWrapper);
                     } else {
                         postContainer.innerHTML = `<p class="no-posts-message">You don't have any posts yet. <a href="create-post.html">Create a new post</a> or <a href="login-page.html">log in</a> to get started!</p>`;
@@ -224,7 +222,7 @@
                 })
                 .catch(error => {
                     console.error('Error loading posts:', error);
-                    preloader.style.display = 'none'; // Скрываем прелоадер в случае ошибки
+                    preloader.style.display = 'none';
                 });
         } else {
             document.getElementById('auth-links').style.display = 'block';
@@ -237,7 +235,7 @@
             localStorage.removeItem('username');
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
-            window.location.href = 'login-page.html'; // Redirect to login page after logout
+            window.location.href = 'login-page.html';
         });
 
         const currentPath = window.location.pathname;
@@ -272,35 +270,27 @@
             localStorage.removeItem('username');
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
-            window.location.href = 'login-page.html'; // Redirect to login page after logout
+            window.location.href = 'login-page.html';
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Получаем текущий URL страницы
             const currentPath = window.location.pathname;
 
-            // Убираем класс 'current' у всех элементов меню
             document.querySelectorAll('.sf-menu li').forEach(function(menuItem) {
                 menuItem.classList.remove('current');
             });
 
-            // Проверяем, какая страница открыта, и добавляем класс 'current' соответствующему пункту меню
             if (currentPath.includes("index.html")) {
                 document.querySelector('.sf-menu li a[href="index.html"]').parentElement.classList.add('current');
             } else if (currentPath.includes("pages/my-posts.html")) {
                 document.querySelector('.sf-menu li a[href="pages/my-posts.html"]').parentElement.classList.add('current');
             }
-            // Добавьте здесь аналогичные условия для других страниц
         });
     });
     function handleSearch(event) {
         event.preventDefault();
         const popup = document.getElementById('search-popup');
-
-        // Показываем попап
         popup.style.display = 'block';
-
-        // Скрываем попап через 3 секунды
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);

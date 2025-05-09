@@ -1,103 +1,91 @@
-/* Основной стиль таблицы */
 table {
     width: 100%;
-    margin-bottom: 40px; /* Увеличенный отступ снизу */
-    background-color: #282828; /* Темный фон для таблицы */
-    color: #ffffff; /* Белый цвет текста */
+    margin-bottom: 40px;
+    background-color: #282828;
+    color: #ffffff;
     border-collapse: separate;
-    border-spacing: 0 15px; /* Отступы между строками */
-    border-radius: 12px; /* Закругленные углы */
+    border-spacing: 0 15px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Тень для глубины */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Заголовки таблицы */
 th {
-    padding: 16px 24px; /* Увеличенный внутренний отступ */
-    background-color: #333333; /* Темный фон для заголовков */
-    color: #e0e0e0; /* Светло-серый текст */
-    font-weight: 600; /* Полужирный текст */
-    text-transform: uppercase; /* Заглавные буквы */
-    text-align: center; /* Выравнивание по центру */
-    border-bottom: 2px solid #444444; /* Нижняя граница */
-    white-space: nowrap; /* Запрет на перенос строк */
+    padding: 16px 24px;
+    background-color: #333333;
+    color: #e0e0e0;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 2px solid #444444;
+    white-space: nowrap;
 }
 
-/* Ячейки таблицы */
 td {
-    padding: 16px 24px; /* Увеличенный внутренний отступ */
-    background-color: #202020; /* Темный фон для ячеек */
-    border-bottom: 1px solid #444444; /* Границы между строками */
-    border-right: 1px solid #444444; /* Границы между столбцами */
-    text-align: center; /* Выравнивание текста по центру */
-    vertical-align: middle; /* Вертикальное выравнивание по центру */
-    font-size: 16px; /* Увеличенный размер текста */
+    padding: 16px 24px;
+    background-color: #202020;
+    border-bottom: 1px solid #444444;
+    border-right: 1px solid #444444;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    white-space: nowrap; /* Запрет на перенос строк */
-    border-radius: 8px; /* Закругленные углы для строк */
+    white-space: nowrap;
+    border-radius: 8px;
+    word-wrap: break-word;
+    max-width: 350px;
+    white-space: normal;
 }
 
-/* Последняя колонка без правой границы */
 td:last-child {
     border-right: none;
 }
 
-/* Фиксированная ширина для числовых данных */
 th:first-child, td:first-child,
 th:nth-child(2), td:nth-child(2) {
-    width: 90px; /* Увеличенная ширина */
+    width: 90px;
 }
 
 th:nth-child(6), td:nth-child(6) {
-    width: 180px; /* Фиксированная ширина для даты */
+    width: 180px;
 }
 
 th:nth-child(7), td:nth-child(7) {
-    width: 350px; /* Увеличенная ширина для Message */
-    text-align: left; /* Выравнивание по левому краю */
-    word-wrap: break-word; /* Перенос длинных слов */
-    white-space: normal; /* Разрешить перенос текста */
+    width: 350px;
+    text-align: left;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 th:nth-child(8), td:nth-child(8) {
-    width: 90px; /* Увеличенная ширина для Is Read */
+    width: 90px;
 }
 
-/* Четные строки с фоновым оттенком */
 tr:nth-child(even) td {
-    background-color: #1b1b1b; /* Легкий контраст для четных строк */
+    background-color: #1b1b1b;
 }
 
-/* Наведение на строку */
 tr:hover td {
-    background-color: #333333; /* Более светлый фон при наведении */
+    background-color: #333333;
     color: #ffffff;
-    transform: translateY(-3px); /* Подъем строки */
+    transform: translateY(-3px);
     cursor: pointer;
 }
 
-/* Поднятие одной ячейки */
-tr:hover td {
-    transform: translateY(-3px); /* Подъем ячейки */
-    cursor: pointer;
-}
-
-/* Галочка и крестик для Is Read */
 td.is-read-yes::before {
-    content: "\2714"; /* Галочка */
-    color: #4CAF50; /* Зеленый цвет */
+    content: "\2714";
+    color: #4CAF50;
     font-weight: bold;
-    font-size: 18px; /* Увеличенный размер */
+    font-size: 18px;
 }
 
 td.is-read-no::before {
-    content: "\2716"; /* Крестик */
-    color: #F44336; /* Красный цвет */
+    content: "\2716";
+    color: #F44336;
     font-weight: bold;
-    font-size: 18px; /* Увеличенный размер */
+    font-size: 18px;
 }
 
-/* Для ссылок внутри ячеек */
 a {
     color: #00bbff;
     text-decoration: none;
@@ -108,14 +96,6 @@ a:hover {
     color: #ffffff;
 }
 
-/* Обработка длинного текста внутри ячеек */
-td {
-    word-wrap: break-word; /* Перенос длинных слов */
-    max-width: 350px; /* Ограничение ширины для длинных текстов */
-    white-space: normal; /* Разрешить перенос текста */
-}
-
-/* Additional styling for pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -126,20 +106,20 @@ td {
 }
 
 .pagination li {
-    margin: 0 4px; /* Slightly reduce the margin to make them closer */
+    margin: 0 4px;
 }
 
 .pagination a {
     text-decoration: none;
-    padding: 6px 12px; /* Reduce padding for a smaller button */
-    background-color: #1e1e1e; /* Dark background color */
-    color: #00BBFF; /* Blue text color */
-    border: 1px solid #00BBFF; /* Blue border */
-    border-radius: 3px; /* Slightly rounded corners */
-    font-size: 14px; /* Smaller font size */
+    padding: 6px 12px;
+    background-color: #1e1e1e;
+    color: #00BBFF;
+    border: 1px solid #00BBFF;
+    border-radius: 3px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 0px 0px 5px rgba(0, 187, 255, 0.4); /* Subtle neon glow */
+    box-shadow: 0px 0px 5px rgba(0, 187, 255, 0.4);
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -147,10 +127,10 @@ td {
 }
 
 .pagination a:hover {
-    background-color: #00BBFF; /* Blue background on hover */
-    color: #ffffff; /* White text on hover */
-    box-shadow: 0px 0px 7px rgba(0, 187, 255, 0.4), 0 0 10px rgba(0, 187, 255, 0.2); /* Less intense neon glow */
-    transform: translateY(-1px) scale(1.01); /* Slight scaling on hover */
+    background-color: #00BBFF;
+    color: #ffffff;
+    box-shadow: 0px 0px 7px rgba(0, 187, 255, 0.4), 0 0 10px rgba(0, 187, 255, 0.2);
+    transform: translateY(-1px) scale(1.01);
 }
 
 .pagination a::after {
@@ -166,17 +146,17 @@ td {
 }
 
 .pagination a:hover::after {
-    transform: scale(1); /* Expands the radial gradient on hover */
+    transform: scale(1);
 }
 
 .pagination .active a {
-    background-color: #00BBFF; /* Active page */
+    background-color: #00BBFF;
     color: #ffffff;
-    transform: translateY(-1px) scale(1.01); /* Slight scaling */
+    transform: translateY(-1px) scale(1.01);
 }
 
 .pagination a:active {
-    background-color: #0088cc; /* Darker blue on active */
+    background-color: #0088cc;
     box-shadow: 0px 0px 5px rgba(0, 136, 204, 0.5);
-    transform: translateY(0) scale(1); /* Return to normal on click */
+    transform: translateY(0) scale(1);
 }

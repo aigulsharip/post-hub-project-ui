@@ -207,7 +207,6 @@
                     <div class="box">
                         <h2 class="first">Latest Posts</h2>
                         <div class="sub_box">
-                            <!-- Preloader for Latest Posts -->
                             <div id="latest-posts-preloader" class="latest-posts-preloader">
                                 <div class="loader">
                                     <div class="loader-bar"></div>
@@ -278,7 +277,7 @@
             <div class="wrapper">
                 <article class="grid_4">
                     <h5>About the Project</h5>
-                    <p class="green p2">This website is created just to check how backend works. It includes 4 microservices which are sending info via Kafka:</p>
+                    <p class="green p2">This website is created just to check how backend works. It includes 4 microservices:</p>
                     <span class="green">IAM-service</span> - Handles user registration and login, creation of users, posts, and comments. It also includes JWT setup, Security, Flyway, CORS, and PostgreSQL.<br>
                     <span class="green">UTILS-service</span> - Collects action logs, such as user creation, and post and comment creation. It receives all information from IAM-service via Kafka.<br>
                     <span class="green">GATEWAY-service</span> - Centralizes all microservices through a single Gateway service.<br>
@@ -352,7 +351,6 @@
         preloader.style.display = 'none';
     });
 
-    // Fetch and display latest posts
     document.addEventListener("DOMContentLoaded", function() {
         const latestPostsContainer = document.getElementById('latest-posts');
         const preloader = document.getElementById('latest-posts-preloader');
@@ -360,7 +358,6 @@
         const token = localStorage.getItem('token');
         const latestUsersContainer = document.getElementById('latest-users');
 
-        // Show preloader and hide posts container
         latestPostsContainer.style.display = 'none';
         preloader.style.display = 'flex';
 
@@ -381,7 +378,6 @@
                         return dateB - dateA;
                     });
 
-                    // Display only the latest three posts
                     sortedPosts.slice(0, 3).forEach(post => {
                         const createdDate = new Date(post.created).toLocaleString('en-GB', {
                             day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
@@ -405,10 +401,8 @@
                         latestPostsContainer.insertAdjacentHTML('beforeend', postItem);
                     });
 
-                    // Display the posts container after loading the data
                     latestPostsContainer.style.display = 'block';
 
-                    // Display the number of posts and information about displaying the latest 3 posts
                     postInfoContainer.textContent = `Total posts: ${data.payload.pagination.total}. Displaying latest 3.`;
                 } else {
                     latestPostsContainer.innerHTML = '<li>No recent posts available.</li>';
@@ -442,7 +436,6 @@
             </ul>
         `;
         } else {
-            // Display the message for users without the required role
             latestUsersContainer.innerHTML = `
             <div class="restricted-access">
                 <figure><img src="images/restricted-access.png" alt="Restricted Access" /></figure>
@@ -531,7 +524,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success && Array.isArray(data.payload.content)) {
-                    latestUsersContainer.innerHTML = ''; // Clear old content
+                    latestUsersContainer.innerHTML = '';
                     const users = data.payload.content;
 
                     users.slice(0, 3).forEach(user => {
@@ -572,17 +565,10 @@
         });
     });
 
-    // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -607,7 +593,6 @@
             });
         }
 
-        // Handle Get list of users link click
         const getListOfUsersLink = document.getElementById('get-list-of-users-link');
         if (getListOfUsersLink) {
             getListOfUsersLink.addEventListener('click', function(event) {
@@ -616,7 +601,6 @@
             });
         }
 
-        // Existing search popup handling
         function handleSearch(event) {
             event.preventDefault();
             showPopupMessage("Search functionality not implemented yet");
@@ -644,7 +628,6 @@
         }
     });
 
-    // Auth and logout handling
     document.addEventListener("DOMContentLoaded", function() {
         const email = localStorage.getItem('email');
         const token = localStorage.getItem('token');
@@ -665,14 +648,6 @@
             localStorage.removeItem('username');
             window.location.reload();
         });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        let visits = localStorage.getItem('visitCount') || 0;
-        visits++;
-        localStorage.setItem('visitCount', visits);
-        const counter = document.getElementById('visitor-count');
-        if (counter) counter.textContent = visits;
     });
 </script>
 </body>

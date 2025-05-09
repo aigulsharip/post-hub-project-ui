@@ -1,33 +1,30 @@
-/* Общий стиль для оверлея */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Темный фон с полупрозрачностью */
+    background: rgba(0, 0, 0, 0.8);
     z-index: 9998;
     display: none;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(8px); /* Эффект размытия фона */
+    backdrop-filter: blur(8px);
 }
 
-/* Стиль для модального окна с неоновыми акцентами */
 .modal-window {
-    background: #1a1a1a; /* Темный фон для модального окна */
+    background: #1a1a1a;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 255, 191, 0.7), 0 0 30px rgba(0, 255, 191, 0.5); /* Неоновая тень */
+    box-shadow: 0 0 15px rgba(0, 255, 191, 0.7), 0 0 30px rgba(0, 255, 191, 0.5);
     max-width: 400px;
     width: 100%;
     text-align: center;
-    color: #e0e0e0; /* Светлый текст */
+    color: #e0e0e0;
     position: relative;
     animation: neonGlow 1.5s infinite alternate;
 }
 
-/* Анимация неонового свечения */
 @keyframes neonGlow {
     from {
         box-shadow: 0 0 15px rgba(0, 255, 191, 0.7), 0 0 30px rgba(0, 255, 191, 0.5);
@@ -37,23 +34,20 @@
     }
 }
 
-/* Стиль заголовка модального окна */
 .modal-title {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #00ffbf; /* Неоновый цвет заголовка */
-    text-shadow: 0 0 8px rgba(0, 255, 191, 0.8); /* Тень текста для неонового эффекта */
+    color: #00ffbf;
+    text-shadow: 0 0 8px rgba(0, 255, 191, 0.8);
 }
 
-/* Стиль кнопок в модальном окне */
 .modal-buttons {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
 
-/* Стиль отдельной кнопки */
 .modal-button {
     padding: 12px 25px;
     border-radius: 8px;
@@ -63,19 +57,17 @@
     transition: box-shadow 0.3s ease;
     flex: 1;
     margin: 0 10px;
-    color: #1a1a1a; /* Темный цвет текста */
-    background: #00ffbf; /* Неоновый фон кнопок */
+    color: #1a1a1a;
+    background: #00ffbf;
     border: none;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 10px rgba(0, 255, 191, 0.5); /* Тень для кнопок */
+    box-shadow: 0 0 10px rgba(0, 255, 191, 0.5);
 }
 
-/* Эффект при наведении на кнопку */
 .modal-button:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 191, 0.8), 0 0 40px rgba(0, 255, 191, 0.6); /* Усиление тени при наведении */
+    box-shadow: 0 0 20px rgba(0, 255, 191, 0.8), 0 0 40px rgba(0, 255, 191, 0.6);
 }
 
-/* Прелоудер для удаления */
 #delete-preloader {
     position: fixed;
     left: 0;

@@ -184,14 +184,8 @@
     // Reuse the search popup for other actions
     function showPopupMessage(message) {
         const popup = document.getElementById('search-popup');
-
-        // Update the message in the popup
         popup.querySelector('span').textContent = message;
-
-        // Show the popup
         popup.style.display = 'block';
-
-        // Hide the popup after 3 seconds
         setTimeout(() => {
             popup.style.display = 'none';
         }, 3000);
@@ -241,7 +235,6 @@
             popup.style.display = 'none';
         }, 3000);
     }
-
 </script>
 </body>
 </html>

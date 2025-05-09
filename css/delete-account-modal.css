@@ -1,21 +1,17 @@
-/* Общий стиль для оверлея на странице My Account */
-/* Сама «подложка» — занимает весь экран и центрует всё внутреннее */
 #delete-account-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    /* правый и нижний: вместо width/height можно сразу inset */
     right: 0;
     bottom: 0;
-    display: none;           /* по-умолчанию скрыт */
-    justify-content: center; /* центр по горизонтали */
-    align-items: center;     /* центр по вертикали */
+    display: none;
+    justify-content: center;
+    align-items: center;
     background: rgba(0, 0, 0, 0.8);
     z-index: 9998;
     backdrop-filter: blur(8px);
 }
 
-/* само модальное окно */
 #delete-account-modal-window {
     background: #1a1a1a;
     padding: 20px;
@@ -23,14 +19,12 @@
     box-shadow: 0 0 15px rgba(0, 255, 191, 0.7),
     0 0 30px rgba(0, 255, 191, 0.5);
     max-width: 400px;
-    width: 90%;        /* чуть отзывчивее */
+    width: 90%;
     text-align: center;
     color: #e0e0e0;
-    /* больше не нужно position: absolute или margin-top — flex сам по центру */
     animation: neonGlow 1.5s infinite alternate;
 }
 
-/* Анимация неонового свечения */
 @keyframes neonGlow {
     from {
         box-shadow: 0 0 15px rgba(0, 255, 191, 0.7), 0 0 30px rgba(0, 255, 191, 0.5);
@@ -40,23 +34,20 @@
     }
 }
 
-/* Стиль заголовка модального окна для удаления аккаунта */
 #delete-account-modal-title {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #00ffbf; /* Неоновый цвет заголовка */
-    text-shadow: 0 0 8px rgba(0, 255, 191, 0.8); /* Тень текста для неонового эффекта */
+    color: #00ffbf;
+    text-shadow: 0 0 8px rgba(0, 255, 191, 0.8);
 }
 
-/* Стиль кнопок в модальном окне для удаления аккаунта */
 #delete-account-modal-buttons {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
 
-/* Стиль отдельной кнопки для удаления аккаунта */
 .delete-account-modal-button {
     padding: 12px 25px;
     border-radius: 8px;
@@ -66,19 +57,17 @@
     transition: box-shadow 0.3s ease;
     flex: 1;
     margin: 0 10px;
-    color: #1a1a1a; /* Темный цвет текста */
-    background: #00ffbf; /* Неоновый фон кнопок */
+    color: #1a1a1a;
+    background: #00ffbf;
     border: none;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 10px rgba(0, 255, 191, 0.5); /* Тень для кнопок */
+    box-shadow: 0 0 10px rgba(0, 255, 191, 0.5);
 }
 
-/* Эффект при наведении на кнопку удаления аккаунта */
 .delete-account-modal-button:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 191, 0.8), 0 0 40px rgba(0, 255, 191, 0.6); /* Усиление тени при наведении */
+    box-shadow: 0 0 20px rgba(0, 255, 191, 0.8), 0 0 40px rgba(0, 255, 191, 0.6);
 }
 
-/* Прелоудер для удаления аккаунта */
 #delete-account-preloader {
     position: fixed;
     left: 0;

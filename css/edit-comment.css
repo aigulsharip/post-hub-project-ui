@@ -1,15 +1,13 @@
-/* Подсветка ссылки на комментарий при наведении */
 .comment-link:hover {
-    color: #00ff00; /* Зеленый цвет */
+    color: #00ff00;
     text-decoration: underline;
 }
-/* Стиль для редактируемого текста */
-/* Стиль для редактируемого текста */
+
 .editable {
     border: 1px solid #ccc;
     padding: 10px;
-    background-color: #2c2f33; /* Темный фон для текстового поля */
-    color: #ffffff; /* Белый текст */
+    background-color: #2c2f33;
+    color: #ffffff;
     border-radius: 5px;
     width: 100%;
     margin-bottom: 15px;
@@ -20,18 +18,17 @@
 
 .editable:focus {
     border-color: #7289da;
-    background-color: #23272a; /* Темный оттенок при фокусе */
+    background-color: #23272a;
     outline: none;
 }
 
-/* Кнопка сохранения */
 .save-comment {
     display: inline-block;
-    background-color: #1e1e1e; /* Цвет фона кнопки */
-    color: #00BBFF; /* Цвет текста на кнопке */
-    border: 2px solid #00BBFF; /* Граница кнопки */
-    padding: 5px 10px; /* Отступы */
-    border-radius: 8px; /* Радиус скругления */
+    background-color: #1e1e1e;
+    color: #00BBFF;
+    border: 2px solid #00BBFF;
+    padding: 5px 10px;
+    border-radius: 8px;
     font-weight: bold;
     text-decoration: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);

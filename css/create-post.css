@@ -1,17 +1,17 @@
 .container_12 {
     display: flex;
     justify-content: center;
-    padding: 0 10px; /* Уменьшаем отступы контейнера */
+    padding: 0 10px;
 }
 
 .create-post-box {
     background-color: #2e2e2e;
     padding: 30px;
     border-radius: 10px;
-    width: calc(100% - 1px); /* Увеличиваем ширину блока */
-    max-width: 1170px; /* Еще немного увеличиваем максимальную ширину */
+    width: calc(100% - 1px);
+    max-width: 1170px;
     box-sizing: border-box;
-    margin-left: -10px; /* Сохраняем центральное выравнивание */
+    margin-left: -10px;
 }
 
 .create-post-box h2 {
@@ -28,11 +28,11 @@
 }
 
 .form-group label[for="title"] {
-    font-size: 20px; /* Увеличиваем размер шрифта для Title */
-    font-family: 'Roboto', sans-serif; /* Используем шрифт Roboto */
-    color: #ffffff; /* Сохраняем белый цвет */
-    font-weight: bold; /* Делаем шрифт жирным */
-    margin-bottom: 8px; /* Сохраняем отступы */
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
 .form-group label:not([for="title"]) {
@@ -41,7 +41,7 @@
     color: #ffffff;
 }
 
-.form-group input[type="text"] ,
+.form-group input[type="text"],
 .form-group textarea,
 .form-group input[type="file"] {
     width: 100%;
@@ -50,19 +50,18 @@
     border: 1px solid #cccccc;
     background-color: #1e1e1e;
     color: #ffffff;
-    font-size: 16px; /* Устанавливаем одинаковый размер шрифта */
-    font-family: 'Roboto', sans-serif; /* Устанавливаем одинаковый шрифт */
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Плавный переход цвета границы */
+    transition: border-color 0.3s ease;
 }
 
 .form-group input[type="text"]:focus,
 .form-group textarea:focus,
 .form-group input[type="file"]:focus {
-    border-color: #00BBFF; /* Синий цвет границы при фокусе */
-    outline: none; /* Убираем стандартное выделение */
+    border-color: #00BBFF;
+    outline: none;
 }
-
 
 .form-group input[type="text"]::placeholder {
     color: #888888;
@@ -80,9 +79,9 @@
 }
 
 .submit-button {
-    background-color: #1e1e1e; /* Темный фон кнопки */
-    color: #00BBFF; /* Синий текст */
-    border: 2px solid #00BBFF; /* Синяя рамка */
+    background-color: #1e1e1e;
+    color: #00BBFF;
+    border: 2px solid #00BBFF;
     padding: 15px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -90,17 +89,17 @@
     font-weight: bold;
     text-transform: uppercase;
     width: 100%;
-    box-shadow: 0px 0px 15px rgba(0, 187, 255, 0.75); /* Неоновая синяя тень */
+    box-shadow: 0px 0px 15px rgba(0, 187, 255, 0.75);
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
 .submit-button:hover {
-    background-color: #00BBFF; /* Синий фон при наведении */
-    color: #ffffff; /* Белый текст */
-    box-shadow: 0px 0px 20px rgba(0, 187, 255, 0.75), 0 0 30px rgba(0, 187, 255, 0.5); /* Умеренный неоновый эффект */
-    transform: translateY(-2px) scale(1.02); /* Подъем и легкое увеличение */
+    background-color: #00BBFF;
+    color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(0, 187, 255, 0.75), 0 0 30px rgba(0, 187, 255, 0.5);
+    transform: translateY(-2px) scale(1.02);
 }
 
 .submit-button::after {
@@ -116,31 +115,29 @@
 }
 
 .submit-button:hover::after {
-    transform: scale(1); /* Радиальный градиент расширяется при наведении */
+    transform: scale(1);
 }
 
 .submit-button:active {
-    background-color: #0088cc; /* Темный синий при нажатии */
+    background-color: #0088cc;
     box-shadow: 0px 0px 10px rgba(0, 136, 204, 0.75);
-    transform: translateY(0) scale(1); /* Возвращение кнопки в исходное положение при нажатии */
+    transform: translateY(0) scale(1);
 }
 
 .form-group input[type="text"]::placeholder,
 .form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6); /* Белый цвет с прозрачностью 0.6 */
-    font-style: normal; /* Убираем курсив */
+    color: rgba(255, 255, 255, 0.6);
+    font-style: normal;
 }
 
 .form-group textarea {
-    resize: none; /* Отключаем возможность изменения размера текстового поля */
+    resize: none;
 }
 
 .char-counter {
     text-align: right;
     font-size: 14px;
-    color: #888888; /* Цвет текста для счетчика */
+    color: #888888;
     margin-top: 5px;
     font-family: 'Roboto', sans-serif;
 }
-
-
