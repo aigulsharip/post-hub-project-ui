@@ -16,7 +16,7 @@
     background: #1a1a1a;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 255, 191, 0.7), 0 0 30px rgba(0, 255, 191, 0.5);
+    box-shadow: 0 0 8px rgba(0, 187, 255, 0.3), 0 0 15px rgba(0, 187, 255, 0.2);
     max-width: 400px;
     width: 100%;
     text-align: center;
@@ -27,10 +27,10 @@
 
 @keyframes neonGlow {
     from {
-        box-shadow: 0 0 15px rgba(0, 255, 191, 0.7), 0 0 30px rgba(0, 255, 191, 0.5);
+        box-shadow: 0 0 8px rgba(0, 187, 255, 0.3), 0 0 15px rgba(0, 187, 255, 0.2);
     }
     to {
-        box-shadow: 0 0 25px rgba(0, 255, 191, 1), 0 0 45px rgba(0, 255, 191, 0.7);
+        box-shadow: 0 0 12px rgba(0, 187, 255, 0.5), 0 0 20px rgba(0, 187, 255, 0.3);
     }
 }
 
@@ -38,8 +38,8 @@
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #00ffbf;
-    text-shadow: 0 0 8px rgba(0, 255, 191, 0.8);
+    color: #00BBFF;
+    text-shadow: 0 0 5px rgba(0, 187, 255, 0.6);
 }
 
 .modal-buttons {
@@ -58,14 +58,14 @@
     flex: 1;
     margin: 0 10px;
     color: #1a1a1a;
-    background: #00ffbf;
+    background: #00BBFF;
     border: none;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 10px rgba(0, 255, 191, 0.5);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 6px rgba(0, 187, 255, 0.4);
 }
 
 .modal-button:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 191, 0.8), 0 0 40px rgba(0, 255, 191, 0.6);
+    box-shadow: 0 0 10px rgba(0, 187, 255, 0.6), 0 0 18px rgba(0, 187, 255, 0.3);
 }
 
 #delete-preloader {
