@@ -545,7 +545,6 @@ html {width:100%;}
     bottom: 0px;
 }
 
-
 .post-footer {
     display: flex;
     justify-content: space-between;
@@ -982,7 +981,7 @@ form#search .button1:hover {
 }
 
 body {
-    background: #1c1c1c;
+    background: #101010;
     font-family: 'Arial', sans-serif;
     color: #ddd;
     line-height: 1.6;
@@ -1000,18 +999,19 @@ h2.first {
     padding-bottom: 10px;
 }
 .title-label {
-    font-size: 18px; /* Увеличенный размер текста метки Title */
+    font-size: 18px;
     font-weight: bold;
 }
 
 /* Общие стили */
 body {
-    background: #1c1c1c;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 19px;
     color: #ddd;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
+    min-width: 960px;
+    padding: 59px 0 0;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #121212 80%, #0a0a0a 100%) !important;
 }
 
 h2.first {
@@ -1078,6 +1078,19 @@ h2.first {
     font-weight: bold;
     color: #fff;
     text-decoration: none;
+}
+
+html {
+    background: #0a0a0a;
+}
+
+body {
+    background: radial-gradient(circle at center, #1a1a1a 0%, #121212 80%, #0a0a0a 100%) fixed !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #ddd;
 }
 
 body {font-family:Arial, Arial, Helvetica, sans-serif; font-size:12px; line-height:19px; color:#6a6a73; min-width:960px; background:url(../images/body_bg.jpg) 50% 0 no-repeat #1b1b1c;padding:59px 0 0;}
