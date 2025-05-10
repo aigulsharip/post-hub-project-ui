@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0;url=/" />
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
     <script>
-        var path = window.location.pathname;
-        if (path.endsWith('/')) path += 'index.html';
-        else if (!path.endsWith('.html')) path += '.html';
-        window.location.replace(path);
+        (function () {
+            const path = window.location.pathname;
+            if (path.endsWith('.html')) return;
+
+            const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+            const htmlPath = cleanPath + '.html';
+
+            fetch(htmlPath, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.replace('/' + htmlPath);
+                    } else {
+                        document.body.innerHTML = "<h1>404 - Page not found</h1>";
+                    }
+                })
+                .catch(() => {
+                    document.body.innerHTML = "<h1>404 - Page not found</h1>";
+                });
+        })();
     </script>
 </head>
 <body>
