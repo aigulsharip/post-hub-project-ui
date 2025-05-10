@@ -354,12 +354,9 @@
         const latestPostsContainer = document.getElementById('latest-posts');
         const preloader = document.getElementById('latest-posts-preloader');
         const postInfoContainer = document.getElementById('post-info-container');
-        const token = localStorage.getItem('token');
-        const latestUsersContainer = document.getElementById('latest-users');
 
         latestPostsContainer.style.display = 'none';
         preloader.style.display = 'flex';
-
 
         fetch('https://post-wave-swagger.fun/posts/all?page=0&limit=10', {
             method: 'GET',
@@ -371,7 +368,9 @@
             .then(data => {
                 preloader.style.display = 'none';
                 if (data.success && Array.isArray(data.payload.content) && data.payload.content.length > 0) {
-                    const sortedPosts = data.payload.content.sort((a, b) => {
+                    const filteredPosts = data.payload.content.filter(post => post.isDeleted !== true);
+
+                    const sortedPosts = filteredPosts.sort((a, b) => {
                         const dateA = new Date(a.created);
                         const dateB = new Date(b.created);
                         return dateB - dateA;
@@ -517,7 +516,6 @@
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${token}`
             }
         })
             .then(response => response.json())
@@ -574,7 +572,6 @@
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Handle Create user link click
         const createUserLink = document.getElementById('create-user-link');
         if (createUserLink) {
             createUserLink.addEventListener('click', function(event) {
