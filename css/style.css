@@ -1081,21 +1081,45 @@ h2.first {
 }
 
 html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     background: #0a0a0a;
 }
 
 body {
-    background: radial-gradient(circle at center, #1a1a1a 0%, #121212 80%, #0a0a0a 100%) fixed !important;
+    min-height: 100vh;
+    margin: 0;
+    padding: 59px 0 0;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #121212 80%, #0a0a0a 100%) fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    margin: 0;
-    padding: 0;
-    color: #ddd;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 19px;
+    color: #6a6a73;
+    min-width: 960px;
+    background-color: #1b1b1c;
+    background-image: url(../images/body_bg.jpg);
+    background-position: 50% 0;
 }
 
-body {font-family:Arial, Arial, Helvetica, sans-serif; font-size:12px; line-height:19px; color:#6a6a73; min-width:960px; background:url(../images/body_bg.jpg) 50% 0 no-repeat #1b1b1c;padding:59px 0 0;}
-.main {width:960px;padding:0;margin:0 auto;}
+.main {
+    flex: 1;
+    width: 960px;
+    margin: 0 auto;
+    padding: 0;
+}
 
+footer {
+    background-color: transparent;
+    padding: 20px 0;
+    color: #888;
+    text-align: center;
+    margin-top: auto;
+}
 /*********************************fonts*************************************/
 .reg {text-transform:uppercase}
 .f_left {float:left}
