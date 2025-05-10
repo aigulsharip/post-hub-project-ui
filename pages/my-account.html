@@ -339,7 +339,9 @@
 
         deleteAccountButton.addEventListener('click', e => {
             e.preventDefault();
-            deleteModal.style.display = 'block';
+            deleteModal.style.display = 'flex';
+            deleteModal.style.alignItems = 'center';
+            deleteModal.style.justifyContent = 'center';
         });
 
         cancelDelete.addEventListener('click', e => {
