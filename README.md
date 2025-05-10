@@ -15,7 +15,7 @@
 
 # 📬 Post-Hub – microservices demo project
 
-**Post-Hub** is a demo microservices project built to learn and showcase how different services work together in a modern backend system. It allows users to register, log in, create posts and comments, and tracks all user actions through a logging system.
+**Post-Hub** is a demo project created for my Udemy course to demonstrate how microservices work in practice. It lets users register, log in, create posts and comments, and shows how services communicate via Kafka and are secured with JWT.
 
 ## 🔍 What the project does
 
@@ -30,10 +30,10 @@
 
 The project is divided into four key services:
 
-- **IAM-service:** Handles user accounts, authentication, and post/comment creation. Uses JWT for security and Flyway for database migrations.
-- **UTILS-service:** Logs user activities like post/comment creation. Receives events from IAM-service via Kafka.
-- **GATEWAY-service:** Main entry point for all external requests. Routes traffic to the correct service and checks authentication.
-**DISCOVERY-service:** Uses Consul for automatic service registration and communication.
+- **IAM-service** - handles user accounts, authentication/registration, and post/comment creation. Uses JWT for security and Flyway for database migrations.
+- **UTILS-service** - logs user activities like post/comment creation. Receives events from IAM-service via Kafka.
+- **GATEWAY-service** - main entry point for all external requests. Routes traffic to the correct service and checks authentication.
+- **DISCOVERY-service** - uses Consul for automatic service registration and communication.
 
 ## ⚙️ Tech stack
 
@@ -58,5 +58,5 @@ Each microservice is packaged as a Docker image and pushed to Docker Hub. CI/CD 
 
 ## 🗄️ Database & Hosting
 
-- **Database:** PostgreSQL hosted on AWS via ScaleGrid
-- **Hosting:** Deployed on a VPS with Docker and Nginx configured for routing, HTTPS, and performance
+- **Database** - PostgreSQL hosted on AWS via ScaleGrid
+- **Hosting** - deployed on a VPS with Docker and Nginx configured for routing, HTTPS, and performance
