@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="images/post-wave-gif-1-last.gif" alt="Post-Wave Logo" />
+  <img src="images/post-hub-demo.gif" alt="Post-Wave Logo" />
 </p>
 
 # 📬 Post-Hub – microservices demo project
