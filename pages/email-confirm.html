@@ -31,12 +31,20 @@
     const messageElement = document.getElementById('message');
 
     if (token) {
-        fetch(`https://post-wave-swagger.fun/auth/confirm?token=${token}`)
+        fetch(`http://localhost:8189/auth/confirm?token=${token}`)
             .then(response => {
-                if (response.redirected) {
-                    window.location.href = response.url;
-                } else if (response.ok) {
-                    messageElement.textContent = "✅ Your email has been confirmed successfully!";
+                if (response.ok) {
+                    let countdown = 3;
+                    messageElement.innerHTML = `✅ Your email has been confirmed successfully!<br>You will be redirected in <span id="countdown">${countdown}</span> seconds...`;
+
+                    const interval = setInterval(() => {
+                        countdown--;
+                        document.getElementById('countdown').textContent = countdown;
+                        if (countdown === 0) {
+                            clearInterval(interval);
+                            window.location.href = "https://post-hub-project.com/pages/login-page.html";
+                        }
+                    }, 1000);
                 } else {
                     messageElement.textContent = "⚠️ This confirmation link is invalid or expired.";
                 }
