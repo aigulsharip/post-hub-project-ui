@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .message {
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="message" id="message">Confirming your email...</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const messageElement = document.getElementById('message');
+
+    if (token) {
+        fetch(`https://post-wave-swagger.fun/auth/confirm?token=${token}`)
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else if (response.ok) {
+                    messageElement.textContent = "✅ Your email has been confirmed successfully!";
+                } else {
+                    messageElement.textContent = "⚠️ This confirmation link is invalid or expired.";
+                }
+            })
+            .catch(() => {
+                messageElement.textContent = "🚫 An error occurred. Please try again later.";
+            });
+    } else {
+        messageElement.textContent = "❌ No token provided.";
+    }
+</script>
+</body>
+</html>
