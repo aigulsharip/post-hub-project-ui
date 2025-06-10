@@ -213,7 +213,7 @@
                         } else if (body.message.includes('Email already exists')) {
                             showError("Email already exists. Please use a different one.");
                         }
-                    } else if (body.success) {
+                    }else if (body.success) {
                         localStorage.setItem('username', body.payload.username);
                         localStorage.setItem('token', body.payload.token);
                         localStorage.setItem('refreshToken', body.payload.refreshToken);
@@ -221,18 +221,28 @@
                         const role = body.payload.roles?.[0]?.name || 'USER';
                         localStorage.setItem('role', role);
 
-                        window.location.href = '../index.html';
-                        preloader.style.display = 'none';
+                        const container = document.querySelector('.register-box');
+                        container.innerHTML = `
+                            <div style="text-align: center; padding: 40px 20px; color: snow;">
+                                <h2 style="color: #6eff6e;">✅ Registration Successful</h2>
+                                <p style="font-size: 16px; margin-top: 20px;">
+                                    A confirmation email has been sent to <strong>${email}</strong>.<br>
+                                    Please check your inbox and click the link to activate your account.
+                                </p>
+                                <p style="margin-top: 30px; color: gray;">
+                                    You will be able to log in once your email is confirmed.
+                                </p>
+                            </div>
+                        `;
                     } else {
                         showError("Registration error: " + body.message);
-
-                        preloader.style.display = 'none';
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
                     showError("Email or username is already taken. Please try another one.");
-
+                })
+                .finally(() => {
                     preloader.style.display = 'none';
                 });
         });

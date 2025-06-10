@@ -43,10 +43,10 @@
         fetch(`https://post-wave-swagger.fun/auth/confirm?token=${token}`)
             .then(response => {
                 if (response.ok) {
-                    let countdown = 5;
+                    let countdown = 3;
                     messageElement.innerHTML = `
                         <div class="success">✅ Your email has been successfully confirmed!</div>
-                        <p>You will be redirected back to the <strong>Post Hub</strong> login page in <span id="countdown">${countdown}</span> seconds.</p>
+                        <p>You will be redirected back to the <strong>Post Hub</strong> login page in <span id="countdown">${countdown}</span> seconds...</p>
                     `;
 
                     const interval = setInterval(() => {
