@@ -214,9 +214,6 @@
                             showError("Email already exists. Please use a different one.");
                         }
                     }else if (body.success) {
-                        localStorage.setItem('username', body.payload.username);
-                        localStorage.setItem('token', body.payload.token);
-                        localStorage.setItem('refreshToken', body.payload.refreshToken);
 
                         const role = body.payload.roles?.[0]?.name || 'USER';
                         localStorage.setItem('role', role);
@@ -366,6 +363,26 @@
             event.preventDefault();
             window.location.href = 'https://post-wave-swagger.fun/login/oauth2/code/google';
         });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const username = localStorage.getItem("username");
+        const token = localStorage.getItem("token");
+        const role = localStorage.getItem("role");
+
+        if (username && token && role) {
+            document.getElementById("greeting").textContent = username;
+            document.getElementById("auth-links").style.display = "none";
+            document.getElementById("welcome-message").style.display = "inline";
+        } else {
+            localStorage.removeItem("username");
+            localStorage.removeItem("token");
+            localStorage.removeItem("refreshToken");
+            localStorage.removeItem("role");
+
+            document.getElementById("auth-links").style.display = "inline";
+            document.getElementById("welcome-message").style.display = "none";
+        }
     });
 </script>
 </body>
