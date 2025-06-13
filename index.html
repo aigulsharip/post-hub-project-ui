@@ -345,10 +345,10 @@
 </div>
 
 <script>
-    window.addEventListener('load', function() {
-        const preloader = document.getElementById('preloader');
-        preloader.style.display = 'none';
-    });
+    // window.addEventListener('load', function() {
+    //     const preloader = document.getElementById('preloader');
+    //     preloader.style.display = 'none';
+    // });
 
     document.addEventListener("DOMContentLoaded", function() {
         const latestPostsContainer = document.getElementById('latest-posts');
@@ -367,14 +367,12 @@
             .then(response => response.json())
             .then(data => {
                 preloader.style.display = 'none';
+                document.querySelector('.main').style.display = 'block';
+
                 if (data.success && Array.isArray(data.payload.content) && data.payload.content.length > 0) {
                     const filteredPosts = data.payload.content.filter(post => post.isDeleted !== true);
 
-                    const sortedPosts = filteredPosts.sort((a, b) => {
-                        const dateA = new Date(a.created);
-                        const dateB = new Date(b.created);
-                        return dateB - dateA;
-                    });
+                    const sortedPosts = filteredPosts.sort((a, b) => new Date(b.created) - new Date(a.created));
 
                     sortedPosts.slice(0, 3).forEach(post => {
                         const createdDate = new Date(post.created).toLocaleString('en-GB', {
@@ -382,25 +380,24 @@
                         });
 
                         const postItem = `
-                            <li class="latest-post-item">
-                                <figure>
-                                    <a href="pages/post.html?id=${post.id}">
-                                    <img src="${post.image ? post.image : 'images/your_photo.png'}" alt="${post.title}" class="latest-post-image" />
-                                    </a>
-                                </figure>
-                                <div class="latest-post-details">
-                                    <h3 class="latest-post-title"><a href="pages/post.html?id=${post.id}" style="text-decoration: none; color: inherit;">${post.title}</a></h3>
-                                    <p class="latest-post-content">${post.content.substring(0, 50)}...</p>
-                                    <p class="latest-post-comments">The number of comments: ${post.commentsCount || 0}</p>
-                                    <p class="latest-post-author">Created by: ${post.createdBy}</p>
-                                    <p class="latest-post-date">Created on: ${createdDate}</p>
-                                </div>
-                            </li>`;
+                <li class="latest-post-item">
+                    <figure>
+                        <a href="pages/post.html?id=${post.id}">
+                        <img src="${post.image ? post.image : 'images/your_photo.png'}" alt="${post.title}" class="latest-post-image" />
+                        </a>
+                    </figure>
+                    <div class="latest-post-details">
+                        <h3 class="latest-post-title"><a href="pages/post.html?id=${post.id}" style="text-decoration: none; color: inherit;">${post.title}</a></h3>
+                        <p class="latest-post-content">${post.content.substring(0, 50)}...</p>
+                        <p class="latest-post-comments">The number of comments: ${post.commentsCount || 0}</p>
+                        <p class="latest-post-author">Created by: ${post.createdBy}</p>
+                        <p class="latest-post-date">Created on: ${createdDate}</p>
+                    </div>
+                </li>`;
                         latestPostsContainer.insertAdjacentHTML('beforeend', postItem);
                     });
 
                     latestPostsContainer.style.display = 'block';
-
                     postInfoContainer.textContent = `Total posts: ${data.payload.pagination.total}. Displaying latest 3.`;
                 } else {
                     latestPostsContainer.innerHTML = '<li>No recent posts available.</li>';
@@ -412,8 +409,12 @@
                 preloader.style.display = 'none';
                 latestPostsContainer.innerHTML = '<li>Error loading posts. Please try again later.</li>';
                 latestPostsContainer.style.display = 'block';
+                document.querySelector('.main').style.display = 'block';
             });
     });
+
+    document.getElementById('preloader').style.display = 'none';
+    document.querySelector('.main').style.display = 'block';
 
     document.addEventListener("DOMContentLoaded", function() {
         const latestUsersContainer = document.getElementById('latest-users');
