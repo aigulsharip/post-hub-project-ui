@@ -385,7 +385,7 @@
                             <li class="latest-post-item">
                                 <figure>
                                     <a href="pages/post.html?id=${post.id}">
-                                        <img src="${post.image}" alt="${post.title}" class="latest-post-image" onerror="this.onerror=null;this.src='images/your_photo.png';" />
+                                    <img src="${post.image ? post.image : 'images/your_photo.png'}" alt="${post.title}" class="latest-post-image" />
                                     </a>
                                 </figure>
                                 <div class="latest-post-details">
