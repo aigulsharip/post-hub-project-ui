@@ -973,6 +973,70 @@ form#search .button1:hover {
 .login-form .register-link a:hover {
     text-decoration: underline;
 }
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+.btn-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.google-text {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.auth-alt-block {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.auth-alt-block .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 104%;
+    max-width: 104%;
+    margin: 30px 0 10px 0;
+}
+
+.auth-alt-block .divider span {
+    background-color: #222;
+    padding: 0 10px;
+    position: relative;
+    top: -12px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.auth-alt-block .social-buttons {
+    width: 104%;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-alt-block .btn-social {
+    width: 100%;
+    max-width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #000000;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+.auth-alt-block .btn-social:hover {
+    background-color: #c1351d;
+}
 
 .required {
     color: #ff0000;
