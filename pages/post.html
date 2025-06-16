@@ -288,8 +288,7 @@
                     postLikes.innerHTML = `Likes: ${data.payload.likes} <span class="not-implemented">(not fully implemented)</span>`;
                     postImage.src = data.payload.image || '../images/here-your-photo.png';
 
-                    const createdDate = formatJavaDate(data.payload.created);
-                    postDate.textContent = `Created on: ${createdDate}`;
+                    const createdDate = new Date(data.payload.created);
 
                     postDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
 
@@ -306,7 +305,7 @@
                     postContentWrapper.style.display = 'block';
                     loadComments(postId, token);
                 } else {
-                    throw new Error('Backend responded with success = false');
+                    alert('Error loading post details');
                 }
             })
             .catch(error => {
