@@ -288,7 +288,7 @@
                     postLikes.innerHTML = `Likes: ${data.payload.likes} <span class="not-implemented">(not fully implemented)</span>`;
                     postImage.src = data.payload.image || '../images/here-your-photo.png';
 
-                    const createdDate = new Date(data.payload.created);
+                    const createdDate = formatJavaDate(data.payload.created);
 
                     postDate.textContent = `Created on: ${createdDate.toLocaleString()}`;
 

@@ -375,9 +375,8 @@
                     const sortedPosts = filteredPosts.sort((a, b) => new Date(b.created) - new Date(a.created));
 
                     sortedPosts.slice(0, 3).forEach(post => {
-                        const createdDate = new Date(post.created).toLocaleString('en-GB', {
-                            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                        });
+                        const createdDate = formatJavaDate(post.created);
+
 
                         const postItem = `
                 <li class="latest-post-item">
