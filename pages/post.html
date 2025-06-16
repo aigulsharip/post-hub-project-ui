@@ -306,7 +306,7 @@
                     postContentWrapper.style.display = 'block';
                     loadComments(postId, token);
                 } else {
-                    alert('Error loading post details');
+                    throw new Error('Backend responded with success = false');
                 }
             })
             .catch(error => {
