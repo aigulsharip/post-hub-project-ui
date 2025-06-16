@@ -212,20 +212,10 @@
                         userDetails.email.textContent = payload.email;
                         userDetails.status.textContent = payload.registrationStatus;
                         userDetails.role.textContent = payload.roles.map(role => role.name).join(', ');
-                        if (Array.isArray(payload.lastLogin)) {
-                            const [year, month, day, hour, minute, second] = payload.lastLogin;
-                            const jsDate = new Date(year, month - 1, day, hour, minute, second);
-                            userDetails.lastLogin.textContent = jsDate.toLocaleString('en-GB', {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric',
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            });
-                        } else {
-                            userDetails.lastLogin.textContent = 'N/A';
-                        }
-
+                        userDetails.lastLogin.textContent = new Date(payload.lastLogin).toLocaleString('en-GB', {
+                            day: 'numeric', month: 'short', year: 'numeric',
+                            hour: '2-digit', minute: '2-digit'
+                        });
 
                         const fixedAvatar = `avatar-6.png`;
                         userAvatar.src = `../images/avatars/${fixedAvatar}`;
