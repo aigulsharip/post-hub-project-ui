@@ -357,13 +357,6 @@
         }, 3000);
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById('google-login').addEventListener('click', function(event) {
-            event.preventDefault();
-            window.location.href = 'https://post-wave-swagger.fun/login/oauth2/code/google';
-        });
-    });
-
     document.addEventListener("DOMContentLoaded", function () {
         const username = localStorage.getItem("username");
         const token = localStorage.getItem("token");
