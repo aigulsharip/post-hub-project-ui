@@ -13,7 +13,7 @@
     if (token) {
         localStorage.setItem("token", token);
 
-        fetch("http://localhost:8189/users/info", {
+        fetch("https://post-wave-swagger.fun/users/info", {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + token
@@ -27,7 +27,7 @@
                     localStorage.setItem("role", data.payload.roles?.[0]?.name || "User");
                 }
 
-                window.location.replace("https://post-hub-project.com/index.html");
+                window.location.replace("/index.html");
             })
             .catch(err => {
                 console.error("Error:", err);
