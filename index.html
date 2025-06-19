@@ -658,31 +658,36 @@
         });
     });
 
-    window.onload = function () {
-        const token = localStorage.getItem('token');
+    const dismissKey = 'oneTapDismissedCount';
+    const token = localStorage.getItem('token');
 
-        if (!token) {
-            google.accounts.id.initialize({
-                client_id: "907173051213-sdvpus37efg136i4mujfak7njjhj33um.apps.googleusercontent.com",
-                callback: handleCredentialResponse,
-                auto_select: true,
-                cancel_on_tap_outside: false,
-                use_fedcm_for_prompt: true
-            });
+    if (!token) {
+        const dismissedCount = parseInt(localStorage.getItem(dismissKey)) || 0;
 
-            google.accounts.id.prompt((notification) => {
-                if (notification.isNotDisplayed && notification.isNotDisplayed()) {
-                    console.warn("One Tap was NOT DISPLAYED:", notification.getNotDisplayedReason?.());
-                }
-                if (notification.isSkippedMoment && notification.isSkippedMoment()) {
-                    console.warn("One Tap was SKIPPED:", notification.getSkippedReason?.());
-                }
-                if (notification.isDismissedMoment && notification.isDismissedMoment()) {
-                    console.warn("One Tap was DISMISSED:", notification.getDismissedReason?.());
-                }
-            });
+        if (dismissedCount >= 3) {
+            // Reset after 3 refreshes
+            localStorage.setItem(dismissKey, '0');
         }
-    };
+
+        google.accounts.id.initialize({
+            client_id: "907173051213-sdvpus37efg136i4mujfak7njjhj33um.apps.googleusercontent.com",
+            callback: handleCredentialResponse,
+            auto_select: true,
+            cancel_on_tap_outside: false,
+            use_fedcm_for_prompt: true
+        });
+
+        google.accounts.id.prompt((notification) => {
+            if (notification.isDismissedMoment && notification.getDismissedReason) {
+                const reason = notification.getDismissedReason();
+                console.warn("One Tap dismissed:", reason);
+
+                // Увеличиваем счётчик при закрытии окна
+                localStorage.setItem(dismissKey, String(dismissedCount + 1));
+            }
+        });
+    }
+
 
     function handleCredentialResponse(response) {
         fetch("https://post-wave-swagger.fun/auth/oauth2/one-tap", {
