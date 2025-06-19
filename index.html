@@ -16,6 +16,7 @@
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
     <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="js/hover-image.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
         $(function(){
             $('.slider')._TMS({
@@ -246,6 +247,14 @@
                             </div>
                         </div>
                     </div>
+
+<!--                    <div id="g_id_onload"-->
+<!--                         data-client_id="907173051213-sdvpus37efg136i4mujfak7njjhj33um.apps.googleusercontent.com"-->
+<!--                         data-callback="handleCredentialResponse"-->
+<!--                         data-auto_prompt="false">-->
+<!--                    </div>-->
+
+<!--                    <div class="g_id_signin" data-type="standard"></div>-->
 
                     <!-- Latest Users Section -->
                     <div class="box">
@@ -648,6 +657,42 @@
             window.location.reload();
         });
     });
+
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "907173051213-sdvpus37efg136i4mujfak7njjhj33um.apps.googleusercontent.com",
+            callback: handleCredentialResponse,
+            auto_select: true,
+            cancel_on_tap_outside: false
+        });
+
+        google.accounts.id.prompt();
+    };
+
+    function handleCredentialResponse(response) {
+        fetch("https://post-wave-swagger.fun/auth/oauth2/one-tap", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ credential: response.credential })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.payload && data.payload.token) {
+                    localStorage.setItem('token', data.payload.token);
+                    localStorage.setItem('username', data.payload.username);  // <== исправлено
+                    localStorage.setItem('email', data.payload.email);
+                    location.reload();
+                } else {
+                    console.error("Missing payload or token in response:", data);
+                }
+            })
+            .catch(err => {
+                console.error("Google One Tap login error:", err);
+            });
+    }
+
 </script>
 </body>
 </html>
