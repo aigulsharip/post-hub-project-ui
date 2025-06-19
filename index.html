@@ -16,7 +16,7 @@
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
     <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="js/hover-image.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer onload="initGoogleOneTap()"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
         $(function(){
             $('.slider')._TMS({
@@ -658,31 +658,31 @@
         });
     });
 
-    function initGoogleOneTap() {
+    window.onload = function () {
         const token = localStorage.getItem('token');
-        if (token) return;
 
-        const dismissedCount = parseInt(localStorage.getItem('oneTapDismissedCount')) || 0;
-        if (dismissedCount >= 3) {
-            localStorage.setItem('oneTapDismissedCount', '0');
+        if (!token) {
+            google.accounts.id.initialize({
+                client_id: "907173051213-sdvpus37efg136i4mujfak7njjhj33um.apps.googleusercontent.com",
+                callback: handleCredentialResponse,
+                auto_select: true,
+                cancel_on_tap_outside: false,
+                use_fedcm_for_prompt: true
+            });
+
+            google.accounts.id.prompt((notification) => {
+                if (notification.isNotDisplayed && notification.isNotDisplayed()) {
+                    console.warn("One Tap was NOT DISPLAYED:", notification.getNotDisplayedReason?.());
+                }
+                if (notification.isSkippedMoment && notification.isSkippedMoment()) {
+                    console.warn("One Tap was SKIPPED:", notification.getSkippedReason?.());
+                }
+                if (notification.isDismissedMoment && notification.isDismissedMoment()) {
+                    console.warn("One Tap was DISMISSED:", notification.getDismissedReason?.());
+                }
+            });
         }
-
-        google.accounts.id.initialize({
-            client_id: "907173051213-sdvpus37efg136i4mujfak7njjhj33um.apps.googleusercontent.com",
-            callback: handleCredentialResponse,
-            auto_select: true,
-            cancel_on_tap_outside: false,
-            use_fedcm_for_prompt: true
-        });
-
-        google.accounts.id.prompt((notification) => {
-            if (notification.isDismissedMoment && notification.getDismissedReason) {
-                const reason = notification.getDismissedReason();
-                console.warn("One Tap dismissed:", reason);
-                localStorage.setItem('oneTapDismissedCount', String(dismissedCount + 1));
-            }
-        });
-    }
+    };
 
     function handleCredentialResponse(response) {
         fetch("https://post-wave-swagger.fun/auth/oauth2/one-tap", {
