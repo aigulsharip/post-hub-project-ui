@@ -16,7 +16,7 @@
     <script type="text/javascript" src="js/tms-0.4.1.js"></script>
     <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="js/hover-image.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer onload="initGoogleOneTap()"></script>
     <script>
         $(function(){
             $('.slider')._TMS({
@@ -658,14 +658,13 @@
         });
     });
 
-    const dismissKey = 'oneTapDismissedCount';
+    function initGoogleOneTap() {
+        const token = localStorage.getItem('token');
+        if (token) return;
 
-    if (!token) {
-        const dismissedCount = parseInt(localStorage.getItem(dismissKey)) || 0;
-
+        const dismissedCount = parseInt(localStorage.getItem('oneTapDismissedCount')) || 0;
         if (dismissedCount >= 3) {
-            // Reset after 3 refreshes
-            localStorage.setItem(dismissKey, '0');
+            localStorage.setItem('oneTapDismissedCount', '0');
         }
 
         google.accounts.id.initialize({
@@ -680,8 +679,7 @@
             if (notification.isDismissedMoment && notification.getDismissedReason) {
                 const reason = notification.getDismissedReason();
                 console.warn("One Tap dismissed:", reason);
-
-                localStorage.setItem(dismissKey, String(dismissedCount + 1));
+                localStorage.setItem('oneTapDismissedCount', String(dismissedCount + 1));
             }
         });
     }
