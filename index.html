@@ -663,12 +663,23 @@
             client_id: "907173051213-sdvpus37efg136i4mujfak7njjhj33um.apps.googleusercontent.com",
             callback: handleCredentialResponse,
             auto_select: true,
-            cancel_on_tap_outside: false
+            cancel_on_tap_outside: false,
+            use_fedcm_for_prompt: true
         });
 
         google.accounts.id.prompt((notification) => {
-            console.log('One Tap state:', notification);
-        });    };
+            if (notification.isNotDisplayed()) {
+                console.warn('One Tap NOT DISPLAYED:', notification.getNotDisplayedReason());
+            }
+            if (notification.isSkippedMoment()) {
+                console.warn('One Tap SKIPPED:', notification.getSkippedReason());
+            }
+            if (notification.isDismissedMoment()) {
+                console.warn('One Tap DISMISSED:', notification.getDismissedReason());
+            }
+        });
+
+    };
 
     function handleCredentialResponse(response) {
         fetch("https://post-wave-swagger.fun/auth/oauth2/one-tap", {
