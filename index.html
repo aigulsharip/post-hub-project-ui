@@ -659,7 +659,6 @@
     });
 
     const dismissKey = 'oneTapDismissedCount';
-    const token = localStorage.getItem('token');
 
     if (!token) {
         const dismissedCount = parseInt(localStorage.getItem(dismissKey)) || 0;
@@ -682,12 +681,10 @@
                 const reason = notification.getDismissedReason();
                 console.warn("One Tap dismissed:", reason);
 
-                // Увеличиваем счётчик при закрытии окна
                 localStorage.setItem(dismissKey, String(dismissedCount + 1));
             }
         });
     }
-
 
     function handleCredentialResponse(response) {
         fetch("https://post-wave-swagger.fun/auth/oauth2/one-tap", {
