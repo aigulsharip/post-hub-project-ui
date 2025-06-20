@@ -670,17 +670,7 @@
                 use_fedcm_for_prompt: true
             });
 
-            google.accounts.id.prompt((notification) => {
-                if (notification.isNotDisplayed && notification.isNotDisplayed()) {
-                    console.warn("One Tap was NOT DISPLAYED:", notification.getNotDisplayedReason?.());
-                }
-                if (notification.isSkippedMoment && notification.isSkippedMoment()) {
-                    console.warn("One Tap was SKIPPED:", notification.getSkippedReason?.());
-                }
-                if (notification.isDismissedMoment && notification.isDismissedMoment()) {
-                    console.warn("One Tap was DISMISSED:", notification.getDismissedReason?.());
-                }
-            });
+            google.accounts.id.prompt(() => {});
         }
     };
 
@@ -696,7 +686,7 @@
             .then(data => {
                 if (data.payload && data.payload.token) {
                     localStorage.setItem('token', data.payload.token);
-                    localStorage.setItem('username', data.payload.username);  // <== исправлено
+                    localStorage.setItem('username', data.payload.username);
                     localStorage.setItem('email', data.payload.email);
                     location.reload();
                 } else {
@@ -707,7 +697,6 @@
                 console.error("Google One Tap login error:", err);
             });
     }
-
 </script>
 </body>
 </html>
