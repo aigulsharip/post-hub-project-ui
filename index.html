@@ -485,7 +485,7 @@
                             hour: '2-digit', minute: '2-digit'
                         });
 
-                        const authorEmail = comment.owner?.email || 'Unknown';
+                        const authorUsername = comment.owner?.username || 'Unknown';
 
                         const commentItem = `
                             <li class="latest-comment-item">
@@ -494,7 +494,7 @@
                                 </div>
                                 <div class="latest-comment-details">
                                     <p class="latest-comment-text">${comment.message.substring(0, 50)}...</p>
-                                    <p class="latest-comment-author">Created by: ${authorEmail}</p>
+                                    <p class="latest-comment-author">Created by: ${authorUsername}</p>
                                     <p class="latest-comment-date">Created on: ${createdDate}</p>
                                 </div>
                             </li>`;
