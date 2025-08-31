@@ -464,19 +464,9 @@
         const latestCommentsContainer = document.getElementById('latest-comments');
         const commentInfoContainer = document.getElementById('comments-info-container');
 
-        fetch('https://post-hub.fun/comments/all?page=0&limit=10', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
+        getJson('https://post-hub.fun/comments/all?page=0&limit=10')
+
+                .then(data => {
                 if (data.success && Array.isArray(data.payload.content)) {
                     const filteredComments = data.payload.content
                         .filter(comment => comment.isDeleted !== true && comment.created);
@@ -528,14 +518,9 @@
         const latestUsersContainer = document.getElementById('latest-users');
         const usersInfoContainer = document.getElementById('users-info-container');
 
-        fetch('https://post-hub.fun/users/all?page=0&limit=10', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
+        getJson('https://post-hub.fun/users/all?page=0&limit=10')
+
+                .then(data => {
                 if (data.success && Array.isArray(data.payload.content)) {
                     latestUsersContainer.innerHTML = '';
                     const users = data.payload.content;
