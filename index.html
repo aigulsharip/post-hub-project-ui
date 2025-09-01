@@ -361,15 +361,6 @@
     //     preloader.style.display = 'none';
     // });
 
-    const getJson = (url, init) =>
-        fetch(url, init).then(async (res) => {
-            if (!res.ok) {
-                const text = await res.text().catch(() => '');
-                throw new Error(`HTTP ${res.status}: ${text.slice(0,120)}`);
-            }
-            return res.json();
-        });
-
     document.addEventListener("DOMContentLoaded", function() {
         const latestPostsContainer = document.getElementById('latest-posts');
         const preloader = document.getElementById('latest-posts-preloader');
@@ -384,7 +375,7 @@
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => response.json())getJson('https://185.233.119.44/posts/all?page=0&limit=10')
+            .then(response => response.json())
             .then(data => {
                 preloader.style.display = 'none';
                 document.querySelector('.main').style.display = 'block';
