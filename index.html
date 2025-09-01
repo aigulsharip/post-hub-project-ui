@@ -369,14 +369,9 @@
         latestPostsContainer.style.display = 'none';
         preloader.style.display = 'flex';
 
-        fetch('https://185.233.119.44/posts/all?page=0&limit=10', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
+        fetch('https://post-hub.fun/posts/all?page=0&limit=10')
+                .then(r=>r.json())
+                .then(data => {
                 preloader.style.display = 'none';
                 document.querySelector('.main').style.display = 'block';
 
@@ -461,12 +456,7 @@
         const latestCommentsContainer = document.getElementById('latest-comments');
         const commentInfoContainer = document.getElementById('comments-info-container');
 
-        fetch('https://185.233.119.44/comments/all?page=0&limit=10', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        fetch('https://post-hub.fun/comments/all?page=0&limit=10')
             .then(response => response.json())
 
                 .then(data => {
@@ -521,12 +511,7 @@
         const latestUsersContainer = document.getElementById('latest-users');
         const usersInfoContainer = document.getElementById('users-info-container');
 
-        fetch('https://185.233.119.44/users/all?page=0&limit=10', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        fetch('https://post-hub.fun/users/all?page=0&limit=10')
             .then(response => response.json())
             .then(data => {
                 if (data.success && Array.isArray(data.payload.content)) {
